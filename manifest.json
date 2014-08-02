@@ -5,21 +5,21 @@
 	"homepage_url": "https://github.com/sindresorhus/github-hide-files",
 	"manifest_version": 2,
 	"minimum_chrome_version": "36",
-	"permissions": [
-		"https://github.com/*/*"
-	],
 	"icons": {
 		"128": "icon.png"
 	},
+	"permissions": [
+		"https://github.com/*/*"
+	],
 	"content_scripts": [
 		{
+			"run_at": "document_end",
 			"matches": [
 				"https://github.com/*/*"
 			],
 			"js": [
 				"content.js"
-			],
-			"run_at": "document_end"
+			]
 		}
 	]
 }

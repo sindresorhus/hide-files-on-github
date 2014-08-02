@@ -1,15 +1,11 @@
-# GitHub Hide Files
-
-[![](icon.png)][install]
+# <img src="icon.png" width="30"> GitHub Hide Files
 
 > Chrome extension - Hide dotfiles from the file browser
 
 [![](screenshot.png)][install]
 
 
-## Install
-
-[Get it on the Chrome Web Store.][install]
+## [Install][install]
 
 
 ## License
