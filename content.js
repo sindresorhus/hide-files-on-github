@@ -25,12 +25,13 @@ function toggleFiles() {
 }
 
 function addToggleBtn() {
-	var toggleBtn = createHtml('<a class="minibutton hide-files-btn" style="margin-right:8px">Toggle dotfiles</a>');
+	var toggleBtn = createHtml('<a class="hide-files-btn minibutton right" style="margin-right:8px">Toggle dotfiles</a>');
 	var btnLocation = document.querySelector('.file-navigation .breadcrumb');
 	var toogleBtnCached = document.querySelector('.hide-files-btn');
 
 	if (!toogleBtnCached) {
-		btnLocation.parentNode.insertBefore(toggleBtn, btnLocation);
+		// insert after
+		btnLocation.parentNode.insertBefore(toggleBtn, btnLocation.nextSibling);
 	}
 
 	document.querySelector('.hide-files-btn').addEventListener('click', function () {
