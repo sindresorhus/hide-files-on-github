@@ -14,13 +14,13 @@ function toggleFiles() {
 function addToggleBtn() {
 
 	var _createHTML = function (htmlStr) {
-	  var frag = document.createDocumentFragment(),
-	  temp = document.createElement('a');
-	  temp.innerHTML = htmlStr;
-	  while (temp.firstChild) {
-	    frag.appendChild(temp.firstChild);
-	  }
-	  return frag;
+		var frag = document.createDocumentFragment(),
+		temp = document.createElement('a');
+		temp.innerHTML = htmlStr;
+		while (temp.firstChild) {
+			frag.appendChild(temp.firstChild);
+		}
+		return frag;
 	};
 
 	var toggleBtn = _createHTML("<a class='minibutton hide-files-btn' style='margin-right:8px'>Toggle dotfiles</a>")
@@ -30,9 +30,9 @@ function addToggleBtn() {
 	if (!toogleBtnCached) btnLocation.parentNode.insertBefore(toggleBtn, btnLocation);
 	
 	document.querySelector('.hide-files-btn').addEventListener("click", function () {
-	  hidden = !hidden;
-	  toggleFiles();
-  });
+		hidden = !hidden;
+		toggleFiles();
+	});
 
 	toggleFiles();
 }
