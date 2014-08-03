@@ -1,0 +1,3 @@
+table.files tbody tr.first td {
+	border-top: 0 !important;
+}
