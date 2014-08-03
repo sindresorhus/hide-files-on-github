@@ -1,6 +1,6 @@
 {
 	"name": "GitHub Hide Files",
-	"version": "1.1.0",
+	"version": "1.2.0",
 	"description": "Hide dotfiles from the file browser",
 	"homepage_url": "https://github.com/sindresorhus/github-hide-files",
 	"manifest_version": 2,
