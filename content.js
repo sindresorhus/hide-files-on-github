@@ -8,6 +8,9 @@ function hideFiles() {
 	});
 }
 
-hideFiles();
+var isDotfilesRepository = document.querySelector('.js-current-repository[href$="/dotfiles"]');
 
-new MutationObserver(hideFiles).observe(document.querySelector('#js-repo-pjax-container'), {childList: true});
+if (!isDotfilesRepository) {
+	hideFiles();
+	new MutationObserver(hideFiles).observe(document.querySelector('#js-repo-pjax-container'), {childList: true});
+}
