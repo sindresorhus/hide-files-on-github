@@ -20,7 +20,7 @@ function toggleFiles() {
 	var i = 0;
 
 	[].forEach.call(document.querySelectorAll('.files tr'), function (el) {
-		if (el.querySelector('a[title^="."')) {
+		if (el.querySelector('.content a[title^="."')) {
 			el.style.display = hidden ? 'none' : 'table-row';
 		} else if (++i === 1) {
 			// remove top border
