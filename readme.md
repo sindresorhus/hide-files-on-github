@@ -2,7 +2,7 @@
 
 > Chrome/Opera extension - Hide dotfiles from the GitHub file browser
 
-![](screenshot.png)]
+![](screenshot.png)
 
 
 ## Install
