@@ -1,16 +1,16 @@
 # <img src="icon.png" width="30"> GitHub Hide Files
 
-> Chrome extension - Hide dotfiles from the file browser
+> Chrome/Opera extension - Hide dotfiles from the GitHub file browser
 
-[![](screenshot.png)][install]
+![](screenshot.png)]
 
 
-## [Install][install]
+## Install
 
+* [Chrome extension](https://chrome.google.com/webstore/detail/github-hide-files/lpnakhpaodhdkleejaehlapdhbgjbddp)
+* [Opera add-on](https://addons.opera.com/en/extensions/details/github-hide-files/)
 
 ## License
 
 MIT © [Sindre Sorhus](http://sindresorhus.com)
 
-
-[install]: https://chrome.google.com/webstore/detail/github-hide-files/lpnakhpaodhdkleejaehlapdhbgjbddp
