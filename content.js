@@ -1,7 +1,7 @@
 'use strict';
 
-var hidden = true;
 var isDotfilesRepository = document.querySelector('.js-current-repository[href$="/dotfiles"]');
+var isHidden = true;
 
 function createHtml(str) {
 	var frag = document.createDocumentFragment();
@@ -21,7 +21,7 @@ function toggleFiles() {
 
 	[].forEach.call(document.querySelectorAll('.files tr'), function (el) {
 		if (el.querySelector('.content a[title^="."')) {
-			el.style.display = hidden ? 'none' : 'table-row';
+			el.style.display = isHidden ? 'none' : 'table-row';
 		} else if (++i === 1) {
 			// remove top border
 			el.classList.add('first');
@@ -41,14 +41,18 @@ function addToggleBtn() {
 	btnContainer.parentNode.insertBefore(toggleBtn, btnContainer.nextSibling);
 
 	document.querySelector('.hide-files-btn').addEventListener('click', function () {
-		hidden = !hidden;
+		isHidden = !isHidden;
 		toggleFiles();
 	});
 }
 
-if (!isDotfilesRepository) {
+function trigger() {
 	addToggleBtn();
 	toggleFiles();
+}
 
-	new MutationObserver(addToggleBtn).observe(document.querySelector('#js-repo-pjax-container'), {childList: true});
+if (!isDotfilesRepository) {
+	trigger();
+
+	new MutationObserver(trigger).observe(document.querySelector('#js-repo-pjax-container'), {childList: true});
 }
