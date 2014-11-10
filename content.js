@@ -31,13 +31,14 @@ function toggleFiles() {
 
 function addToggleBtn() {
 	var toggleBtn = createHtml('<a class="hide-files-btn minibutton right" style="margin-right:8px">Toggle dotfiles</a>');
-	var btnLocation = document.querySelector('.file-navigation .breadcrumb');
-	var toogleBtnCached = document.querySelector('.hide-files-btn');
+	var btnContainer = document.querySelector('.file-navigation .breadcrumb');
 
-	if (!toogleBtnCached) {
-		// insert after
-		btnLocation.parentNode.insertBefore(toggleBtn, btnLocation.nextSibling);
+	if (document.querySelector('.hide-files-btn')) {
+		return;
 	}
+
+	// insert after
+	btnContainer.parentNode.insertBefore(toggleBtn, btnContainer.nextSibling);
 
 	document.querySelector('.hide-files-btn').addEventListener('click', function () {
 		hidden = !hidden;
