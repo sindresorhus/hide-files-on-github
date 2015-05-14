@@ -30,7 +30,7 @@ function toggleFiles() {
 }
 
 function addToggleBtn() {
-	var toggleBtn = createHtml('<a class="hide-files-btn minibutton right" style="margin-right:8px">Toggle dotfiles</a>');
+	var toggleBtn = createHtml('<a class="hide-files-btn btn btn-sm right">Toggle dotfiles</a>');
 	var btnContainer = document.querySelector('.file-navigation .breadcrumb');
 
 	if (document.querySelector('.hide-files-btn')) {
