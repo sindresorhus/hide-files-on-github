@@ -1,3 +1,7 @@
 table.files tbody tr.first td {
 	border-top: 0 !important;
 }
+
+.hide-files-btn {
+	margin-right: 5px;
+}
