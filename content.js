@@ -1,6 +1,4 @@
 'use strict';
-
-var isDotfilesRepository = document.querySelector('.js-current-repository[href$="/dotfiles"]');
 var isHidden = true;
 
 function createHtml(str) {
@@ -51,8 +49,14 @@ function trigger() {
 	toggleFiles();
 }
 
-if (!isDotfilesRepository) {
+document.addEventListener('DOMContentLoaded', function () {
+	var isDotfilesRepo = document.querySelector('.js-current-repository[href$="/dotfiles"]');
+
+	if (isDotfilesRepo) {
+		return;
+	}
+
 	trigger();
 
 	new MutationObserver(trigger).observe(document.querySelector('#js-repo-pjax-container'), {childList: true});
-}
+});
