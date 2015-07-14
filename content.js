@@ -50,12 +50,6 @@ function trigger() {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-	var isDotfilesRepo = document.querySelector('.js-current-repository[href$="/dotfiles"]');
-
-	if (isDotfilesRepo) {
-		return;
-	}
-
 	trigger();
 
 	new MutationObserver(trigger).observe(document.querySelector('#js-repo-pjax-container'), {childList: true});
