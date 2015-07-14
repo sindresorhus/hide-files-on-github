@@ -17,6 +17,9 @@
 			"matches": [
 				"https://github.com/*/*"
 			],
+			"exclude_matches": [
+				"https://github.com/*/dotfiles*"
+			],
 			"css": [
 				"content.css"
 			],
