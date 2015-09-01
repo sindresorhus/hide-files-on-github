@@ -28,20 +28,23 @@ function toggleFiles() {
 }
 
 function addToggleBtn() {
-	var toggleBtn = createHtml('<a class="hide-files-btn btn btn-sm right">Toggle dotfiles</a>');
+	var toggleBtn = createHtml('<a class="hide-files-btn btn btn-sm right">Show Dotfiles</a>');
 	var btnContainer = document.querySelector('.file-navigation .breadcrumb');
 
 	if (document.querySelector('.hide-files-btn')) {
 		return;
 	}
 
-	// insert after
-	btnContainer.parentNode.insertBefore(toggleBtn, btnContainer.nextSibling);
+	if (btnContainer) {
+		// insert after
+		btnContainer.parentNode.insertBefore(toggleBtn, btnContainer.nextSibling);
 
-	document.querySelector('.hide-files-btn').addEventListener('click', function () {
-		isHidden = !isHidden;
-		toggleFiles();
-	});
+		document.querySelector('.hide-files-btn').addEventListener('click', function (e) {
+			isHidden = !isHidden;
+			this.textContent = isHidden ? 'Show Dotfiles' : 'Hide Dotfiles';
+			toggleFiles();
+		});
+	}
 }
 
 function trigger() {
