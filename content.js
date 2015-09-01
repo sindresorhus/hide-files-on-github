@@ -35,14 +35,16 @@ function addToggleBtn() {
 		return;
 	}
 
-	// insert after
-	btnContainer.parentNode.insertBefore(toggleBtn, btnContainer.nextSibling);
+	if (btnContainer) {
+		// insert after
+		btnContainer.parentNode.insertBefore(toggleBtn, btnContainer.nextSibling);
 
-	document.querySelector('.hide-files-btn').addEventListener('click', function (e) {
-		isHidden = !isHidden;
-		this.textContent = isHidden ? 'Show Dotfiles' : 'Hide Dotfiles';
-		toggleFiles();
-	});
+		document.querySelector('.hide-files-btn').addEventListener('click', function (e) {
+			isHidden = !isHidden;
+			this.textContent = isHidden ? 'Show Dotfiles' : 'Hide Dotfiles';
+			toggleFiles();
+		});
+	}
 }
 
 function trigger() {
