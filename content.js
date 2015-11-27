@@ -28,8 +28,8 @@ function toggleFiles() {
 }
 
 function addToggleBtn() {
-	var toggleBtn = createHtml('<a class="hide-files-btn btn btn-sm right">Show Dotfiles</a>');
-	var btnContainer = document.querySelector('.file-navigation .breadcrumb');
+	var toggleBtn = createHtml('<a class="hide-files-btn btn btn-sm">Show .files</a>');
+	var btnContainer = document.querySelector('.file-navigation .right');
 
 	if (document.querySelector('.hide-files-btn')) {
 		return;
@@ -37,11 +37,11 @@ function addToggleBtn() {
 
 	if (btnContainer) {
 		// insert after
-		btnContainer.parentNode.insertBefore(toggleBtn, btnContainer.nextSibling);
+		btnContainer.insertBefore(toggleBtn, btnContainer.children[0]);
 
 		document.querySelector('.hide-files-btn').addEventListener('click', function (e) {
 			isHidden = !isHidden;
-			this.textContent = isHidden ? 'Show Dotfiles' : 'Hide Dotfiles';
+			this.textContent = isHidden ? 'Show .files' : 'Hide .files';
 			toggleFiles();
 		});
 	}
