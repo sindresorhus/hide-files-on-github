@@ -1,9 +1,9 @@
 'use strict';
-var isHidden = true;
+let isHidden = true;
 
 function createHtml(str) {
-	var frag = document.createDocumentFragment();
-	var temp = document.createElement('div');
+	const frag = document.createDocumentFragment();
+	const temp = document.createElement('div');
 
 	temp.innerHTML = str;
 
@@ -15,21 +15,22 @@ function createHtml(str) {
 }
 
 function toggleFiles() {
-	var i = 0;
+	const rows = Array.from(document.querySelectorAll('.files tr'));
+	let i = 0;
 
-	[].forEach.call(document.querySelectorAll('.files tr'), function (el) {
+	for (const el of rows) {
 		if (el.querySelector('.content a[title^="."')) {
 			el.style.display = isHidden ? 'none' : 'table-row';
 		} else if (++i === 1) {
 			// remove top border
 			el.classList.add('first');
 		}
-	});
+	}
 }
 
 function addToggleBtn() {
-	var toggleBtn = createHtml('<a class="hide-files-btn btn btn-sm">Show .files</a>');
-	var btnContainer = document.querySelector('.file-navigation .right');
+	const toggleBtn = createHtml('<a class="hide-files-btn btn btn-sm">Show dotfiles</a>');
+	const btnContainer = document.querySelector('.file-navigation .right');
 
 	if (document.querySelector('.hide-files-btn')) {
 		return;
@@ -39,9 +40,11 @@ function addToggleBtn() {
 		// insert after
 		btnContainer.insertBefore(toggleBtn, btnContainer.children[0]);
 
-		document.querySelector('.hide-files-btn').addEventListener('click', function (e) {
+		const btn = document.querySelector('.hide-files-btn');
+
+		btn.addEventListener('click', () => {
 			isHidden = !isHidden;
-			this.textContent = isHidden ? 'Show .files' : 'Hide .files';
+			btn.textContent = isHidden ? 'Show dotfiles' : 'Hide dotfiles';
 			toggleFiles();
 		});
 	}
@@ -52,7 +55,7 @@ function trigger() {
 	toggleFiles();
 }
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', () => {
 	trigger();
 
 	new MutationObserver(trigger).observe(document.querySelector('#js-repo-pjax-container'), {childList: true});
