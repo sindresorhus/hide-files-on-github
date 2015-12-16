@@ -1,8 +1,8 @@
 {
-	"name": "GitHub Hide Files",
+	"name": "Hide Files on GitHub",
 	"version": "1.2.6",
 	"description": "Hide dotfiles from the file browser",
-	"homepage_url": "https://github.com/sindresorhus/github-hide-files",
+	"homepage_url": "https://github.com/sindresorhus/hide-files-on-github",
 	"manifest_version": 2,
 	"minimum_chrome_version": "46",
 	"icons": {
