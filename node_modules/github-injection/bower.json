@@ -1,0 +1,13 @@
+{
+  "name": "github-injection",
+  "version": "0.0.1",
+  "main": "index.js",
+  "ignore" : [
+    "test",
+    "gulpfile.js",
+    "*.yml",
+    ".editorconfig",
+    ".jscsrc",
+    ".jshintrc"
+  ]
+}
