@@ -1,5 +1,6 @@
 'use strict';
 let isHidden = true;
+const injector = window.gitHubInjection;
 
 function createHtml(str) {
 	const frag = document.createDocumentFragment();
@@ -56,7 +57,12 @@ function trigger() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-	trigger();
-
 	new MutationObserver(trigger).observe(document.querySelector('#js-repo-pjax-container'), {childList: true});
+
+	injector(window, err => {
+		if (err) {
+			return console.error(err);
+		}
+		trigger();
+	});
 });

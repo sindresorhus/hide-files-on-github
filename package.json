@@ -9,6 +9,12 @@
     "esnext": true,
     "envs": [
       "browser"
+    ],
+    "ignores": [
+      "deps/*"
     ]
+  },
+  "dependencies": {
+    "github-injection": "^0.1.0"
   }
 }
