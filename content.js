@@ -30,7 +30,7 @@ function toggleFiles() {
 }
 
 function addToggleBtn() {
-	const toggleBtn = createHtml('<a class="hide-files-btn btn btn-sm">Show dotfiles</a>');
+	const toggleBtn = createHtml(`<a class="hide-files-btn btn btn-sm">${label()}</a>`);
 	const btnContainer = document.querySelector('.file-navigation .right');
 
 	if (document.querySelector('.hide-files-btn')) {
@@ -45,10 +45,14 @@ function addToggleBtn() {
 
 		btn.addEventListener('click', () => {
 			isHidden = !isHidden;
-			btn.textContent = isHidden ? 'Show dotfiles' : 'Hide dotfiles';
+			btn.textContent = label();
 			toggleFiles();
 		});
 	}
+}
+
+function label() {
+	return isHidden ? 'Show dotfiles' : 'Hide dotfiles';
 }
 
 function trigger() {
