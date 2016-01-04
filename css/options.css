@@ -1,0 +1,44 @@
+@import "chrome-bootstrap.min.css";
+
+body { margin: 25px !important; }
+
+#header {
+    background: url("../icon.png") no-repeat top left;
+    background-size: contain;
+    height: 40px;
+    border-bottom: solid thin lightgray;
+}
+
+#header h2 {
+    text-indent: 50px;
+    padding: 21px 0 0 0;
+}
+
+.visradio {
+    padding-bottom: 5px;
+}
+
+.chrome-bootstrap h3 {
+
+    font-size: 1.0em;
+    margin: 2.0em 0 .8em;
+    width:150px;
+}
+
+small {
+    display: block;
+    margin:0;
+    padding: 0 0 10px;
+    width: 30%;
+    min-width: 300px;
+}
+
+#ignoreRegExp {
+    width: 244px;
+}
+
+#status {
+    color: #6CBAEA;
+    margin: 10px 0;
+    height: 20px;
+}

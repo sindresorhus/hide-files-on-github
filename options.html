@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hide Files on Github Extension Options</title>
+    <link href="css/options.css" rel="stylesheet" media="all">
+
+    <script src="options.js"></script>
+
+</head>
+<body class="chrome-bootstrap">
+
+<div id="header">
+    <h2>Hide Files on Github</h2>
+</div>
+
+
+<h3>VISIBILITY OPTIONS</h3>
+
+<div class="visradio">
+    <input type="radio" value="hidden" id="hidden" name="visibilityOption" checked="checked">
+    <label for="hidden">Hidden</label>
+</div>
+
+<div class="visradio">
+    <input type="radio" value="dimmed" id="dimmed" name="visibilityOption">
+    <label for="dimmed">Dimmed</label>
+</div>
+
+<h3>IGNORE FILES</h3>
+<small>Optionally ignore specific dotfiles with a <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Guide/Regular_Expressions" target="_blank">Regular Expression</a>.</small>
+
+<label for="ignoreRegExp">RegExp: </label>
+<input type="text" id="ignoreRegExp"/>
+
+<div id="status"></div>
+<button id="saveBtn">Save Options</button>
+
+</body>
+</html>
