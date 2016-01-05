@@ -24,6 +24,12 @@ function toggleFiles() {
 
 	for (const el of rows) {
 		if (el.querySelector('.content a[title^="."')) {
+			const dotfileName = el.querySelector('td.content a').innerText;
+
+			if (ignoreRegExp && ignoreRegExp.test(dotfileName)) {
+				continue;
+			}
+
 			if (visibility === 'hidden') {
 				el.style.display = toggleOn ? 'none' : 'table-row';
 			} else if (visibility === 'dimmed') {
@@ -86,8 +92,9 @@ document.addEventListener('DOMContentLoaded', () => {
 		HFOG_VISIBILITY: 'hidden',
 		HFOG_IGNOREREGEX: ''
 	}, items => {
+		console.log('items: ', items);
 		visibility = items.HFOG_VISIBILITY;
-		ignoreRegExp = items.HFOG_IGNOREREGEX;
+		ignoreRegExp = items.HFOG_IGNOREREGEX === '' ? undefined : new RegExp(items.HFOG_IGNOREREGEX, 'i');
 
 		injector(window, err => {
 			if (err) {
