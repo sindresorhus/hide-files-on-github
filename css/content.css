@@ -7,6 +7,4 @@ table.files tbody tr.first td {
 	width: 285px !important;
 }
 
-.dimmed {
-
-}
+.dimmed span, .dimmed a { color: #c7c7c7 !important;}

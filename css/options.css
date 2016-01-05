@@ -19,10 +19,9 @@ body { margin: 25px !important; }
 }
 
 .chrome-bootstrap h3 {
-
     font-size: 1.0em;
     margin: 2.0em 0 .8em;
-    width:150px;
+    width: 150px;
 }
 
 small {
@@ -33,12 +32,36 @@ small {
     min-width: 300px;
 }
 
-#ignoreRegExp {
-    width: 244px;
+small span {
+    display: block;
+    margin:0;
+    padding: 5px 0 0 0;
+    color:#929292;
+    font-size: 9px;
 }
 
+#regwrap {
+    height: 20px;
+    width: 400px;
+}
+#regwrap::before {
+    content:'\2215';/*u+204*/
+    color: red;
+    font-size: 18px;
+    display: inline;
+    width:20px;
+    height:100%;
+}
+
+#ignoreRegExp {
+    width: 244px;
+    height: 100%;
+}
+
+
+
 #status {
-    color: #6CBAEA;
+    color: black;
     margin: 10px 0;
     height: 20px;
 }

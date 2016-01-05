@@ -1,5 +1,8 @@
 'use strict';
-let isHidden = true;
+let visibility;
+let ignoreRegExp;
+let toggleOn = true;
+
 const injector = window.gitHubInjection;
 
 function createHtml(str) {
@@ -21,7 +24,15 @@ function toggleFiles() {
 
 	for (const el of rows) {
 		if (el.querySelector('.content a[title^="."')) {
-			el.style.display = isHidden ? 'none' : 'table-row';
+			if (visibility === 'hidden') {
+				el.style.display = toggleOn ? 'none' : 'table-row';
+			} else if (visibility === 'dimmed') {
+				if (toggleOn) {
+					el.classList.add('dimmed');
+				} else {
+					el.classList.remove('dimmed');
+				}
+			}
 		} else if (++i === 1) {
 			// remove top border
 			el.classList.add('first');
@@ -50,7 +61,7 @@ function addToggleBtnEvents() {
 
 	if (btn) {
 		btn.addEventListener('click', () => {
-			isHidden = !isHidden;
+			toggleOn = !toggleOn;
 			btn.textContent = label();
 			toggleFiles();
 		});
@@ -58,7 +69,7 @@ function addToggleBtnEvents() {
 }
 
 function label() {
-	return isHidden ? 'Show dotfiles' : 'Hide dotfiles';
+	return toggleOn ? 'Show dotfiles' : 'Hide dotfiles';
 }
 
 function trigger() {
@@ -71,11 +82,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	new MutationObserver(trigger).observe(document.querySelector('#js-repo-pjax-container'), {childList: true});
 
-	injector(window, err => {
-		if (err) {
-		    return console.error(err);
-		}
-		addToggleBtnEvents();
-		trigger();
+	window.chrome.storage.sync.get({
+		HFOG_VISIBILITY: 'hidden',
+		HFOG_IGNOREREGEX: ''
+	}, items => {
+		visibility = items.HFOG_VISIBILITY;
+		ignoreRegExp = items.HFOG_IGNOREREGEX;
+
+		injector(window, err => {
+			if (err) {
+				return console.error(err);
+			}
+			trigger();
+		});
 	});
 });
