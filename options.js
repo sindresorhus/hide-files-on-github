@@ -7,6 +7,17 @@ document.addEventListener('DOMContentLoaded', () => {
 		saveBtn.addEventListener('click', saveOptions);
 	}
 	restoreOptions();
+
+	// Don't allow delimiters in RegExp string
+	const ignoreRegExpField = document.getElementById('ignoreRegExp');
+	ignoreRegExpField.addEventListener('keyup', () => {
+		const value = ignoreRegExpField.value;
+		const nodelimiters = /^\/|\/$/;
+
+		if (nodelimiters.test(value)) {
+			ignoreRegExpField.value = ignoreRegExpField.value.replace(/^\/|\/$/, '');
+		}
+	});
 });
 
 // Saves options to chrome.storage
@@ -29,8 +40,6 @@ function saveOptions() {
 }
 
 function restoreOptions() {
-	// Use default values: { visibility: 'hidden', HFOGIgnoreRegExp: '' }
-
 	window.chrome.storage.sync.get({
 		HFOG_VISIBILITY: 'hidden',
 		HFOG_IGNOREREGEX: ''
