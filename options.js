@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	if (saveBtn) {
 		saveBtn.addEventListener('click', saveOptions);
 	}
+
 	restoreOptions();
 
 	// Don't allow delimiters in RegExp string
@@ -26,8 +27,8 @@ function saveOptions() {
 	const ignoreRegEx = document.getElementById('ignoreRegExp').value;
 
 	window.chrome.storage.sync.set({
-		HFOG_VISIBILITY: visibility,
-		HFOG_IGNOREREGEX: ignoreRegEx
+		visibility,
+		ignoreRegEx
 	}, () => {
 		// Update status to let user know options were saved.
 		const status = document.getElementById('status');
@@ -41,14 +42,14 @@ function saveOptions() {
 
 function restoreOptions() {
 	window.chrome.storage.sync.get({
-		HFOG_VISIBILITY: 'hidden',
-		HFOG_IGNOREREGEX: ''
+		visibility: 'hidden',
+		ignoreRegEx: ''
 	}, items => {
 		// visibility
-		document.getElementById(items.HFOG_VISIBILITY).checked = true;
+		document.getElementById(items.visibility).checked = true;
 
 		// regex
-		document.getElementById('ignoreRegExp').value = items.HFOG_IGNOREREGEX;
+		document.getElementById('ignoreRegExp').value = items.ignoreRegEx;
 	});
 }
 
