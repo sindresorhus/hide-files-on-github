@@ -89,12 +89,11 @@ document.addEventListener('DOMContentLoaded', () => {
 	new MutationObserver(trigger).observe(document.querySelector('#js-repo-pjax-container'), {childList: true});
 
 	window.chrome.storage.sync.get({
-		HFOG_VISIBILITY: 'hidden',
-		HFOG_IGNOREREGEX: ''
+		visibility: 'hidden',
+		ignoreRegEx: ''
 	}, items => {
-		console.log('items: ', items);
-		visibility = items.HFOG_VISIBILITY;
-		ignoreRegExp = items.HFOG_IGNOREREGEX === '' ? undefined : new RegExp(items.HFOG_IGNOREREGEX, 'i');
+		visibility = items.visibility;
+		ignoreRegExp = items.ignoreRegEx === '' ? undefined : new RegExp(items.ignoreRegEx, 'i');
 
 		injector(window, err => {
 			if (err) {
