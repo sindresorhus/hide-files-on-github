@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <title>Hide Files on Github Extension Options</title>
-    <link href="css/options.css" rel="stylesheet" media="all">
+    <link href="css/options.css" rel="stylesheet">
 
     <script src="options.js"></script>
 
@@ -15,7 +15,7 @@
 </div>
 
 
-<h3>VISIBILITY OPTIONS</h3>
+<h3>Visibility Options</h3>
 
 <div class="visradio">
     <input type="radio" value="hidden" id="hidden" name="visibilityOption" checked="checked">
@@ -27,9 +27,9 @@
     <label for="dimmed">Dimmed</label>
 </div>
 
-<h3>IGNORE FILES</h3>
+<h3>Ignore Files</h3>
 <small>Optionally ignore specific dotfiles with a <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Guide/Regular_Expressions" target="_blank">Regular Expression</a>.
-    <span><b>Example:</b> .gitignore|.travis.yml</span>
+    <span><b>Example:</b> ^.gitignore$|^.travis.yml$</span>
 </small>
 
 
