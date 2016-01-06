@@ -12,7 +12,10 @@
 		"https://github.com/*/*",
 		"storage"
 	],
-	"options_page": "options.html",
+	"options_ui": {
+		"page": "options.html",
+		"chrome_style": true
+	},
 	"content_scripts": [
 		{
 			"run_at": "document_start",
