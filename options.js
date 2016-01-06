@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	restoreOptions();
 
 	// Don't allow delimiters in RegExp string
-	const ignoreRegExpField = document.getElementById('ignoreRegExp');
+	const ignoreRegExpField = document.querySelector('#ignoreRegExp');
 	ignoreRegExpField.addEventListener('keyup', () => {
 		const value = ignoreRegExpField.value;
 		const nodelimiters = /^\/|\/$/;
@@ -24,14 +24,14 @@ document.addEventListener('DOMContentLoaded', () => {
 // Saves options to chrome.storage
 function saveOptions() {
 	const visibility = document.querySelector('input[name=visibilityOption]:checked').value;
-	const ignoreRegEx = document.getElementById('ignoreRegExp').value;
+	const ignoreRegEx = document.querySelector('#ignoreRegExp').value;
 
 	window.chrome.storage.sync.set({
 		visibility,
 		ignoreRegEx
 	}, () => {
 		// Update status to let user know options were saved.
-		const status = document.getElementById('status');
+		const status = document.querySelector('#status');
 
 		status.textContent = 'Options saved.';
 		setTimeout(() => {
@@ -46,10 +46,10 @@ function restoreOptions() {
 		ignoreRegEx: ''
 	}, items => {
 		// visibility
-		document.getElementById(items.visibility).checked = true;
+		document.querySelector(`#${items.visibility}`).checked = true;
 
 		// regex
-		document.getElementById('ignoreRegExp').value = items.ignoreRegEx;
+		document.querySelector('#ignoreRegExp').value = items.ignoreRegEx;
 	});
 }
 
