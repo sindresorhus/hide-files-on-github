@@ -99,6 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			if (err) {
 				return console.error(err);
 			}
+			addToggleBtnEvents();
 			trigger();
 		});
 	});
