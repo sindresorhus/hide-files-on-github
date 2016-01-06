@@ -1,43 +1,33 @@
 'use strict';
+let ignoreRegExpInput;
+let visibilityInput;
 
 document.addEventListener('DOMContentLoaded', () => {
-	const saveBtn = document.getElementById('saveBtn');
-
-	if (saveBtn) {
-		saveBtn.addEventListener('click', saveOptions);
-	}
-
-	restoreOptions();
+	visibilityInput = document.querySelector('#visibilityOption');
+	ignoreRegExpInput = document.querySelector('#ignoreRegExp');
 
 	// Don't allow delimiters in RegExp string
-	const ignoreRegExpField = document.querySelector('#ignoreRegExp');
-	ignoreRegExpField.addEventListener('keyup', () => {
-		const value = ignoreRegExpField.value;
+	ignoreRegExpInput.addEventListener('keyup', () => {
+		const value = ignoreRegExpInput.value;
 		const nodelimiters = /^\/|\/$/;
 
 		if (nodelimiters.test(value)) {
-			ignoreRegExpField.value = ignoreRegExpField.value.replace(/^\/|\/$/, '');
+			ignoreRegExpInput.value = ignoreRegExpInput.value.replace(/^\/|\/$/, '');
 		}
 	});
+
+	visibilityInput.addEventListener('change', saveOptions);
+	ignoreRegExpInput.addEventListener('change', saveOptions);
+
+	restoreOptions();
 });
 
 // Saves options to chrome.storage
 function saveOptions() {
-	const visibility = document.querySelector('input[name=visibilityOption]:checked').value;
-	const ignoreRegEx = document.querySelector('#ignoreRegExp').value;
+	const visibility = visibilityInput.value;
+	const ignoreRegEx = ignoreRegExpInput.value;
 
-	window.chrome.storage.sync.set({
-		visibility,
-		ignoreRegEx
-	}, () => {
-		// Update status to let user know options were saved.
-		const status = document.querySelector('#status');
-
-		status.textContent = 'Options saved.';
-		setTimeout(() => {
-			status.textContent = '';
-		}, 750);
-	});
+	window.chrome.storage.sync.set({visibility, ignoreRegEx}, () => {});
 }
 
 function restoreOptions() {
@@ -45,11 +35,8 @@ function restoreOptions() {
 		visibility: 'hidden',
 		ignoreRegEx: ''
 	}, items => {
-		// visibility
-		document.querySelector(`#${items.visibility}`).checked = true;
-
-		// regex
-		document.querySelector('#ignoreRegExp').value = items.ignoreRegEx;
+		visibilityInput.selectedIndex = items.visibility === 'hidden' ? 0 : 1;
+		ignoreRegExpInput.value = items.ignoreRegEx;
 	});
 }
 
