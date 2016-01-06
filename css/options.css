@@ -65,3 +65,7 @@ small span {
     margin: 10px 0;
     height: 20px;
 }
+
+h3 {
+    text-transform: uppercase;
+}
