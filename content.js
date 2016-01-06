@@ -51,15 +51,21 @@ function addToggleBtn() {
 	const btnContainer = document.querySelector('.file-navigation .right');
 
 	if (document.querySelector('.hide-files-btn')) {
+		addToggleBtnEvents();
 		return;
 	}
 
 	if (btnContainer) {
 		// insert after
 		btnContainer.insertBefore(toggleBtn, btnContainer.children[0]);
+		addToggleBtnEvents();
+	}
+}
 
-		const btn = document.querySelector('.hide-files-btn');
+function addToggleBtnEvents() {
+	const btn = document.querySelector('.hide-files-btn');
 
+	if (btn) {
 		btn.addEventListener('click', () => {
 			toggleOn = !toggleOn;
 			btn.textContent = label();
@@ -91,6 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			if (err) {
 				return console.error(err);
 			}
+			addToggleBtnEvents();
 			trigger();
 		});
 	});
