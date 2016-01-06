@@ -13,14 +13,12 @@
 <h3>Visibility Options</h3>
 
 <div class="visradio">
-    <input type="radio" value="hidden" id="hidden" name="visibilityOption" checked="checked">
-    <label for="hidden">Hidden</label>
+    <select id="visibilityOption" >
+        <option value="hidden">Hidden</option>
+        <option value="dimmed">Dimmed</option>
+    </select>
 </div>
 
-<div class="visradio">
-    <input type="radio" value="dimmed" id="dimmed" name="visibilityOption">
-    <label for="dimmed">Dimmed</label>
-</div>
 
 <h3>Ignore Files</h3>
 <small>Optionally ignore specific dotfiles with a <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Guide/Regular_Expressions" target="_blank">Regular Expression</a>.
@@ -31,9 +29,6 @@
 <label for="ignoreRegExp">RegExp:</label>
 
 <input type="text" id="ignoreRegExp"/>
-
-<div id="status"></div>
-<button id="saveBtn">Save Options</button>
 
 </body>
 </html>
