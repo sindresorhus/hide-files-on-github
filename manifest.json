@@ -24,6 +24,7 @@
 				"content.css"
 			],
 			"js": [
+				"node_modules/github-injection/index.js",
 				"content.js"
 			]
 		}

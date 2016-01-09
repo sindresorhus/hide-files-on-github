@@ -10,5 +10,8 @@
     "envs": [
       "browser"
     ]
+  },
+  "dependencies": {
+    "github-injection": "^0.1.0"
   }
 }

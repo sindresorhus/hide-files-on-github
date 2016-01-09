@@ -1,5 +1,6 @@
 'use strict';
 let isHidden = true;
+const injector = window.gitHubInjection;
 
 function createHtml(str) {
 	const frag = document.createDocumentFragment();
@@ -29,25 +30,35 @@ function toggleFiles() {
 }
 
 function addToggleBtn() {
-	const toggleBtn = createHtml('<a class="hide-files-btn btn btn-sm">Show dotfiles</a>');
+	const toggleBtn = createHtml(`<a class="hide-files-btn btn btn-sm">${label()}</a>`);
 	const btnContainer = document.querySelector('.file-navigation .right');
 
 	if (document.querySelector('.hide-files-btn')) {
+		addToggleBtnEvents();
 		return;
 	}
 
 	if (btnContainer) {
 		// insert after
 		btnContainer.insertBefore(toggleBtn, btnContainer.children[0]);
+		addToggleBtnEvents();
+	}
+}
 
-		const btn = document.querySelector('.hide-files-btn');
+function addToggleBtnEvents() {
+	const btn = document.querySelector('.hide-files-btn');
 
+	if (btn) {
 		btn.addEventListener('click', () => {
 			isHidden = !isHidden;
-			btn.textContent = isHidden ? 'Show dotfiles' : 'Hide dotfiles';
+			btn.textContent = label();
 			toggleFiles();
 		});
 	}
+}
+
+function label() {
+	return isHidden ? 'Show dotfiles' : 'Hide dotfiles';
 }
 
 function trigger() {
@@ -59,4 +70,12 @@ document.addEventListener('DOMContentLoaded', () => {
 	trigger();
 
 	new MutationObserver(trigger).observe(document.querySelector('#js-repo-pjax-container'), {childList: true});
+
+	injector(window, err => {
+		if (err) {
+			return console.error(err);
+		}
+		addToggleBtnEvents();
+		trigger();
+	});
 });
