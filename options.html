@@ -17,15 +17,14 @@
     </select>
 </div>
 
-<h3>Ignore Files</h3>
-<small>Optionally ignore specific dotfiles with a <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Guide/Regular_Expressions" target="_blank">Regular Expression</a>.</small>
+<h3>Hide Files</h3>
+<small>Control which files are hidden with a <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Guide/Regular_Expressions" target="_blank">Regular Expression</a>.</small>
 
-
-<label for="ignoreRegExp">RegExp:</label>
+<label for="hideRegExp">RegExp:</label>
 
 <div id="regexInput">
-    <input type="text" id="ignoreRegExp"/>
-    <span class="inputExample"><b>Example:</b> ^.gitignore$|^.travis.yml$</span>
+    <input type="text" id="hideRegExp"/>
+    <span class="inputExample"><b>Example:</b> ^\.|^license|^appveyor\.yml</span>
 </div>
 
 </body>
