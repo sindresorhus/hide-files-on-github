@@ -1,6 +1,6 @@
 'use strict';
 let visibility;
-let ignoreRegExp;
+let hideRegExp;
 let toggleOn = true;
 
 const injector = window.gitHubInjection;
@@ -23,20 +23,18 @@ function toggleFiles() {
 	let i = 0;
 
 	for (const el of rows) {
-		if (el.querySelector('.content a[title^="."')) {
-			const dotfileName = el.querySelector('td.content a').innerText;
+		if (el.querySelector('.content a')) {
+			const fileName = el.querySelector('td.content a').innerText;
 
-			if (ignoreRegExp && ignoreRegExp.test(dotfileName)) {
-				continue;
-			}
-
-			if (visibility === 'hidden') {
-				el.style.display = toggleOn ? 'none' : 'table-row';
-			} else if (visibility === 'dimmed') {
-				if (toggleOn) {
-					el.classList.add('dimmed');
-				} else {
-					el.classList.remove('dimmed');
+			if (hideRegExp && hideRegExp.test(fileName)) {
+				if (visibility === 'hidden') {
+					el.style.display = toggleOn ? 'none' : 'table-row';
+				} else if (visibility === 'dimmed') {
+					if (toggleOn) {
+						el.classList.add('dimmed');
+					} else {
+						el.classList.remove('dimmed');
+					}
 				}
 			}
 		} else if (++i === 1) {
@@ -88,10 +86,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	window.chrome.storage.sync.get({
 		visibility: 'hidden',
-		ignoreRegEx: ''
+		hideRegExp: '^\.|^license|^appveyor\.yml'
 	}, items => {
 		visibility = items.visibility;
-		ignoreRegExp = items.ignoreRegEx === '' ? undefined : new RegExp(items.ignoreRegEx, 'i');
+		hideRegExp = items.hideRegExp === '' ? undefined : new RegExp(items.hideRegExp, 'i');
 
 		injector(window, err => {
 			if (err) {

@@ -1,41 +1,41 @@
 'use strict';
-let ignoreRegExpInput;
+let hideRegExpInput;
 let visibilityInput;
 
 document.addEventListener('DOMContentLoaded', () => {
 	visibilityInput = document.querySelector('#visibilityOption');
-	ignoreRegExpInput = document.querySelector('#ignoreRegExp');
+	hideRegExpInput = document.querySelector('#hideRegExp');
 
 	// Don't allow delimiters in RegExp string
-	ignoreRegExpInput.addEventListener('input', () => {
-		const value = ignoreRegExpInput.value;
+	hideRegExpInput.addEventListener('input', () => {
+		const value = hideRegExpInput.value;
 		const nodelimiters = /^\/|\/$/;
 
 		if (nodelimiters.test(value)) {
-			ignoreRegExpInput.value = ignoreRegExpInput.value.replace(/^\/|\/$/, '');
+			hideRegExpInput.value = hideRegExpInput.value.replace(/^\/|\/$/, '');
 		}
 	});
 
 	visibilityInput.addEventListener('change', saveOptions);
-	ignoreRegExpInput.addEventListener('change', saveOptions);
+	hideRegExpInput.addEventListener('change', saveOptions);
 
 	restoreOptions();
 });
 
 function saveOptions() {
 	const visibility = visibilityInput.value;
-	const ignoreRegEx = ignoreRegExpInput.value;
+	const hideRegExp = hideRegExpInput.value;
 
-	window.chrome.storage.sync.set({visibility, ignoreRegEx}, () => {});
+	window.chrome.storage.sync.set({visibility, hideRegExp}, () => {});
 }
 
 function restoreOptions() {
 	window.chrome.storage.sync.get({
 		visibility: 'hidden',
-		ignoreRegEx: '^\.|^license|^appveyor\.yml'
+		hideRegExp: '^\.|^license|^appveyor\.yml'
 	}, items => {
 		visibilityInput.selectedIndex = items.visibility === 'hidden' ? 0 : 1;
-		ignoreRegExpInput.value = items.ignoreRegEx;
+		hideRegExpInput.value = items.hideRegExp;
 	});
 }
 
