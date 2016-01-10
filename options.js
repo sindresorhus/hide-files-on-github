@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	ignoreRegExpInput = document.querySelector('#ignoreRegExp');
 
 	// Don't allow delimiters in RegExp string
-	ignoreRegExpInput.addEventListener('keyup', () => {
+	ignoreRegExpInput.addEventListener('input', () => {
 		const value = ignoreRegExpInput.value;
 		const nodelimiters = /^\/|\/$/;
 
@@ -32,7 +32,7 @@ function saveOptions() {
 function restoreOptions() {
 	window.chrome.storage.sync.get({
 		visibility: 'hidden',
-		ignoreRegEx: ''
+		ignoreRegEx: '^\.|^license|^appveyor\.yml'
 	}, items => {
 		visibilityInput.selectedIndex = items.visibility === 'hidden' ? 0 : 1;
 		ignoreRegExpInput.value = items.ignoreRegEx;
