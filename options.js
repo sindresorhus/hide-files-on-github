@@ -22,7 +22,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	restoreOptions();
 });
 
-// Saves options to chrome.storage
 function saveOptions() {
 	const visibility = visibilityInput.value;
 	const ignoreRegEx = ignoreRegExpInput.value;
