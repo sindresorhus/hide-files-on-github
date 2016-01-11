@@ -86,10 +86,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	new MutationObserver(trigger).observe(document.querySelector('#js-repo-pjax-container'), {childList: true});
 
-	window.chrome.storage.sync.get({
-		visibility: 'hidden',
-		hideRegExp: '^\.|^license|^appveyor\.yml'
-	}, items => {
+	window.HideFilesOnGitHub.storage.get((err, items) => {
+		if (err) {
+			throw err;
+		}
 		visibility = items.visibility;
 		hideRegExp = items.hideRegExp === '' ? undefined : new RegExp(items.hideRegExp, 'i');
 
