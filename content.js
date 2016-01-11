@@ -82,6 +82,8 @@ function trigger() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+	trigger();
+
 	new MutationObserver(trigger).observe(document.querySelector('#js-repo-pjax-container'), {childList: true});
 
 	window.HideFilesOnGitHub.storage.get((err, items) => {
