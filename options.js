@@ -26,14 +26,14 @@ function saveOptions() {
 	const visibility = visibilityInput.value;
 	const hideRegExp = hideRegExpInput.value;
 
-	window.chrome.storage.sync.set({visibility, hideRegExp}, () => {});
+	window.HideFilesOnGitHub.storage.set({visibility, hideRegExp});
 }
 
 function restoreOptions() {
-	window.chrome.storage.sync.get({
-		visibility: 'hidden',
-		hideRegExp: '^\.|^license|^appveyor\.yml'
-	}, items => {
+	window.HideFilesOnGitHub.storage.get((err, items) => {
+		if (err) {
+			throw err;
+		}
 		visibilityInput.selectedIndex = items.visibility === 'hidden' ? 0 : 1;
 		hideRegExpInput.value = items.hideRegExp;
 	});
