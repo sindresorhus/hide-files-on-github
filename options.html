@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Hide Files on Github Extension Options</title>
+    <link href="css/options.css" rel="stylesheet">
+    <script src="api.js"></script>
+    <script src="options.js"></script>
+</head>
+<body>
+
+<h3>Visibility</h3>
+
+<div class="visradio">
+    <select id="visibilityOption" >
+        <option value="hidden">Hidden</option>
+        <option value="dimmed">Dimmed</option>
+    </select>
+</div>
+
+<h3>Hide Files</h3>
+<small>Control which files are hidden with a <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Guide/Regular_Expressions" target="_blank">Regular Expression</a>.</small>
+
+<label for="hideRegExp">RegExp:</label>
+
+<div id="regexInput">
+    <input type="text" id="hideRegExp"/>
+    <span class="inputExample"><b>Example:</b> ^\.|^license|^appveyor\.yml</span>
+</div>
+
+</body>
+</html>
