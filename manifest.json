@@ -9,19 +9,8 @@
 		"128": "icon.png"
 	},
 	"permissions": [
-		"https://github.com/*/*",
-		"storage"
+		"https://github.com/*/*"
 	],
-	"background": {
-		"persistent": false,
-		"scripts": [
-			"api.js"
-		]
-	},
-	"options_ui": {
-		"page": "options.html",
-		"chrome_style": true
-	},
 	"content_scripts": [
 		{
 			"run_at": "document_start",
@@ -32,10 +21,9 @@
 				"https://github.com/*/dotfiles*"
 			],
 			"css": [
-				"css/content.css"
+				"content.css"
 			],
 			"js": [
-				"api.js",
 				"node_modules/github-injection/index.js",
 				"content.js"
 			]
