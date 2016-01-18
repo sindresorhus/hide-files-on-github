@@ -90,13 +90,16 @@ document.addEventListener('DOMContentLoaded', () => {
 		if (err) {
 			throw err;
 		}
+
 		visibility = items.visibility;
 		hideRegExp = items.hideRegExp === '' ? undefined : new RegExp(items.hideRegExp, 'i');
 
 		injector(window, err => {
 			if (err) {
-				return console.error(err);
+				console.error(err);
+				return;
 			}
+
 			addToggleBtnEvents();
 			trigger();
 		});

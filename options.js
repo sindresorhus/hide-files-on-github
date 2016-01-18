@@ -34,8 +34,8 @@ function restoreOptions() {
 		if (err) {
 			throw err;
 		}
+
 		visibilityInput.selectedIndex = items.visibility === 'hidden' ? 0 : 1;
 		hideRegExpInput.value = items.hideRegExp;
 	});
 }
-
