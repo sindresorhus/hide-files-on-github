@@ -2,6 +2,8 @@
 
 > Chrome/Opera extension - Hide dotfiles from the GitHub file browser
 
+In the options, you can choose between hiding or dimming files matching a custom regex.
+
 ![](screenshot.png)
 
 
