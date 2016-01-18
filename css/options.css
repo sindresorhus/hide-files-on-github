@@ -1,0 +1,32 @@
+small {
+    display: block;
+    margin:0;
+    padding: 0 0 10px;
+    width: 30%;
+    min-width: 300px;
+    font-size: 0.8em;
+}
+
+#regexInput {
+    width: 245px;
+    display: inline-block;
+}
+
+.inputExample {
+    display: block;
+    margin:0;
+    padding: 5px 0 0 0;
+    color:#929292;
+    font-size: 9px;
+}
+
+#hideRegExp {
+    width: 244px;
+    height: 100%;
+}
+
+label {
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 5px;
+}

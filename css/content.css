@@ -6,3 +6,7 @@ table.files tbody tr.first td {
 .file-navigation-option .input-group {
 	width: 285px !important;
 }
+
+.dimmed span, .dimmed a {
+	color: #c7c7c7 !important;
+}
