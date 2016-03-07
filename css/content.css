@@ -4,7 +4,7 @@ table.files tbody tr.first td {
 
 /* make the SSH box more narrow to make the dotfiles button fit */
 .file-navigation-option .input-group {
-	width: 285px !important;
+	width: 200px !important;
 }
 
 .dimmed span,

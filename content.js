@@ -81,7 +81,12 @@ function trigger() {
 	toggleFiles();
 }
 
+function adjustOtherButtons() {
+	document.getElementsByClassName('new-pull-request-btn')[0].textContent = 'New PR';
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+	adjustOtherButtons();
 	trigger();
 
 	new MutationObserver(trigger).observe(document.querySelector('#js-repo-pjax-container'), {childList: true});
