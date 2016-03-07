@@ -73,7 +73,7 @@ function addToggleBtnEvents() {
 }
 
 function label() {
-	return toggleOn ? 'Show dotfiles' : 'Hide dotfiles';
+	return toggleOn ? 'Show dot' : 'Hide dot';
 }
 
 function trigger() {
@@ -81,7 +81,13 @@ function trigger() {
 	toggleFiles();
 }
 
+function adjustOtherButtons() {
+	var prButton = document.getElementsByClassName('new-pull-request-btn')[0];
+	prButton.textContent = 'New PR';
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+	adjustOtherButtons();
 	trigger();
 
 	new MutationObserver(trigger).observe(document.querySelector('#js-repo-pjax-container'), {childList: true});
