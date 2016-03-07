@@ -73,7 +73,7 @@ function addToggleBtnEvents() {
 }
 
 function label() {
-	return toggleOn ? 'Show dotfiles' : 'Hide dotfiles';
+	return toggleOn ? 'Show dot' : 'Hide dot';
 }
 
 function trigger() {
