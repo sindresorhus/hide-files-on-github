@@ -77,8 +77,16 @@ function label() {
 }
 
 function trigger() {
+	adjustOtherButtons();
 	addToggleBtn();
 	toggleFiles();
+}
+
+function adjustOtherButtons() {
+	const prButton = document.getElementsByClassName('new-pull-request-btn')[0];
+	if (prButton) {
+		prButton.textContent = 'New PR';
+	}
 }
 
 document.addEventListener('DOMContentLoaded', () => {
