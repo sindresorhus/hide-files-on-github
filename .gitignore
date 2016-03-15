@@ -1,2 +1,2 @@
-node_modules/*
-!node_modules/github-injection/index.js
+extension/node_modules/*
+!extension/node_modules/github-injection/index.js
