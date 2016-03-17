@@ -92,7 +92,13 @@ function adjustOtherButtons() {
 document.addEventListener('DOMContentLoaded', () => {
 	trigger();
 
-	new MutationObserver(trigger).observe(document.querySelector('#js-repo-pjax-container'), {childList: true});
+	const container = document.querySelector('#js-repo-pjax-container');
+
+	if (!container) {
+		return;
+	}
+
+	new MutationObserver(trigger).observe(container, {childList: true});
 
 	window.HideFilesOnGitHub.storage.get((err, items) => {
 		if (err) {
