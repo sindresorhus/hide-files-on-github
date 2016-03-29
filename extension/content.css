@@ -7,6 +7,12 @@ table.files tbody tr.first td {
 	width: 200px !important;
 }
 
+.file-navigation-option .input-group input[type="text"] {
+  font-size: 9px;
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
 .dimmed span,
 .dimmed a {
 	color: #c7c7c7 !important;

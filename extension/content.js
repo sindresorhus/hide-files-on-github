@@ -48,6 +48,8 @@ function addToggleBtn() {
 	const toggleBtn = createHtml(`<a class="hide-files-btn btn btn-sm">${label()}</a>`);
 	const btnContainer = document.querySelector('.file-navigation .right .btn-group');
 
+	fixupOtherButtons();
+
 	if (document.querySelector('.hide-files-btn')) {
 		addToggleBtnEvents();
 		return;
@@ -57,6 +59,21 @@ function addToggleBtn() {
 		// insert after
 		btnContainer.insertBefore(toggleBtn, btnContainer.children[0]);
 		addToggleBtnEvents();
+	}
+}
+
+function fixupOtherButtons() {
+	const sidebar = document.querySelector('.file-navigation .right');
+	if (!sidebar) {
+		return;
+	}
+
+	const buttons = Array.from(sidebar.getElementsByClassName('btn btn-sm'));
+	for (const button of buttons) {
+		const text = button.textContent.trim();
+		if (text === 'Download ZIP') {
+			button.innerHTML = '⇣ ZIP';
+		}
 	}
 }
 
@@ -77,16 +94,8 @@ function label() {
 }
 
 function trigger() {
-	adjustOtherButtons();
 	addToggleBtn();
 	toggleFiles();
-}
-
-function adjustOtherButtons() {
-	const prButton = document.getElementsByClassName('new-pull-request-btn')[0];
-	if (prButton) {
-		prButton.textContent = 'New PR';
-	}
 }
 
 document.addEventListener('DOMContentLoaded', () => {
