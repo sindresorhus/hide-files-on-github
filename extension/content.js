@@ -46,7 +46,7 @@ function toggleFiles() {
 
 function addToggleBtn() {
 	const toggleBtn = createHtml(`<a class="hide-files-btn btn btn-sm">${label()}</a>`);
-	const btnContainer = document.querySelector('.file-navigation .right .btn-group');
+	const btnContainer = document.querySelector('.file-navigation .btn-group.right');
 
 	fixupOtherButtons();
 
