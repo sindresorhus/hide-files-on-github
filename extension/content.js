@@ -7,7 +7,7 @@ const injector = window.gitHubInjection;
 
 function createHtml(str) {
 	const frag = document.createDocumentFragment();
-	const temp = document.createElement('div');
+	const temp = document.createElement('tr');
 
 	temp.innerHTML = str;
 
@@ -45,17 +45,17 @@ function toggleFiles() {
 }
 
 function addToggleBtn() {
-	const toggleBtn = createHtml(`<a class="hide-files-btn btn btn-sm">${label()}</a>`);
-	const btnContainer = document.querySelector('.file-navigation .btn-group.right');
+	const toggleBtn = createHtml(`<td class="icon"></td><td class="hide-files-btn content">${label()}</td>`);
+	const fileTable = document.querySelector('.files');
 
 	if (document.querySelector('.hide-files-btn')) {
 		addToggleBtnEvents();
 		return;
 	}
 
-	if (btnContainer) {
-		// insert after
-		btnContainer.insertBefore(toggleBtn, btnContainer.children[0]);
+	if (fileTable) {
+		// insert at the end of the table
+		fileTable.insertBefore(toggleBtn, fileTable.children[fileTable.rows.length - 1]);
 		addToggleBtnEvents();
 	}
 }
