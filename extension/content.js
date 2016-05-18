@@ -45,7 +45,7 @@ function toggleFiles() {
 }
 
 function addToggleBtn() {
-	const toggleBtn = createHtml(`<td class="icon"></td><td class="hide-files-btn content">${label()}</td>`);
+	const toggleBtn = createHtml(`<td class="icon"></td><td class="hide-files-btn content">${label()}</td><td class="message"></td><td class="age"></td>`);
 	const fileTable = document.querySelector('.files');
 
 	if (document.querySelector('.hide-files-btn')) {
