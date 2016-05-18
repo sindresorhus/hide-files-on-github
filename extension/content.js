@@ -47,13 +47,14 @@ function toggleFiles() {
 function addToggleBtn() {
 	const toggleBtn = createHtml(`<td class="icon"></td><td class="hide-files-btn content">${label()}</td><td class="message"></td><td class="age"></td>`);
 	const fileTable = document.querySelector('.files');
+	const inRootView = !document.querySelector('tr.up-tree');
 
 	if (document.querySelector('.hide-files-btn')) {
 		addToggleBtnEvents();
 		return;
 	}
 
-	if (fileTable) {
+	if (fileTable && inRootView) {
 		// insert at the end of the table
 		fileTable.insertBefore(toggleBtn, fileTable.children[fileTable.rows.length - 1]);
 		addToggleBtnEvents();
