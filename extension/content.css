@@ -2,17 +2,6 @@ table.files tbody tr.first td {
 	border-top: 0 !important;
 }
 
-/* make the SSH box more narrow to make the dotfiles button fit */
-.file-navigation-option .input-group {
-	width: 200px !important;
-}
-
-.file-navigation-option .input-group input[type="text"] {
-  font-size: 9px;
-  padding-left: 3px;
-  padding-right: 3px;
-}
-
 .dimmed span,
 .dimmed a {
 	color: #c7c7c7 !important;
