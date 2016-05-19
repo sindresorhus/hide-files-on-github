@@ -2,6 +2,16 @@ table.files tbody tr.first td {
 	border-top: 0 !important;
 }
 
+.hide-files-btn {
+	font-style: italic;
+	cursor: pointer;
+	color: #c7c7c7;
+}
+
+.hide-files-btn:hover {
+	color: #4078c0;
+}
+
 .dimmed span,
 .dimmed a {
 	color: #c7c7c7 !important;

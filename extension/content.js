@@ -7,7 +7,7 @@ const injector = window.gitHubInjection;
 
 function createHtml(str) {
 	const frag = document.createDocumentFragment();
-	const temp = document.createElement('div');
+	const temp = document.createElement('tr');
 
 	temp.innerHTML = str;
 
@@ -19,6 +19,10 @@ function createHtml(str) {
 }
 
 function toggleFiles() {
+	if (!inRootView()) {
+		return;
+	}
+
 	const rows = Array.from(document.querySelectorAll('.files tr'));
 	let i = 0;
 
@@ -45,26 +49,31 @@ function toggleFiles() {
 }
 
 function addToggleBtn() {
-	const toggleBtn = createHtml(`<a class="hide-files-btn btn btn-sm">${label()}</a>`);
-	const btnContainer = document.querySelector('.file-navigation .btn-group.right');
+	const toggleBtn = createHtml(`<td class="icon"></td><td class="content"><a href="#" class="hide-files-btn">${label()}</a></td><td class="message"></td><td class="age"></td>`);
+	const fileTable = document.querySelector('.files');
 
 	if (document.querySelector('.hide-files-btn')) {
 		addToggleBtnEvents();
 		return;
 	}
 
-	if (btnContainer) {
-		// insert after
-		btnContainer.insertBefore(toggleBtn, btnContainer.children[0]);
+	if (fileTable && inRootView()) {
+		// insert at the end of the table
+		fileTable.insertBefore(toggleBtn, fileTable.children[fileTable.rows.length - 1]);
 		addToggleBtnEvents();
 	}
+}
+
+function inRootView() {
+	return !document.querySelector('tr.up-tree');
 }
 
 function addToggleBtnEvents() {
 	const btn = document.querySelector('.hide-files-btn');
 
 	if (btn) {
-		btn.addEventListener('click', () => {
+		btn.addEventListener('click', e => {
+			e.preventDefault();
 			toggleOn = !toggleOn;
 			btn.textContent = label();
 			toggleFiles();
