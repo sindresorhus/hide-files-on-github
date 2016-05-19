@@ -45,7 +45,7 @@ function toggleFiles() {
 }
 
 function addToggleBtn() {
-	const toggleBtn = createHtml(`<td class="icon"></td><td class="content"><span class="hide-files-btn">${label()}</span></td><td class="message"></td><td class="age"></td>`);
+	const toggleBtn = createHtml(`<td class="icon"></td><td class="content"><a href="#" class="hide-files-btn">${label()}</a></td><td class="message"></td><td class="age"></td>`);
 	const fileTable = document.querySelector('.files');
 	const inRootView = !document.querySelector('tr.up-tree');
 
@@ -65,7 +65,8 @@ function addToggleBtnEvents() {
 	const btn = document.querySelector('.hide-files-btn');
 
 	if (btn) {
-		btn.addEventListener('click', () => {
+		btn.addEventListener('click', evt => {
+			evt.preventDefault();
 			toggleOn = !toggleOn;
 			btn.textContent = label();
 			toggleFiles();
