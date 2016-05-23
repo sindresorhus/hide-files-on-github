@@ -1,9 +1,9 @@
 'use strict';
+const $ = document.querySelector.bind(document);
+
 let visibility;
 let hideRegExp;
 let toggleOn = true;
-
-const injector = window.gitHubInjection;
 
 function createHtml(str) {
 	const frag = document.createDocumentFragment();
@@ -23,9 +23,11 @@ function toggleFiles() {
 		return;
 	}
 
+	// TODO: remove `Array.from` when Chrome 51 is target
 	const rows = Array.from(document.querySelectorAll('.files tr'));
 	let i = 0;
 
+	// TODO: use `rows.entries()` when Chrome 51 is target
 	for (const el of rows) {
 		if (el.querySelector('.content a')) {
 			const fileName = el.querySelector('td.content a').innerText;
@@ -34,11 +36,7 @@ function toggleFiles() {
 				if (visibility === 'hidden') {
 					el.style.display = toggleOn ? 'none' : 'table-row';
 				} else if (visibility === 'dimmed') {
-					if (toggleOn) {
-						el.classList.add('dimmed');
-					} else {
-						el.classList.remove('dimmed');
-					}
+					el.classList.add('dimmed');
 				}
 			}
 		} else if (++i === 1) {
@@ -49,10 +47,18 @@ function toggleFiles() {
 }
 
 function addToggleBtn() {
-	const toggleBtn = createHtml(`<td class="icon"></td><td class="content"><a href="#" class="hide-files-btn">${label()}</a></td><td class="message"></td><td class="age"></td>`);
-	const fileTable = document.querySelector('.files');
+	const toggleBtn = createHtml(`
+		<td class="icon"></td>
+		<td class="content">
+			<a href="#" class="hide-files-btn">${label()}</a>
+		</td>
+		<td class="message"></td>
+		<td class="age"></td>
+	`);
 
-	if (document.querySelector('.hide-files-btn')) {
+	const fileTable = $('.files');
+
+	if ($('.hide-files-btn')) {
 		addToggleBtnEvents();
 		return;
 	}
@@ -65,11 +71,11 @@ function addToggleBtn() {
 }
 
 function inRootView() {
-	return !document.querySelector('tr.up-tree');
+	return !$('tr.up-tree');
 }
 
 function addToggleBtnEvents() {
-	const btn = document.querySelector('.hide-files-btn');
+	const btn = $('.hide-files-btn');
 
 	if (btn) {
 		btn.addEventListener('click', e => {
@@ -96,7 +102,7 @@ function trigger() {
 document.addEventListener('DOMContentLoaded', () => {
 	trigger();
 
-	const container = document.querySelector('#js-repo-pjax-container');
+	const container = $('#js-repo-pjax-container');
 
 	if (!container) {
 		return;
@@ -112,12 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		visibility = items.visibility;
 		hideRegExp = items.hideRegExp === '' ? undefined : new RegExp(items.hideRegExp, 'i');
 
-		injector(window, err => {
-			if (err) {
-				console.error(err);
-				return;
-			}
-
+		window.gitHubInjection(window, () => {
 			addToggleBtnEvents();
 			trigger();
 		});

@@ -12,6 +12,6 @@
     ]
   },
   "dependencies": {
-    "github-injection": "^0.1.0"
+    "github-injection": "^0.2.0"
   }
 }

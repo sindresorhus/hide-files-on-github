@@ -4,7 +4,7 @@
 	"description": "Hide dotfiles from the file browser",
 	"homepage_url": "https://github.com/sindresorhus/hide-files-on-github",
 	"manifest_version": 2,
-	"minimum_chrome_version": "46",
+	"minimum_chrome_version": "50",
 	"icons": {
 		"128": "icon.png"
 	},
