@@ -86,7 +86,10 @@ function label() {
 }
 
 function trigger() {
-	addToggleBtn();
+	if (visibility === 'hidden') {
+		addToggleBtn();
+	}
+
 	toggleFiles();
 }
 
