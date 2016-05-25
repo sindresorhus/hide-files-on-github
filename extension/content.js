@@ -1,7 +1,6 @@
 'use strict';
 const $ = document.querySelector.bind(document);
 
-let shouldHide = true;
 let toggleOn = true;
 let hideRegExp;
 
