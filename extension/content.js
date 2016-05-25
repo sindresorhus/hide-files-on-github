@@ -65,7 +65,7 @@ function addToggleBtn() {
 
 	if (fileTable && inRootView()) {
 		// insert at the end of the table
-		fileTable.insertBefore(toggleBtn, fileTable.children[fileTable.rows.length - 1]);
+		fileTable.insertBefore(toggleBtn, fileTable.children[0]);
 		addToggleBtnEvents();
 	}
 }
