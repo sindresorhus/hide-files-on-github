@@ -1,7 +1,7 @@
 'use strict';
 const $ = document.querySelector.bind(document);
 
-let visibility;
+let shouldHide;
 let hideRegExp;
 let toggleOn = true;
 
@@ -33,10 +33,9 @@ function toggleFiles() {
 			const fileName = el.querySelector('td.content a').innerText;
 
 			if (hideRegExp && hideRegExp.test(fileName)) {
-				if (visibility === 'hidden') {
+				el.classList.add('dimmed');
+				if (shouldHide) {
 					el.style.display = toggleOn ? 'none' : 'table-row';
-				} else if (visibility === 'dimmed') {
-					el.classList.add('dimmed');
 				}
 			}
 		} else if (++i === 1) {
@@ -92,7 +91,7 @@ function label() {
 }
 
 function trigger() {
-	if (visibility === 'hidden') {
+	if (shouldHide) {
 		addToggleBtn();
 	}
 
@@ -115,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			throw err;
 		}
 
-		visibility = items.visibility;
+		shouldHide = items.shouldHide;
 		hideRegExp = items.hideRegExp === '' ? undefined : new RegExp(items.hideRegExp, 'i');
 
 		window.gitHubInjection(window, () => {

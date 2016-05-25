@@ -9,11 +9,10 @@
 	</head>
 	<body>
 	<h3>Visibility</h3>
-	<div class="visradio">
-		<select id="visibilityOption" >
-			<option value="hidden">Hidden</option>
-			<option value="dimmed">Dimmed</option>
-		</select>
+	<small>Uncheck the box to remove the toggle button ('dim-only' mode).</small>
+	<div id="vistoggle">
+		<input type="checkbox" id="hidden" />
+		<label for="hidden">Hide dotfiles</label>
 	</div>
 	<h3>Hide Files</h3>
 	<small>Control which files are hidden with a <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Guide/Regular_Expressions" target="_blank">Regular Expression</a>.</small>

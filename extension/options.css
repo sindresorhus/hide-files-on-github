@@ -7,15 +7,15 @@ small {
 	font-size: 0.8em;
 }
 
-label {
-	display: inline-block;
-	vertical-align: top;
-	margin-top: 5px;
-}
-
 #regexInput {
 	width: 245px;
 	display: inline-block;
+}
+
+label[for*="hideRegExp"] {
+	display: inline-block;
+	vertical-align: top;
+	margin-top: 5px;
 }
 
 .inputExample {
@@ -29,4 +29,8 @@ label {
 #hideRegExp {
 	width: 244px;
 	height: 100%;
+}
+
+#vistoggle {
+	padding-bottom: 10px;
 }
