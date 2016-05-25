@@ -1,9 +1,7 @@
 'use strict';
 let hideRegExpInput;
-let shouldHideInput;
 
 document.addEventListener('DOMContentLoaded', () => {
-	shouldHideInput = document.querySelector('#hidden');
 	hideRegExpInput = document.querySelector('#hideRegExp');
 
 	// Don't allow delimiters in RegExp string
@@ -16,17 +14,14 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	});
 
-	shouldHideInput.addEventListener('change', saveOptions);
 	hideRegExpInput.addEventListener('change', saveOptions);
 
 	restoreOptions();
 });
 
 function saveOptions() {
-	const shouldHide = shouldHideInput.checked;
 	const hideRegExp = hideRegExpInput.value;
-
-	window.HideFilesOnGitHub.storage.set({shouldHide, hideRegExp});
+	window.HideFilesOnGitHub.storage.set({hideRegExp});
 }
 
 function restoreOptions() {
@@ -35,7 +30,6 @@ function restoreOptions() {
 			throw err;
 		}
 
-		shouldHideInput.checked = items.shouldHide;
 		hideRegExpInput.value = items.hideRegExp;
 	});
 }

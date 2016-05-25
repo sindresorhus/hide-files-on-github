@@ -12,7 +12,7 @@ small {
 	display: inline-block;
 }
 
-label[for*="hideRegExp"] {
+label {
 	display: inline-block;
 	vertical-align: top;
 	margin-top: 5px;
@@ -29,8 +29,4 @@ label[for*="hideRegExp"] {
 #hideRegExp {
 	width: 244px;
 	height: 100%;
-}
-
-#vistoggle {
-	padding-bottom: 10px;
 }

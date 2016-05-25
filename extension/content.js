@@ -1,9 +1,9 @@
 'use strict';
 const $ = document.querySelector.bind(document);
 
-let shouldHide;
-let hideRegExp;
+let shouldHide = true;
 let toggleOn = true;
+let hideRegExp;
 
 function createHtml(str) {
 	const frag = document.createDocumentFragment();
@@ -34,9 +34,7 @@ function toggleFiles() {
 
 			if (hideRegExp && hideRegExp.test(fileName)) {
 				el.classList.add('dimmed');
-				if (shouldHide) {
-					el.style.display = toggleOn ? 'none' : 'table-row';
-				}
+				el.style.display = toggleOn ? 'none' : 'table-row';
 			}
 		} else if (++i === 1) {
 			// remove top border
@@ -91,10 +89,7 @@ function label() {
 }
 
 function trigger() {
-	if (shouldHide) {
-		addToggleBtn();
-	}
-
+	addToggleBtn();
 	toggleFiles();
 }
 
@@ -114,7 +109,6 @@ document.addEventListener('DOMContentLoaded', () => {
 			throw err;
 		}
 
-		shouldHide = items.shouldHide;
 		hideRegExp = items.hideRegExp === '' ? undefined : new RegExp(items.hideRegExp, 'i');
 
 		window.gitHubInjection(window, () => {
