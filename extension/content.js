@@ -1,9 +1,8 @@
 'use strict';
 const $ = document.querySelector.bind(document);
 
-let visibility;
-let hideRegExp;
 let toggleOn = true;
+let hideRegExp;
 
 function createHtml(str) {
 	const frag = document.createDocumentFragment();
@@ -33,11 +32,8 @@ function toggleFiles() {
 			const fileName = el.querySelector('td.content a').innerText;
 
 			if (hideRegExp && hideRegExp.test(fileName)) {
-				if (visibility === 'hidden') {
-					el.style.display = toggleOn ? 'none' : 'table-row';
-				} else if (visibility === 'dimmed') {
-					el.classList.add('dimmed');
-				}
+				el.classList.add('dimmed');
+				el.style.display = toggleOn ? 'none' : 'table-row';
 			}
 		} else if (++i === 1) {
 			// remove top border
@@ -65,7 +61,7 @@ function addToggleBtn() {
 
 	if (fileTable && inRootView()) {
 		// insert at the end of the table
-		fileTable.insertBefore(toggleBtn, fileTable.children[fileTable.rows.length - 1]);
+		fileTable.insertBefore(toggleBtn, fileTable.children[0]);
 		addToggleBtnEvents();
 	}
 }
@@ -92,10 +88,7 @@ function label() {
 }
 
 function trigger() {
-	if (visibility === 'hidden') {
-		addToggleBtn();
-	}
-
+	addToggleBtn();
 	toggleFiles();
 }
 
@@ -115,7 +108,6 @@ document.addEventListener('DOMContentLoaded', () => {
 			throw err;
 		}
 
-		visibility = items.visibility;
 		hideRegExp = items.hideRegExp === '' ? undefined : new RegExp(items.hideRegExp, 'i');
 
 		window.gitHubInjection(window, () => {

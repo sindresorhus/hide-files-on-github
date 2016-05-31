@@ -7,15 +7,15 @@ small {
 	font-size: 0.8em;
 }
 
+#regexInput {
+	width: 245px;
+	display: inline-block;
+}
+
 label {
 	display: inline-block;
 	vertical-align: top;
 	margin-top: 5px;
-}
-
-#regexInput {
-	width: 245px;
-	display: inline-block;
 }
 
 .inputExample {
