@@ -57,7 +57,7 @@ function reorderFiles() {
 	for (const el of rows) {
 		const filename = el.querySelector('.content a').innerText;
 
-		if (/^\./.test(filename)) {
+		if (hideRegExp && hideRegExp.test(filename)) {
 			dotted.appendChild(el);
 		} else {
 			normal.appendChild(el);
