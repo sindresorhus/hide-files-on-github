@@ -42,6 +42,36 @@ function toggleFiles() {
 	}
 }
 
+function reorderFiles() {
+	if (!inRootView()) {
+		return;
+	}
+
+	// TODO: remove `Array.from` when Chrome 51 is target
+	const rows = Array.from(document.querySelectorAll('.files .js-navigation-item'));
+
+	const dotted = document.createDocumentFragment();
+	const normal = document.createDocumentFragment();
+
+	// TODO: use `rows.entries()` when Chrome 51 is target
+	for (const el of rows) {
+		const filename = el.querySelector('.content a').innerText;
+
+		if (hideRegExp && hideRegExp.test(filename)) {
+			dotted.appendChild(el);
+		} else {
+			normal.appendChild(el);
+		}
+	}
+
+	const tableBody = $('.files tbody');
+
+	if (tableBody) {
+		tableBody.appendChild(dotted);
+		tableBody.appendChild(normal);
+	}
+}
+
 function addToggleBtn() {
 	const toggleBtn = createHtml(`
 		<td class="icon"></td>
@@ -90,10 +120,12 @@ function label() {
 function trigger() {
 	addToggleBtn();
 	toggleFiles();
+	reorderFiles();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-	trigger();
+	addToggleBtn();
+	toggleFiles();
 
 	const container = $('#js-repo-pjax-container');
 
