@@ -22,11 +22,9 @@ function toggleFiles() {
 		return;
 	}
 
-	// TODO: remove `Array.from` when Chrome 51 is target
-	const rows = Array.from(document.querySelectorAll('.files tr'));
+	const rows = document.querySelectorAll('.files tr');
 	let i = 0;
 
-	// TODO: use `rows.entries()` when Chrome 51 is target
 	for (const el of rows) {
 		if (el.querySelector('.content a')) {
 			const fileName = el.querySelector('td.content a').innerText;
@@ -47,13 +45,10 @@ function reorderFiles() {
 		return;
 	}
 
-	// TODO: remove `Array.from` when Chrome 51 is target
-	const rows = Array.from(document.querySelectorAll('.files .js-navigation-item'));
-
+	const rows = document.querySelectorAll('.files .js-navigation-item');
 	const dotted = document.createDocumentFragment();
 	const normal = document.createDocumentFragment();
 
-	// TODO: use `rows.entries()` when Chrome 51 is target
 	for (const el of rows) {
 		const filename = el.querySelector('.content a').innerText;
 
