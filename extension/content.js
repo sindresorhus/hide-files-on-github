@@ -34,7 +34,7 @@ function toggleFiles() {
 				el.style.display = toggleOn ? 'none' : 'table-row';
 			}
 		} else if (++i === 1) {
-			// remove top border
+			// Remove top border
 			el.classList.add('first');
 		}
 	}
@@ -85,7 +85,7 @@ function addToggleBtn() {
 	}
 
 	if (fileTable && inRootView()) {
-		// insert at the end of the table
+		// Insert at the end of the table
 		fileTable.insertBefore(toggleBtn, fileTable.children[0]);
 		addToggleBtnEvents();
 	}
