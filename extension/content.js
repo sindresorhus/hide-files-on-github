@@ -26,8 +26,8 @@ function toggleFiles() {
 	let i = 0;
 
 	for (const el of rows) {
-		if (el.querySelector('.content > * > *')) {
-			const fileName = el.querySelector('td.content > * > *').innerText;
+		if (el.querySelector('.content > span > :-webkit-any(a, span)')) {
+			const fileName = el.querySelector('td.content > span > :-webkit-any(a, span)').innerText;
 
 			if (hideRegExp && hideRegExp.test(fileName)) {
 				el.classList.add('dimmed');
@@ -50,7 +50,7 @@ function reorderFiles() {
 	const normal = document.createDocumentFragment();
 
 	for (const el of rows) {
-		const filename = el.querySelector('.content > * > *').innerText;
+		const filename = el.querySelector('.content > span > :-webkit-any(a, span)').innerText;
 
 		if (hideRegExp && hideRegExp.test(filename)) {
 			dotted.appendChild(el);
