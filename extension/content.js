@@ -26,8 +26,10 @@ function toggleFiles() {
 	let i = 0;
 
 	for (const el of rows) {
-		if (el.querySelector('.content > span > :-webkit-any(a, span)')) {
-			const fileName = el.querySelector('td.content > span > :-webkit-any(a, span)').innerText;
+		const file = el.querySelector('.content > span > :-webkit-any(a, span)');
+
+		if (file) {
+			const fileName = file.innerText;
 
 			if (hideRegExp && hideRegExp.test(fileName)) {
 				el.classList.add('dimmed');
