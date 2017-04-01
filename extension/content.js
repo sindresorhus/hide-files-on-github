@@ -26,15 +26,15 @@ function toggleFiles() {
 	let i = 0;
 
 	for (const el of rows) {
-		if (el.querySelector('.content a')) {
-			const fileName = el.querySelector('td.content a').innerText;
+		if (el.querySelector('.content > span > :-webkit-any(a, span)')) {
+			const fileName = el.querySelector('td.content > span > :-webkit-any(a, span)').innerText;
 
 			if (hideRegExp && hideRegExp.test(fileName)) {
 				el.classList.add('dimmed');
 				el.style.display = toggleOn ? 'none' : 'table-row';
 			}
 		} else if (++i === 1) {
-			// remove top border
+			// Remove top border
 			el.classList.add('first');
 		}
 	}
@@ -50,7 +50,7 @@ function reorderFiles() {
 	const normal = document.createDocumentFragment();
 
 	for (const el of rows) {
-		const filename = el.querySelector('.content a').innerText;
+		const filename = el.querySelector('.content > span > :-webkit-any(a, span)').innerText;
 
 		if (hideRegExp && hideRegExp.test(filename)) {
 			dotted.appendChild(el);
@@ -85,7 +85,7 @@ function addToggleBtn() {
 	}
 
 	if (fileTable && inRootView()) {
-		// insert at the end of the table
+		// Insert at the end of the table
 		fileTable.insertBefore(toggleBtn, fileTable.children[0]);
 		addToggleBtnEvents();
 	}
