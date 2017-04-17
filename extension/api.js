@@ -3,7 +3,7 @@
 
 	window.HideFilesOnGitHub = (() => {
 		const defaults = {
-			hideRegExp: '^\\.|^license|^appveyor\\.yml$'
+			hideRegExp: '^\\.|^license|^appveyor\\.yml$|^yarn\\.lock$'
 		};
 
 		const api = {
