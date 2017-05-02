@@ -2,15 +2,17 @@
 let hideRegExpInput;
 
 document.addEventListener('DOMContentLoaded', () => {
+	document.querySelector('#inputExample span').textContent = window.HideFilesOnGitHub.defaults.hideRegExp;
+
 	hideRegExpInput = document.querySelector('#hideRegExp');
 
 	// Don't allow delimiters in RegExp string
 	hideRegExpInput.addEventListener('input', () => {
 		const value = hideRegExpInput.value;
-		const nodelimiters = /^\/|\/$/;
+		const noDelimiters = /^\/|\/$/;
 
-		if (nodelimiters.test(value)) {
-			hideRegExpInput.value = hideRegExpInput.value.replace(/^\/|\/$/, '');
+		if (noDelimiters.test(value)) {
+			hideRegExpInput.value = hideRegExpInput.value.replace(noDelimiters, '');
 		}
 	});
 

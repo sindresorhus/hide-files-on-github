@@ -8,7 +8,6 @@ small {
 }
 
 #regexInput {
-	width: 245px;
 	display: inline-block;
 }
 
@@ -18,15 +17,17 @@ label {
 	margin-top: 5px;
 }
 
-.inputExample {
+#inputExample {
 	display: block;
 	margin: 0;
 	padding: 5px 0 0 0;
 	color: #929292;
 	font-size: 9px;
+	word-break: break-all;
 }
 
 #hideRegExp {
-	width: 244px;
-	height: 100%;
+	width: 100%;
+	height: 180px;
+	resize: vertical;
 }

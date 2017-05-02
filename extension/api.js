@@ -3,7 +3,24 @@
 
 	window.HideFilesOnGitHub = (() => {
 		const defaults = {
-			hideRegExp: '^\\.|^license|^appveyor\\.yml$|^yarn\\.lock$|^circle\\.yml$'
+			hideRegExp: [
+				'^\\.',
+				'^license',
+				'^cname$',
+				'^version$',
+				'^(patents|authors|contributors|acknowledgments|backers)(\\.|$)',
+				'^(issue|pull_request)_template\\.md$',
+				'^(appveyor|circle|codecov)\\.yml$',
+				'^(yarn|Gemfile)\\.lock$',
+				'^npm-shrinkwrap\\.json$',
+				'\\.sublime-project$',
+				'^(tsconfig|typings|tslint|tsfmt)\\.json$', // TypeScript
+				'^coffeelint\\.json$',
+				'^(karma|protractor|sauce).*\\.js$',
+				'^testem(\\.[\\w-]+)?\\.(json|js)$',
+				'^yuidoc\\.json$',
+				'^stylelint-config\\.json'
+			].join('|')
 		};
 
 		const api = {
