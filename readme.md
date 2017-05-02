@@ -1,8 +1,8 @@
 # Hide Files on GitHub
 
-> Chrome extension - Hide dotfiles from the GitHub file browser
+> Chrome extension - Hide nonessential files from the GitHub file browser
 
-In the options, you can choose between hiding or dimming files matching a custom regex.
+In the options, you can choose what files/directories to hide with a custom regex.
 
 ![](screenshot.png)
 

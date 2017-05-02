@@ -111,7 +111,7 @@ function addToggleBtnEvents() {
 }
 
 function label() {
-	return toggleOn ? 'Show dotfiles' : 'Hide dotfiles';
+	return toggleOn ? 'Show nonessentials' : 'Hide nonessentials';
 }
 
 function trigger() {
