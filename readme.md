@@ -14,7 +14,7 @@ Install it from the [Chrome Web Store](https://chrome.google.com/webstore/detail
 
 ## Related
 
-- [Hide Files from Bitbucket PR](https://github.com/Zhouzi/hide-files-from-bitbucket-pr) - Hides non-essential files in Bitbucket's pull request viewer
+- [Hide Files from Bitbucket PR](https://github.com/Zhouzi/hide-files-from-bitbucket-pr) - Hides nonessential files in Bitbucket's pull request viewer
 
 
 ## License
