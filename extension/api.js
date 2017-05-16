@@ -19,7 +19,8 @@
 				'^(karma|protractor|sauce).*\\.js$',
 				'^testem(\\.[\\w-]+)?\\.(json|js)$',
 				'^yuidoc\\.json$',
-				'^stylelint-config\\.json'
+				'^stylelint-config\\.json',
+				'^humans\\.txt'
 			].join('|')
 		};
 
