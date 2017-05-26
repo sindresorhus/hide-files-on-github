@@ -12,6 +12,7 @@
 				'^(issue|pull_request)_template\\.md$',
 				'^(appveyor|circle|codecov)\\.yml$',
 				'^(yarn|Gemfile)\\.lock$',
+				'^package-lock\\.json$',
 				'^npm-shrinkwrap\\.json$',
 				'\\.sublime-project$',
 				'^(tsconfig|typings|tslint|tsfmt)\\.json$', // TypeScript
