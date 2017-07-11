@@ -9,8 +9,5 @@
     "envs": [
       "browser"
     ]
-  },
-  "dependencies": {
-    "github-injection": "^0.2.0"
   }
 }

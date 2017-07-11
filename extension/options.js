@@ -27,11 +27,7 @@ function saveOptions() {
 }
 
 function restoreOptions() {
-	window.HideFilesOnGitHub.storage.get((err, items) => {
-		if (err) {
-			throw err;
-		}
-
+	window.HideFilesOnGitHub.storage.get().then(items => {
 		hideRegExpInput.value = items.hideRegExp;
 	});
 }

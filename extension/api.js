@@ -27,11 +27,7 @@
 
 		const api = {
 			storage: {
-				get: cb => {
-					window.chrome.storage.sync.get(defaults, items => {
-						cb(null, items);
-					});
-				},
+				get: () => new Promise(resolve => window.chrome.storage.sync.get(defaults, resolve)),
 				set: obj => {
 					window.chrome.storage.sync.set(obj);
 				}

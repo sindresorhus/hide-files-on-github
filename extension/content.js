@@ -1,147 +1,71 @@
 'use strict';
-const $ = document.querySelector.bind(document);
 
-let toggleOn = true;
+const select = document.querySelector.bind(document);
+select.all = document.querySelectorAll.bind(document);
+
 let hideRegExp;
+const settingsPromise = window.HideFilesOnGitHub.storage.get();
 
-function createHtml(str) {
-	const frag = document.createDocumentFragment();
-	const temp = document.createElement('tr');
+function update() {
+	const files = select.all('.files tr .content > span > :-webkit-any(a, span)');
+	const hidden = document.createDocumentFragment();
 
-	temp.innerHTML = str;
+	for (const file of files) {
+		const fileName = file.textContent;
+		const row = file.closest('tr');
 
-	while (temp.firstChild) {
-		frag.appendChild(temp.firstChild);
-	}
-
-	return frag;
-}
-
-function toggleFiles() {
-	if (!inRootView()) {
-		return;
-	}
-
-	const rows = document.querySelectorAll('.files tr');
-	let i = 0;
-
-	for (const el of rows) {
-		const file = el.querySelector('.content > span > :-webkit-any(a, span)');
-
-		if (file) {
-			const fileName = file.innerText;
-
-			if (hideRegExp && hideRegExp.test(fileName)) {
-				el.classList.add('dimmed');
-				el.style.display = toggleOn ? 'none' : 'table-row';
-			}
-		} else if (++i === 1) {
-			// Remove top border
-			el.classList.add('first');
-		}
-	}
-}
-
-function reorderFiles() {
-	if (!inRootView()) {
-		return;
-	}
-
-	const rows = document.querySelectorAll('.files .js-navigation-item');
-	const dotted = document.createDocumentFragment();
-	const normal = document.createDocumentFragment();
-
-	for (const el of rows) {
-		const filename = el.querySelector('.content > span > :-webkit-any(a, span)').innerText;
-
-		if (hideRegExp && hideRegExp.test(filename)) {
-			dotted.appendChild(el);
-		} else {
-			normal.appendChild(el);
+		if (hideRegExp.test(fileName)) {
+			row.classList.add('dimmed');
+			hidden.appendChild(row);
 		}
 	}
 
-	const tableBody = $('.files tbody');
-
-	if (tableBody) {
-		tableBody.appendChild(dotted);
-		tableBody.appendChild(normal);
+	if (hidden.children.length === 0) {
+		return;
 	}
+
+	// The first tbody contains the .. link if it's a subfolder.
+	select('.files tbody:last-child').prepend(hidden);
+
+	// Add it at last to make sure it's prepended to everything
+	addToggleBtn();
 }
 
 function addToggleBtn() {
-	const toggleBtn = createHtml(`
-		<td class="icon"></td>
-		<td class="content">
-			<a href="#" class="hide-files-btn">${label()}</a>
-		</td>
-		<td class="message"></td>
-		<td class="age"></td>
+	const btnRow = select('.hide-files-row');
+	const tbody = select('table.files tbody');
+	if (btnRow) {
+		// This is probably inside a pjax event.
+		// Make sure it's still on top.
+		tbody.prepend(btnRow);
+		return;
+	}
+
+	select('table.files').insertAdjacentHTML('beforeBegin', `
+		<input type="checkbox" id="HFT" class="hide-files-toggle" checked />
 	`);
 
-	const fileTable = $('.files');
-
-	if ($('.hide-files-btn')) {
-		addToggleBtnEvents();
-		return;
-	}
-
-	if (fileTable && inRootView()) {
-		// Insert at the end of the table
-		fileTable.insertBefore(toggleBtn, fileTable.children[0]);
-		addToggleBtnEvents();
-	}
+	tbody.insertAdjacentHTML('afterBegin', `
+		<tr class="hide-files-row">
+			<td class="icon"></td>
+			<td class="content" colspan="3">
+				<a><label for="HFT" class="hide-files-btn">nonessentials</label></a>
+			</td>
+		</tr>
+	`);
 }
 
-function inRootView() {
-	return !$('tr.up-tree');
-}
-
-function addToggleBtnEvents() {
-	const btn = $('.hide-files-btn');
-
-	if (btn) {
-		btn.addEventListener('click', e => {
-			e.preventDefault();
-			toggleOn = !toggleOn;
-			btn.textContent = label();
-			toggleFiles();
-		});
+async function init() {
+	const settings = await settingsPromise;
+	if (settings.hideRegExp) {
+		hideRegExp = new RegExp(settings.hideRegExp, 'i');
+		update();
+		document.addEventListener('pjax:end', update);
 	}
 }
 
-function label() {
-	return toggleOn ? 'Show nonessentials' : 'Hide nonessentials';
+if (document.readyState === 'loading') {
+	document.addEventListener('DOMContentLoaded', init);
+} else {
+	init();
 }
-
-function trigger() {
-	addToggleBtn();
-	toggleFiles();
-	reorderFiles();
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-	addToggleBtn();
-	toggleFiles();
-
-	const container = $('#js-repo-pjax-container');
-
-	if (!container) {
-		return;
-	}
-
-	new MutationObserver(trigger).observe(container, {childList: true});
-
-	window.HideFilesOnGitHub.storage.get((err, items) => {
-		if (err) {
-			throw err;
-		}
-
-		hideRegExp = items.hideRegExp === '' ? undefined : new RegExp(items.hideRegExp, 'i');
-
-		window.gitHubInjection(window, () => {
-			addToggleBtnEvents();
-			trigger();
-		});
-	});
-});
