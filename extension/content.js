@@ -18,10 +18,6 @@ function createHtml(str) {
 }
 
 function toggleFiles() {
-	if (!inRootView()) {
-		return;
-	}
-
 	const rows = document.querySelectorAll('.files tr');
 	let i = 0;
 
@@ -43,18 +39,17 @@ function toggleFiles() {
 }
 
 function reorderFiles() {
-	if (!inRootView()) {
-		return;
-	}
-
 	const rows = document.querySelectorAll('.files .js-navigation-item');
 	const dotted = document.createDocumentFragment();
 	const normal = document.createDocumentFragment();
 
 	for (const el of rows) {
-		const filename = el.querySelector('.content > span > :-webkit-any(a, span)').innerText;
+		const file = el.querySelector('.content > span > :-webkit-any(a, span)')
+		if (!file) {
+			continue;
+		}
 
-		if (hideRegExp && hideRegExp.test(filename)) {
+		if (hideRegExp && hideRegExp.test(file.textContent)) {
 			dotted.appendChild(el);
 		} else {
 			normal.appendChild(el);
@@ -86,15 +81,11 @@ function addToggleBtn() {
 		return;
 	}
 
-	if (fileTable && inRootView()) {
+	if (fileTable) {
 		// Insert at the end of the table
 		fileTable.insertBefore(toggleBtn, fileTable.children[0]);
 		addToggleBtnEvents();
 	}
-}
-
-function inRootView() {
-	return !$('tr.up-tree');
 }
 
 function addToggleBtnEvents() {
