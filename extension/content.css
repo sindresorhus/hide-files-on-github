@@ -12,6 +12,11 @@
 	color: #c7c7c7;
 }
 
+.hide-files-row .content {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
 .hide-files-row label {
 	font-weight: normal;
 	cursor: pointer;
@@ -24,6 +29,12 @@
 }
 .hide-files-toggle:checked ~ .files .hide-files-btn:before {
 	content: 'Show ';
+}
+.hide-files-toggle:not(:checked) ~ .files .hide-files-row .hide-files-list {
+	display: none;
+}
+.hide-files-list a {
+	margin-left: 1em;
 }
 
 .dimmed span,

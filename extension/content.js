@@ -7,8 +7,9 @@ let hideRegExp;
 const settingsPromise = window.HideFilesOnGitHub.storage.get();
 
 function update() {
-	const files = select.all('.files tr .content > span > :-webkit-any(a, span)');
+	const files = select.all('.files .js-navigation-item .content > span > :-webkit-any(a, span)');
 	const hidden = document.createDocumentFragment();
+	const links = document.createDocumentFragment();
 
 	for (const file of files) {
 		const fileName = file.textContent;
@@ -17,6 +18,7 @@ function update() {
 		if (hideRegExp.test(fileName)) {
 			row.classList.add('dimmed');
 			hidden.appendChild(row);
+			links.appendChild(file.cloneNode(true));
 		}
 	}
 
@@ -28,10 +30,10 @@ function update() {
 	select('.files tbody:last-child').prepend(hidden);
 
 	// Add it at last to make sure it's prepended to everything
-	addToggleBtn();
+	addToggleBtn(links);
 }
 
-function addToggleBtn() {
+function addToggleBtn(links) {
 	const btnRow = select('.hide-files-row');
 	const tbody = select('table.files tbody');
 	if (btnRow) {
@@ -49,10 +51,12 @@ function addToggleBtn() {
 		<tr class="hide-files-row">
 			<td class="icon"></td>
 			<td class="content" colspan="3">
-				<a><label for="HFT" class="hide-files-btn">nonessentials</label></a>
+				<a><label for="HFT" class="hide-files-btn">nonessentials</label></a>:
+				<span class="hide-files-list"></span>
 			</td>
 		</tr>
 	`);
+	select('.hide-files-row .hide-files-list').append(links);
 }
 
 async function init() {
