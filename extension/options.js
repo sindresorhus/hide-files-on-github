@@ -1,33 +1,33 @@
 'use strict';
-let hideRegExpInput;
+const regexField = document.querySelector('#hideRegExp');
+const delimiters = /^\/|\/$/;
 
-document.addEventListener('DOMContentLoaded', () => {
-	document.querySelector('#inputExample span').textContent = window.HideFilesOnGitHub.defaults.hideRegExp;
+restoreOptions();
+regexField.addEventListener('input', update);
 
-	hideRegExpInput = document.querySelector('#hideRegExp');
-
+function update() {
 	// Don't allow delimiters in RegExp string
-	hideRegExpInput.addEventListener('input', () => {
-		const value = hideRegExpInput.value;
-		const noDelimiters = /^\/|\/$/;
+	const values = regexField.value.split('\n');
+	const hasDelimiters = values.some(line => delimiters.test(line));
+	if (hasDelimiters) {
+		regexField.value = values
+			.map(line => line.replace(delimiters, ''))
+			.join('\n');
+	}
 
-		if (noDelimiters.test(value)) {
-			hideRegExpInput.value = hideRegExpInput.value.replace(noDelimiters, '');
-		}
-	});
-
-	hideRegExpInput.addEventListener('change', saveOptions);
-
-	restoreOptions();
-});
+	saveOptions();
+}
 
 function saveOptions() {
-	const hideRegExp = hideRegExpInput.value;
+	let hideRegExp = regexField.value;
+	if (hideRegExp.length === 0) {
+		hideRegExp = window.HideFilesOnGitHub.defaults.hideRegExp;
+	}
 	window.HideFilesOnGitHub.storage.set({hideRegExp});
 }
 
 function restoreOptions() {
 	window.HideFilesOnGitHub.storage.get().then(items => {
-		hideRegExpInput.value = items.hideRegExp;
+		regexField.value = items.hideRegExp;
 	});
 }
