@@ -1,15 +1,29 @@
-table.files tbody tr.first td {
-	border-top: 0 !important;
+.hide-files-toggle {
+	display: none;
+}
+.hide-files-toggle:checked ~ .files .dimmed {
+	display: none;
 }
 
-.hide-files-btn {
+.hide-files-row {
+	border-bottom: 1px solid #eaecef; /* Needed on non-root listings */
 	font-style: italic;
-	cursor: pointer;
+	user-select: none;
 	color: #c7c7c7;
 }
 
-.hide-files-btn:hover {
-	color: #4078c0;
+.hide-files-row label {
+	font-weight: normal;
+	cursor: pointer;
+}
+.hide-files-row a:not(:hover) {
+	color: inherit;
+}
+.hide-files-btn:before {
+	content: 'Hide ';
+}
+.hide-files-toggle:checked ~ .files .hide-files-btn:before {
+	content: 'Show ';
 }
 
 .dimmed span,

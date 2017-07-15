@@ -12,12 +12,6 @@
 		"https://github.com/*/*",
 		"storage"
 	],
-	"background": {
-		"persistent": false,
-		"scripts": [
-			"api.js"
-		]
-	},
 	"options_ui": {
 		"page": "options.html",
 		"chrome_style": true
@@ -36,7 +30,6 @@
 			],
 			"js": [
 				"api.js",
-				"node_modules/github-injection/index.js",
 				"content.js"
 			]
 		}
