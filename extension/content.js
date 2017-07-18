@@ -22,7 +22,10 @@ function update() {
 		if (hideRegExp.test(fileName)) {
 			row.classList.add('dimmed');
 			hidden.appendChild(row);
-			links.appendChild(file.cloneNode(true));
+			const node = file.cloneNode(true);
+			delete node.id;
+			node.tabIndex = -1;
+			links.appendChild(node);
 		}
 	}
 
@@ -54,7 +57,7 @@ function addToggleBtn(links) {
 	tbody.insertAdjacentHTML('afterBegin', `
 		<tr class="hide-files-row">
 			<td colspan="5">
-				<a><label for="HFT" class="hide-files-btn"><svg aria-hidden="true" height="16" viewBox="0 0 10 16" width="10"><path d="M5 11L0 6l1.5-1.5L5 8.25 8.5 4.5 10 6z"></path></svg></label></a>
+				<label for="HFT" class="hide-files-btn"><svg aria-hidden="true" height="16" viewBox="0 0 10 16" width="10"><path d="M5 11L0 6l1.5-1.5L5 8.25 8.5 4.5 10 6z"></path></svg></label></a>
 				<span class="hide-files-list"></span>
 			</td>
 		</tr>

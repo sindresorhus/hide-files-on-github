@@ -1,5 +1,6 @@
 .hide-files-toggle {
-	display: none;
+	position: absolute;
+	clip: rect(0px, 0px, 0px, 0px);
 }
 .hide-files-toggle:checked ~ .files .dimmed {
 	display: none;
@@ -30,6 +31,9 @@
 	fill: currentColor;
 	width: 1.6em;
 	text-align: center;
+}
+.hide-files-toggle:focus ~ .files .hide-files-btn {
+	color: #0366d6;
 }
 .hide-files-btn svg {
 	vertical-align: middle;
