@@ -1,54 +1,64 @@
+/* Hide the checkbox but keep it focusable*/
 .hide-files-toggle {
 	position: absolute;
 	clip: rect(0px, 0px, 0px, 0px);
 }
+
+/* Hide files when the checkbox is checked */
 .hide-files-toggle:checked ~ .files .dimmed {
 	display: none;
 }
 
+/* Set spacing of line container */
 .hide-files-row td {
 	border-bottom: 1px solid #eaecef; /* Needed on non-root listings */
 	font-style: italic;
 	user-select: none;
-	color: #c7c7c7 !important;
 	padding-left: 5px !important;
 	padding-right: 10px !important;
 	white-space: nowrap;
 	max-width: 1px;
 }
-.hide-files-row label {
-	font-weight: normal;
-	cursor: pointer;
+.hide-files-list a {
+	margin-right: 1em;
+}
+
+/* Correct style and color for all links */
+.hide-files-row,
+.dimmed span,
+.dimmed a {
+	color: #c7c7c7 !important;
 }
 .hide-files-row .simplified-path {
 	color: inherit !important;
 }
-.hide-files-row a:not(:hover) {
-	color: inherit;
+.hide-files-row a:hover,
+.hide-files-btn:hover,
+.hide-files-toggle:focus ~ .files .hide-files-btn {
+	color: #0366d6;
 }
+.hide-files-row label {
+	font-weight: normal;
+	cursor: pointer;
+}
+
+/* Size and style chevron */
 .hide-files-btn {
 	display: inline-block;
 	fill: currentColor;
 	width: 1.6em;
 	text-align: center;
-}
-.hide-files-toggle:focus ~ .files .hide-files-btn {
-	color: #0366d6;
+	font-weight: normal;
+	cursor: pointer;
 }
 .hide-files-btn svg {
 	vertical-align: middle;
 }
-.hide-files-toggle:checked ~ .files .hide-files-btn {
+.hide-files-toggle:checked ~ .files .hide-files-btn svg {
 	transform: rotate(-90deg);
 }
+
+/* The magic */
 .hide-files-toggle:not(:checked) ~ .files .hide-files-row .hide-files-list {
 	display: none;
-}
-.hide-files-list a {
-	margin-right: 1em;
-}
-
-.dimmed span,
-.dimmed a {
-	color: #c7c7c7 !important;
 }
