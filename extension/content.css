@@ -11,6 +11,7 @@
 	user-select: none;
 	color: #c7c7c7 !important;
 	padding-left: 5px !important;
+	padding-right: 10px !important;
 
 	/* All 4 properties are needed to add ellipsis */
 	text-overflow: ellipsis;
