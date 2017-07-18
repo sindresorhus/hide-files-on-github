@@ -68,7 +68,7 @@ function addToggleBtn(links) {
 
 	// Drop extra links on long lists
 	let moreBtn;
-	while(overflowsParent(wrapper)) {
+	while (overflowsParent(wrapper)) {
 		if (!moreBtn) {
 			moreBtn = `<label for="HFT"><a>etc...</a></label>`;
 			wrapper.insertAdjacentHTML('beforeEnd', moreBtn);
