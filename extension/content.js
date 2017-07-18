@@ -6,6 +6,10 @@ select.all = document.querySelectorAll.bind(document);
 let hideRegExp;
 const settingsPromise = window.HideFilesOnGitHub.storage.get();
 
+function overflowsParent(el) {
+	return el.getBoundingClientRect().right > el.parentNode.getBoundingClientRect().right;
+}
+
 function update() {
 	const files = select.all('.files .js-navigation-item .content > span > :-webkit-any(a, span)');
 	const hidden = document.createDocumentFragment();
@@ -55,7 +59,19 @@ function addToggleBtn(links) {
 			</td>
 		</tr>
 	`);
-	select('.hide-files-row .hide-files-list').append(links);
+
+	const wrapper = select('.hide-files-row .hide-files-list');
+	wrapper.append(links);
+
+	// Drop extra links on long lists
+	let moreBtn;
+	while(overflowsParent(wrapper)) {
+		if (!moreBtn) {
+			moreBtn = `<label for="HFT"><a>etc...</a></label>`;
+			wrapper.insertAdjacentHTML('beforeEnd', moreBtn);
+		}
+		wrapper.querySelector(':scope > a:last-of-type').remove();
+	}
 }
 
 async function init() {
