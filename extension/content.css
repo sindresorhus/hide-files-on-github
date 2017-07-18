@@ -23,6 +23,9 @@
 	font-weight: normal;
 	cursor: pointer;
 }
+.hide-files-row .simplified-path {
+	color: inherit !important;
+}
 .hide-files-row a:not(:hover) {
 	color: inherit;
 }
