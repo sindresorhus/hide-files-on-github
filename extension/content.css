@@ -1,3 +1,5 @@
+/* Uses :root for increased specificity without !important */
+
 /* Hide the checkbox but keep it focusable*/
 .hide-files-toggle {
 	position: absolute;
@@ -5,7 +7,7 @@
 }
 
 /* Hide files when the checkbox is checked */
-.hide-files-toggle:checked ~ .files .dimmed {
+.hide-files-toggle:checked ~ .files .js-navigation-item.dimmed {
 	display: none;
 }
 
@@ -24,16 +26,14 @@
 }
 
 /* Correct style and color for all links */
-.hide-files-row,
-.dimmed span,
-.dimmed a {
-	color: #c7c7c7 !important;
+.dimmed {
+	color: #c7c7c7;
 }
-.hide-files-row .simplified-path {
-	color: inherit !important;
+:root:root .dimmed * {
+	color: inherit;
 }
-.hide-files-row a:hover,
-.hide-files-btn:hover,
+:root:root .dimmed a:hover,
+:root:root .hide-files-btn:hover,
 .hide-files-toggle:focus ~ .files .hide-files-btn {
 	color: #0366d6;
 }
