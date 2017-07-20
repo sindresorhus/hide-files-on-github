@@ -14,10 +14,10 @@ function setValidity(text = '') {
 
 function update() {
 	// Don't allow delimiters in RegExp string
-	const values = regexField.value.split('\n');
-	const hasDelimiters = values.some(line => delimiters.test(line));
-	if (hasDelimiters) {
-		return setValidity('Don’t use regex delimiters around each regex (type <code>a</code> instead of <code>/a/</code>)');
+	for (const line of regexField.value.split('\n')) {
+		if (delimiters.test(line)) {
+			return setValidity(`Use <code>${line.replace(/^\/|\/$/g, '')}</code> instead of <code>${line}</code>. Slashes are not required.`);
+		}
 	}
 	}
 
