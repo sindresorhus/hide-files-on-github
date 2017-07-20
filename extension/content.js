@@ -1,10 +1,12 @@
+/* global HideFilesOnGitHub */
+
 'use strict';
 
 const select = document.querySelector.bind(document);
 select.all = document.querySelectorAll.bind(document);
 
 let hideRegExp;
-const settingsPromise = window.HideFilesOnGitHub.storage.get();
+const settingsPromise = HideFilesOnGitHub.storage.get();
 
 function update() {
 	const files = select.all('.files tr .content > span > :-webkit-any(a, span)');
@@ -57,11 +59,9 @@ function addToggleBtn() {
 
 async function init() {
 	const settings = await settingsPromise;
-	if (settings.hideRegExp) {
-		hideRegExp = new RegExp(settings.hideRegExp, 'i');
-		update();
-		document.addEventListener('pjax:end', update);
-	}
+	hideRegExp = new RegExp(settings.hideRegExp.replace(/\n+/g, '|'), 'i');
+	update();
+	document.addEventListener('pjax:end', update);
 }
 
 if (document.readyState === 'loading') {

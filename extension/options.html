@@ -4,16 +4,15 @@
 		<meta charset="utf-8">
 		<title>Hide Files on Github Options</title>
 		<link href="options.css" rel="stylesheet">
-		<script src="api.js"></script>
-		<script src="options.js"></script>
 	</head>
 	<body>
-		<h3>Hide Files</h3>
-		<small>Control which files are hidden with a <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Guide/Regular_Expressions">Regular Expression</a>.</small>
-		<label for="hideRegExp">RegExp:</label>
-		<div id="regexInput">
-			<textarea id="hideRegExp"></textarea>
-			<span id="inputExample"><b>Example:</b> <span></span></span>
-		</div>
+		<p>Control which files are hidden with a <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Guide/Regular_Expressions">Regular Expression</a>:</p>
+
+		<textarea id="hideRegExp"></textarea>
+		<small id="errorMessage"></small>
+		<small>Leave empty to restore the defaults.</small>
+
+		<script src="api.js"></script>
+		<script src="options.js"></script>
 	</body>
 </html>
