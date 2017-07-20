@@ -33,7 +33,7 @@ function update() {
 }
 
 function saveOptions() {
-	let hideRegExp = regexField.value;
+	let hideRegExp = regexField.value.trim();
 	if (hideRegExp.length === 0) {
 		hideRegExp = window.HideFilesOnGitHub.defaults.hideRegExp;
 	}

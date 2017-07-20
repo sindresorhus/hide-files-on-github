@@ -57,7 +57,7 @@ function addToggleBtn() {
 
 async function init() {
 	const settings = await settingsPromise;
-	hideRegExp = new RegExp(settings.hideRegExp.replace(/\n/g, '|'), 'i');
+	hideRegExp = new RegExp(settings.hideRegExp.replace(/\n+/g, '|'), 'i');
 	update();
 	document.addEventListener('pjax:end', update);
 }
