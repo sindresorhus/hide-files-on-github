@@ -1,3 +1,5 @@
+/* global HideFilesOnGitHub */
+
 'use strict';
 const regexField = document.querySelector('#hideRegExp');
 const errorMessage = document.querySelector('#errorMessage');
@@ -33,15 +35,15 @@ function update() {
 }
 
 function saveOptions() {
-	let hideRegExp = regexField.value.trim();
-	if (hideRegExp.length === 0) {
-		hideRegExp = window.HideFilesOnGitHub.defaults.hideRegExp;
-	}
-	window.HideFilesOnGitHub.storage.set({hideRegExp});
+	const defaults = HideFilesOnGitHub.defaults;
+
+	HideFilesOnGitHub.storage.set({
+		hideRegExp: regexField.value.trim() || defaults.hideRegExp
+	});
 }
 
 function restoreOptions() {
-	window.HideFilesOnGitHub.storage.get().then(items => {
+	HideFilesOnGitHub.storage.get().then(items => {
 		regexField.value = items.hideRegExp;
 	});
 }
