@@ -5,17 +5,19 @@
 const select = document.querySelector.bind(document);
 select.all = document.querySelectorAll.bind(document);
 
-let hideRegExp;
 const settingsPromise = HideFilesOnGitHub.storage.get();
 
 function overflowsParent(el) {
 	return el.getBoundingClientRect().right > el.parentNode.getBoundingClientRect().right;
 }
 
-function update() {
+function update({filesPreview, hideRegExp}) {
 	const files = select.all('.files .js-navigation-item .content > span > :-webkit-any(a, span)');
 	const hidden = document.createDocumentFragment();
-	const links = document.createDocumentFragment();
+	if (filesPreview) {
+		filesPreview = document.createElement('span');
+		filesPreview.className = 'hide-files-list';
+	}
 
 	for (const file of files) {
 		const fileName = file.textContent;
@@ -24,10 +26,12 @@ function update() {
 		if (hideRegExp.test(fileName)) {
 			row.classList.add('dimmed');
 			hidden.appendChild(row);
-			const node = file.cloneNode(true);
-			delete node.id;
-			node.tabIndex = -1;
-			links.appendChild(node);
+			if (filesPreview) {
+				const node = file.cloneNode(true);
+				delete node.id;
+				node.tabIndex = -1;
+				filesPreview.appendChild(node);
+			}
 		}
 	}
 
@@ -39,10 +43,10 @@ function update() {
 	select('.files tbody:last-child').prepend(hidden);
 
 	// Add it at last to make sure it's prepended to everything
-	addToggleBtn(links);
+	addToggleBtn(filesPreview);
 }
 
-function addToggleBtn(links) {
+function addToggleBtn(filesPreview) {
 	const btnRow = select('.hide-files-row');
 	const tbody = select('table.files tbody');
 	if (btnRow) {
@@ -59,31 +63,43 @@ function addToggleBtn(links) {
 	tbody.insertAdjacentHTML('afterBegin', `
 		<tr class="hide-files-row dimmed">
 			<td colspan="5">
-				<label for="HFT" class="hide-files-btn"><svg aria-hidden="true" height="16" viewBox="0 0 10 16" width="10"><path d="M5 11L0 6l1.5-1.5L5 8.25 8.5 4.5 10 6z"></path></svg></label></a>
-				<span class="hide-files-list"></span>
+				<label for="HFT" class="hide-files-btn"></label>
 			</td>
 		</tr>
 	`);
 
-	const wrapper = select('.hide-files-row .hide-files-list');
-	wrapper.append(links);
+	if (!filesPreview) {
+		select('.hide-files-row').insertAdjacentHTML('afterBegin', `
+			<td class="icon"></td>
+		`);
+
+		return;
+	}
+
+	const btn = select('.hide-files-btn');
+	btn.insertAdjacentHTML('afterBegin', `
+		<svg aria-hidden="true" height="16" viewBox="0 0 10 16" width="10"><path d="M5 11L0 6l1.5-1.5L5 8.25 8.5 4.5 10 6z"></path></svg>
+	`);
+
+	btn.insertAdjacentElement('afterEnd', filesPreview);
 
 	// Drop extra links on long lists
 	let moreBtn;
-	while (overflowsParent(wrapper)) {
+	while (overflowsParent(filesPreview)) {
 		if (!moreBtn) {
 			moreBtn = `<label for="HFT"><a>etc...</a></label>`;
-			wrapper.insertAdjacentHTML('beforeEnd', moreBtn);
+			filesPreview.insertAdjacentHTML('beforeEnd', moreBtn);
 		}
-		wrapper.querySelector(':scope > a:last-of-type').remove();
+		filesPreview.querySelector(':scope > a:last-of-type').remove();
 	}
 }
 
 async function init() {
 	const settings = await settingsPromise;
-	hideRegExp = new RegExp(settings.hideRegExp.replace(/\n+/g, '|'), 'i');
-	update();
-	document.addEventListener('pjax:end', update);
+	settings.hideRegExp = new RegExp(settings.hideRegExp.replace(/\n+/g, '|'), 'i');
+
+	update(settings);
+	document.addEventListener('pjax:end', () => update(settings));
 }
 
 if (document.readyState === 'loading') {

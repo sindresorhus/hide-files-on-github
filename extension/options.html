@@ -5,14 +5,20 @@
 		<title>Hide Files on Github Options</title>
 		<link href="options.css" rel="stylesheet">
 	</head>
-	<body>
+	<form>
 		<p>Control which files are hidden with a <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Guide/Regular_Expressions">Regular Expression</a>:</p>
 
 		<textarea id="hideRegExp"></textarea>
 		<small id="errorMessage"></small>
 		<small>Leave empty to restore the defaults.</small>
 
+		<p>
+			<label>
+				<input id="filesPreview" type="checkbox">
+				Preview hidden files next to toggle
+			</label>
+		</p>
 		<script src="api.js"></script>
 		<script src="options.js"></script>
-	</body>
+	</form>
 </html>

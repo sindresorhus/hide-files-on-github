@@ -2,11 +2,13 @@
 
 'use strict';
 const regexField = document.querySelector('#hideRegExp');
+const previewField = document.querySelector('#filesPreview');
 const errorMessage = document.querySelector('#errorMessage');
 const delimiters = /^\/|\/$/;
 
 restoreOptions();
-regexField.addEventListener('input', update);
+document.addEventListener('input', update);
+document.addEventListener('change', update);
 
 /* Native validation tooltips don't seem to work */
 function setValidity(text = '') {
@@ -38,6 +40,7 @@ function saveOptions() {
 	const defaults = HideFilesOnGitHub.defaults;
 
 	HideFilesOnGitHub.storage.set({
+		filesPreview: previewField.checked,
 		hideRegExp: regexField.value.trim() || defaults.hideRegExp
 	});
 }
@@ -45,5 +48,6 @@ function saveOptions() {
 function restoreOptions() {
 	HideFilesOnGitHub.storage.get().then(items => {
 		regexField.value = items.hideRegExp;
+		previewField.checked = items.filesPreview;
 	});
 }

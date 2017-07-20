@@ -54,6 +54,15 @@
 .hide-files-btn svg {
 	vertical-align: middle;
 }
+.hide-files-btn:empty:before {
+	content: 'Hide';
+}
+.hide-files-btn:empty:after {
+	content: ' nonessentials';
+}
+.hide-files-toggle:checked ~ .files .hide-files-btn:empty:before {
+	content: 'Show';
+}
 .hide-files-toggle:checked ~ .files .hide-files-btn svg {
 	transform: rotate(-90deg);
 }

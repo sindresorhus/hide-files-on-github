@@ -4,6 +4,7 @@
 const HideFilesOnGitHub = {};
 
 HideFilesOnGitHub.defaults = {
+	filesPreview: true,
 	hideRegExp: `
 		^\\.
 		^license
