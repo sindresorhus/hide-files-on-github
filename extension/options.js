@@ -1,33 +1,49 @@
+/* global HideFilesOnGitHub */
+
 'use strict';
-let hideRegExpInput;
+const regexField = document.querySelector('#hideRegExp');
+const errorMessage = document.querySelector('#errorMessage');
+const delimiters = /^\/|\/$/;
 
-document.addEventListener('DOMContentLoaded', () => {
-	document.querySelector('#inputExample span').textContent = window.HideFilesOnGitHub.defaults.hideRegExp;
+restoreOptions();
+regexField.addEventListener('input', update);
 
-	hideRegExpInput = document.querySelector('#hideRegExp');
+/* Native validation tooltips don't seem to work */
+function setValidity(text = '') {
+	errorMessage.innerHTML = text;
+	regexField.setCustomValidity(text); /* Triggers :invalid */
+}
 
-	// Don't allow delimiters in RegExp string
-	hideRegExpInput.addEventListener('input', () => {
-		const value = hideRegExpInput.value;
-		const noDelimiters = /^\/|\/$/;
-
-		if (noDelimiters.test(value)) {
-			hideRegExpInput.value = hideRegExpInput.value.replace(noDelimiters, '');
+function update() {
+	for (const line of regexField.value.split('\n')) {
+		// Don't allow delimiters in RegExp string
+		if (delimiters.test(line)) {
+			return setValidity(`Use <code>${line.replace(/^\/|\/$/g, '')}</code> instead of <code>${line}</code>. Slashes are not required.`);
 		}
-	});
 
-	hideRegExpInput.addEventListener('change', saveOptions);
+		// Fully test each RegExp
+		try {
+			// eslint-disable-next-line no-new
+			new RegExp(line);
+		} catch (err) {
+			return setValidity(err.message);
+		}
+	}
 
-	restoreOptions();
-});
+	setValidity();
+	saveOptions();
+}
 
 function saveOptions() {
-	const hideRegExp = hideRegExpInput.value;
-	window.HideFilesOnGitHub.storage.set({hideRegExp});
+	const defaults = HideFilesOnGitHub.defaults;
+
+	HideFilesOnGitHub.storage.set({
+		hideRegExp: regexField.value.trim() || defaults.hideRegExp
+	});
 }
 
 function restoreOptions() {
-	window.HideFilesOnGitHub.storage.get().then(items => {
-		hideRegExpInput.value = items.hideRegExp;
+	HideFilesOnGitHub.storage.get().then(items => {
+		regexField.value = items.hideRegExp;
 	});
 }
