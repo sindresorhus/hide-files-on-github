@@ -1,6 +1,6 @@
 /* Uses :root for increased specificity without !important */
 
-/* Hide the checkbox but keep it focusable*/
+/* Hide the checkbox but keep it focusable */
 .hide-files-toggle {
 	position: absolute;
 	clip: rect(0px, 0px, 0px, 0px);
