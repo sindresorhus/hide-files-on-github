@@ -17,7 +17,14 @@ Install it from the [Chrome Web Store](https://chrome.google.com/webstore/detail
 - [Hide Files from Bitbucket PR](https://github.com/Zhouzi/hide-files-from-bitbucket-pr) - Hides nonessential files in Bitbucket's pull request viewer
 
 
+## Created by
+
+- [Sindre Sorhus](https://github.com/sindresorhus)
+- [Michael Wuergler](https://github.com/radiovisual)
+- [Federico Brigante](https://github.com/bfred-it)
+- [Contributors…](https://github.com/sindresorhus/hide-files-on-github/graphs/contributors)
+
+
 ## License
 
-MIT © [Sindre Sorhus](https://sindresorhus.com)
-
+MIT
