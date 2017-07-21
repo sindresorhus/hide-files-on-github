@@ -2,7 +2,6 @@
 
 'use strict';
 const regexField = document.querySelector('#hideRegExp');
-const previewField = document.querySelector('#filesPreview');
 const errorMessage = document.querySelector('#errorMessage');
 const delimiters = /^\/|\/$/;
 
@@ -38,16 +37,18 @@ function update() {
 
 function saveOptions() {
 	const defaults = HideFilesOnGitHub.defaults;
+	const previewField = document.querySelector('[name="filesPreview"]:checked');
 
 	HideFilesOnGitHub.storage.set({
-		filesPreview: previewField.checked,
+		filesPreview: previewField.value === 'true',
 		hideRegExp: regexField.value.trim() || defaults.hideRegExp
 	});
 }
 
 function restoreOptions() {
 	HideFilesOnGitHub.storage.get().then(items => {
+		const previewField = document.querySelector(`[name="filesPreview"][value="${String(items.filesPreview)}"]`);
 		regexField.value = items.hideRegExp;
-		previewField.checked = items.filesPreview;
+		previewField.checked = true;
 	});
 }
