@@ -1,32 +1,73 @@
+/* Uses :root for increased specificity without !important */
+
+/* Hide the checkbox but keep it focusable */
 .hide-files-toggle {
-	display: none;
+	position: absolute;
+	clip: rect(0px, 0px, 0px, 0px);
 }
-.hide-files-toggle:checked ~ .files .dimmed {
+
+/* Hide files when the checkbox is checked */
+.hide-files-toggle:checked ~ .files .js-navigation-item.dimmed {
 	display: none;
 }
 
-.hide-files-row {
+/* Set spacing of line container */
+.hide-files-row td {
 	border-bottom: 1px solid #eaecef; /* Needed on non-root listings */
 	font-style: italic;
 	user-select: none;
-	color: #c7c7c7;
+	padding-left: 5px !important;
+	padding-right: 10px !important;
+	white-space: nowrap;
+	max-width: 1px;
+}
+.hide-files-list a {
+	margin-right: 1em;
 }
 
+/* Correct style and color for all links */
+.dimmed {
+	color: #c7c7c7;
+}
+:root:root .dimmed * {
+	color: inherit;
+}
+:root:root .dimmed a:hover,
+:root:root .hide-files-btn:hover,
+.hide-files-toggle:focus ~ .files .hide-files-btn {
+	color: #0366d6;
+}
 .hide-files-row label {
 	font-weight: normal;
 	cursor: pointer;
 }
-.hide-files-row a:not(:hover) {
-	color: inherit;
+
+/* Size and style chevron */
+.hide-files-btn {
+	display: inline-block;
+	fill: currentColor;
+	width: 1.6em;
+	text-align: center;
+	font-weight: normal;
+	cursor: pointer;
 }
-.hide-files-btn:before {
-	content: 'Hide ';
+.hide-files-btn svg {
+	vertical-align: middle;
 }
-.hide-files-toggle:checked ~ .files .hide-files-btn:before {
-	content: 'Show ';
+.hide-files-btn:empty:before {
+	content: 'Hide';
+}
+.hide-files-btn:empty:after {
+	content: ' nonessentials';
+}
+.hide-files-toggle:checked ~ .files .hide-files-btn:empty:before {
+	content: 'Show';
+}
+.hide-files-toggle:checked ~ .files .hide-files-btn svg {
+	transform: rotate(-90deg);
 }
 
-.dimmed span,
-.dimmed a {
-	color: #c7c7c7 !important;
+/* The magic */
+.hide-files-toggle:not(:checked) ~ .files .hide-files-row .hide-files-list {
+	display: none;
 }

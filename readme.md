@@ -1,10 +1,8 @@
-# Hide Files on GitHub
+# Hide Files on GitHub <img src="screenshot.png" width="318" align="right">
 
 > Chrome extension - Hide nonessential files from the GitHub file browser
 
-In the options, you can choose what files/directories to hide with a custom regex.
-
-![](screenshot.png)
+You can customize which files to hide and you can make it more minimal in the extension's options page.
 
 
 ## Install

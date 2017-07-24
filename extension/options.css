@@ -24,6 +24,10 @@ textarea:invalid {
 	box-shadow: inset 0 0 10px var(--red-by-github);
 }
 
+h2:not(:first-child) {
+	margin-top: 2em;
+}
+
 /* Style by GitHub */
 code {
 	padding: 0;

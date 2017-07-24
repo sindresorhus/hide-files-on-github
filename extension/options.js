@@ -6,7 +6,8 @@ const errorMessage = document.querySelector('#errorMessage');
 const delimiters = /^\/|\/$/;
 
 restoreOptions();
-regexField.addEventListener('input', update);
+document.addEventListener('input', update);
+document.addEventListener('change', update);
 
 /* Native validation tooltips don't seem to work */
 function setValidity(text = '') {
@@ -36,14 +37,18 @@ function update() {
 
 function saveOptions() {
 	const defaults = HideFilesOnGitHub.defaults;
+	const previewField = document.querySelector('[name="filesPreview"]:checked');
 
 	HideFilesOnGitHub.storage.set({
+		filesPreview: previewField.value === 'true',
 		hideRegExp: regexField.value.trim() || defaults.hideRegExp
 	});
 }
 
 function restoreOptions() {
 	HideFilesOnGitHub.storage.get().then(items => {
+		const previewField = document.querySelector(`[name="filesPreview"][value="${String(items.filesPreview)}"]`);
 		regexField.value = items.hideRegExp;
+		previewField.checked = true;
 	});
 }
