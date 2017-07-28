@@ -100,10 +100,12 @@ async function init() {
 
 	update(settings);
 	document.addEventListener('pjax:end', () => update(settings));
-	const ajaxFiles = select('include-fragment.file-wrap').parentNode;
-	new MutationObserver(() => update(settings)).observe(ajaxFiles, {
-		childList: true
-	});
+	const ajaxFiles = select('include-fragment.file-wrap');
+	if (ajaxFiles) {
+		new MutationObserver(() => update(settings)).observe(ajaxFiles.parentNode, {
+			childList: true
+		});
+	}
 }
 
 if (document.readyState === 'loading') {
