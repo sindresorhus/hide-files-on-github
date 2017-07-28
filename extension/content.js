@@ -108,15 +108,21 @@ function addToggleBtn(filesPreview) {
 }
 
 function init() {
+	// Update on fragment update
+	const observer = new MutationObserver(update);
+	const observeFragment = () => {
+		const ajaxFiles = select('include-fragment.file-wrap');
+		if (ajaxFiles) {
+			observer.observe(ajaxFiles.parentNode, {
+				childList: true
+			});
+		}
+	};
 
 	update();
+	observeFragment();
 	document.addEventListener('pjax:end', update); // Update on page change
-	const ajaxFiles = select('include-fragment.file-wrap');
-	if (ajaxFiles) {
-		new MutationObserver(() => update(settings)).observe(ajaxFiles.parentNode, {
-			childList: true
-		});
-	}
+	document.addEventListener('pjax:end', observeFragment);
 }
 
 Promise.all([domLoaded, settingsPromise]).then(init);
