@@ -11,6 +11,14 @@ const settingsPromise = HideFilesOnGitHub.storage.get().then(retrieved => {
 	settings.hideRegExp = new RegExp(settings.hideRegExp.replace(/\n+/g, '|'), 'i');
 });
 
+const domLoaded = new Promise(resolve => {
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', resolve);
+	} else {
+		resolve();
+	}
+});
+
 function overflowsParent(el) {
 	return el.getBoundingClientRect().right > el.parentNode.getBoundingClientRect().right;
 }
@@ -99,8 +107,7 @@ function addToggleBtn(filesPreview) {
 	}
 }
 
-async function init() {
-	await settingsPromise;
+function init() {
 
 	update();
 	document.addEventListener('pjax:end', update); // Update on page change
@@ -112,8 +119,4 @@ async function init() {
 	}
 }
 
-if (document.readyState === 'loading') {
-	document.addEventListener('DOMContentLoaded', init);
-} else {
-	init();
-}
+Promise.all([domLoaded, settingsPromise]).then(init);
