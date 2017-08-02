@@ -5,13 +5,26 @@
 const select = document.querySelector.bind(document);
 select.all = document.querySelectorAll.bind(document);
 
-const settingsPromise = HideFilesOnGitHub.storage.get();
+let settings;
+const settingsPromise = HideFilesOnGitHub.storage.get().then(retrieved => {
+	settings = retrieved;
+	settings.hideRegExp = new RegExp(settings.hideRegExp.replace(/\n+/g, '|'), 'i');
+});
+
+const domLoaded = new Promise(resolve => {
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', resolve);
+	} else {
+		resolve();
+	}
+});
 
 function overflowsParent(el) {
 	return el.getBoundingClientRect().right > el.parentNode.getBoundingClientRect().right;
 }
 
-function update({filesPreview, hideRegExp}) {
+function update() {
+	let {filesPreview, hideRegExp} = settings;
 	const files = select.all('.files .js-navigation-item .content > span > :-webkit-any(a, span)');
 	const hidden = document.createDocumentFragment();
 	if (filesPreview) {
@@ -94,16 +107,22 @@ function addToggleBtn(filesPreview) {
 	}
 }
 
-async function init() {
-	const settings = await settingsPromise;
-	settings.hideRegExp = new RegExp(settings.hideRegExp.replace(/\n+/g, '|'), 'i');
+function init() {
+	// Update on fragment update
+	const observer = new MutationObserver(update);
+	const observeFragment = () => {
+		const ajaxFiles = select('include-fragment.file-wrap');
+		if (ajaxFiles) {
+			observer.observe(ajaxFiles.parentNode, {
+				childList: true
+			});
+		}
+	};
 
-	update(settings);
-	document.addEventListener('pjax:end', () => update(settings));
+	update();
+	observeFragment();
+	document.addEventListener('pjax:end', update); // Update on page change
+	document.addEventListener('pjax:end', observeFragment);
 }
 
-if (document.readyState === 'loading') {
-	document.addEventListener('DOMContentLoaded', init);
-} else {
-	init();
-}
+Promise.all([domLoaded, settingsPromise]).then(init);
