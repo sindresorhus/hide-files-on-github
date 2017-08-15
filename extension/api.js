@@ -24,6 +24,7 @@ HideFilesOnGitHub.defaults = {
 		^yuidoc\\.json$
 		^stylelint-config\\.json
 		^humans\\.txt
+		^readme\\.md$
 	`.replace(/\n\t+/g, '\n').trim()
 };
 
