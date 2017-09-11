@@ -2,8 +2,8 @@
   "scripts": {
     "test": "xo",
     "release": "npm run update-version && npm run upload",
-    "upload": "webstore upload --auto-publish",
-    "update-version": "dot-json manifest.json version $TRAVIS_TAG"
+    "upload": "cd extension && webstore upload --auto-publish",
+    "update-version": "dot-json extension/manifest.json version $TRAVIS_TAG"
   },
   "devDependencies": {
     "chrome-webstore-upload-cli": "^1.1.1",
