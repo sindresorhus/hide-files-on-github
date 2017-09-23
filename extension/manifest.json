@@ -1,6 +1,6 @@
 {
 	"name": "Hide Files on GitHub",
-	"version": "2.1.0",
+	"version": "0.0.0",
 	"description": "Hide nonessential files from the file browser",
 	"homepage_url": "https://github.com/sindresorhus/hide-files-on-github",
 	"manifest_version": 2,

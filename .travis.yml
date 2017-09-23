@@ -1,5 +1,12 @@
 language: node_js
 node_js:
   - 'node'
-before_install:
-  - cd extension
+env:
+  - EXTENSION_ID=lpnakhpaodhdkleejaehlapdhbgjbddp
+deploy:
+  provider: script
+  skip_cleanup: true
+  script: npm run release
+  on:
+    branch: master
+    tags: true
