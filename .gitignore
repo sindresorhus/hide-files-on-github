@@ -1,2 +1,1 @@
-extension/node_modules/*
-!extension/node_modules/github-injection/index.js
+node_modules
