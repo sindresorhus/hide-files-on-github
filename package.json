@@ -14,5 +14,9 @@
 		"envs": [
 			"browser"
 		]
+	},
+	"dependencies": {
+		"webext-domain-permission-toggle": "0.0.2",
+		"webext-dynamic-content-scripts": "^5.0.1"
 	}
 }
