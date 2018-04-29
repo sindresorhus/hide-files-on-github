@@ -42,7 +42,6 @@
 				"content.css"
 			],
 			"js": [
-				"libs/webext-dynamic-content-scripts.js",
 				"api.js",
 				"content.js"
 			]
