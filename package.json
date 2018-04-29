@@ -1,6 +1,6 @@
 {
 	"scripts": {
-		"test": "xo",
+		"test": "xo !lib",
 		"release": "npm run update-version && npm run upload",
 		"upload": "cd extension && webstore upload --auto-publish",
 		"update-version": "dot-json extension/manifest.json version $TRAVIS_TAG"
