@@ -100,7 +100,7 @@ function addToggleBtn(filesPreview) {
 	let moreBtn;
 	while (overflowsParent(filesPreview)) {
 		if (!moreBtn) {
-			moreBtn = `<label for="HFT"><a>etc...</a></label>`;
+			moreBtn = '<label for="HFT"><a>etc...</a></label>';
 			filesPreview.insertAdjacentHTML('beforeEnd', moreBtn);
 		}
 		filesPreview.querySelector(':scope > a:last-of-type').remove();

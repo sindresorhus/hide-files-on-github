@@ -26,8 +26,8 @@ function update() {
 		try {
 			// eslint-disable-next-line no-new
 			new RegExp(line);
-		} catch (err) {
-			return setValidity(err.message);
+		} catch (error) {
+			return setValidity(error.message);
 		}
 	}
 
@@ -36,12 +36,11 @@ function update() {
 }
 
 function saveOptions() {
-	const defaults = HideFilesOnGitHub.defaults;
 	const previewField = document.querySelector('[name="filesPreview"]:checked');
 
 	HideFilesOnGitHub.storage.set({
 		filesPreview: previewField.value === 'true',
-		hideRegExp: regexField.value.trim() || defaults.hideRegExp
+		hideRegExp: regexField.value.trim() || HideFilesOnGitHub.defaults.hideRegExp
 	});
 }
 
