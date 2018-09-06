@@ -5,6 +5,12 @@
 	"homepage_url": "https://github.com/sindresorhus/hide-files-on-github",
 	"manifest_version": 2,
 	"minimum_chrome_version": "51",
+	"applications": {
+		"gecko": {
+			"id": "{e3ad1b0f-99ff-4df7-87bb-0b17cfa9628d}",
+			"strict_min_version": "53.0"
+		}
+	},
 	"icons": {
 		"128": "icon.png"
 	},

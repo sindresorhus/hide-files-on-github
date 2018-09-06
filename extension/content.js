@@ -25,7 +25,7 @@ function overflowsParent(el) {
 
 function update() {
 	let {filesPreview, hideRegExp} = settings;
-	const files = select.all('.files .js-navigation-item .content > span > :-webkit-any(a, span)');
+	const files = select.all('.files .js-navigation-item .content > span > *');
 	const hidden = document.createDocumentFragment();
 	if (filesPreview) {
 		filesPreview = document.createElement('span');
