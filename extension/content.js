@@ -25,31 +25,36 @@ function overflowsParent(el) {
 
 function update() {
 	let {filesPreview, hideRegExp} = settings;
-	const files = select.all('.files .js-navigation-item .content > span > *');
+	const hiddenFiles = select
+		.all('.files .js-navigation-item .content > span > *')
+		.filter(el => hideRegExp.test(el.textContent));
+
+	if (hiddenFiles.length === 0) {
+		return;
+	}
+
 	const hidden = document.createDocumentFragment();
 	if (filesPreview) {
 		filesPreview = document.createElement('span');
 		filesPreview.className = 'hide-files-list';
 	}
 
-	for (const file of files) {
-		const fileName = file.textContent;
+	for (const file of hiddenFiles) {
 		const row = file.closest('tr');
+		row.classList.add('dimmed');
 
-		if (hideRegExp.test(fileName)) {
-			row.classList.add('dimmed');
-			hidden.appendChild(row);
-			if (filesPreview) {
-				const node = file.cloneNode(true);
-				delete node.id;
-				node.tabIndex = -1;
-				filesPreview.appendChild(node);
-			}
+		// If there's just one hidden file, there's no need to move it
+		if (hiddenFiles.length === 1) {
+			continue;
 		}
-	}
 
-	if (hidden.children.length === 0) {
-		return;
+		hidden.appendChild(row);
+		if (filesPreview) {
+			const node = file.cloneNode(true);
+			delete node.id;
+			node.tabIndex = -1;
+			filesPreview.appendChild(node);
+		}
 	}
 
 	// The first tbody contains the .. link if it's a subfolder.
