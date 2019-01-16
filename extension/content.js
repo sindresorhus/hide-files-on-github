@@ -3,7 +3,7 @@
 'use strict';
 
 const select = document.querySelector.bind(document);
-select.all = document.querySelectorAll.bind(document);
+select.all = selector => Array.apply(0, document.querySelectorAll(selector));
 
 let settings;
 const settingsPromise = HideFilesOnGitHub.storage.get().then(retrieved => {
@@ -55,6 +55,10 @@ function update() {
 			node.tabIndex = -1;
 			filesPreview.appendChild(node);
 		}
+	}
+
+	if (hiddenFiles.length < 2) {
+		return;
 	}
 
 	// The first tbody contains the .. link if it's a subfolder.
