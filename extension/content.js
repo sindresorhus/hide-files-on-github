@@ -48,12 +48,12 @@ function update() {
 			continue;
 		}
 
-		hidden.appendChild(row);
+		hidden.append(row);
 		if (filesPreview) {
 			const node = file.cloneNode(true);
 			delete node.id;
 			node.tabIndex = -1;
-			filesPreview.appendChild(node);
+			filesPreview.append(node);
 		}
 	}
 
@@ -112,12 +112,12 @@ function addToggleBtn(filesPreview) {
 			moreBtn = '<label for="HFT"><a>etc...</a></label>';
 			filesPreview.insertAdjacentHTML('beforeEnd', moreBtn);
 		}
+
 		filesPreview.querySelector(':scope > a:last-of-type').remove();
 	}
 }
 
 function init() {
-	// Update on fragment update
 	const observer = new MutationObserver(update);
 	const observeFragment = () => {
 		const ajaxFiles = select('include-fragment.file-wrap');
