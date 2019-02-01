@@ -22,8 +22,8 @@ HideFilesOnGitHub.defaults = {
 		^(karma|protractor|sauce).*\\.js$
 		^testem(\\.[\\w-]+)?\\.(json|js)$
 		^yuidoc\\.json$
-		^stylelint-config\\.json
-		^humans\\.txt
+		^stylelint-config\\.json$
+		^humans\\.txt$
 		^readme\\.md$
 	`.replace(/\n\t+/g, '\n').trim()
 };
@@ -32,7 +32,7 @@ HideFilesOnGitHub.storage = {
 	get: () => new Promise(resolve => {
 		chrome.storage.sync.get(HideFilesOnGitHub.defaults, resolve);
 	}),
-	set: obj => {
-		chrome.storage.sync.set(obj);
+	set: object => {
+		chrome.storage.sync.set(object);
 	}
 };

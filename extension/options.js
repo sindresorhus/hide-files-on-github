@@ -1,5 +1,4 @@
 /* global HideFilesOnGitHub */
-
 'use strict';
 const regexField = document.querySelector('#hideRegExp');
 const errorMessage = document.querySelector('#errorMessage');
@@ -45,9 +44,10 @@ function saveOptions() {
 }
 
 function restoreOptions() {
-	HideFilesOnGitHub.storage.get().then(items => {
+	(async () => {
+		const items = await HideFilesOnGitHub.storage.get();
 		const previewField = document.querySelector(`[name="filesPreview"][value="${String(items.filesPreview)}"]`);
 		regexField.value = items.hideRegExp;
 		previewField.checked = true;
-	});
+	})();
 }

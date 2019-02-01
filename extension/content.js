@@ -1,5 +1,4 @@
 /* global HideFilesOnGitHub */
-
 'use strict';
 
 const select = document.querySelector.bind(document);
@@ -134,4 +133,8 @@ function init() {
 	document.addEventListener('pjax:end', observeFragment);
 }
 
-Promise.all([domLoaded, settingsPromise]).then(init);
+(async () => {
+	await Promise.all([domLoaded, settingsPromise]);
+
+	init();
+})();
