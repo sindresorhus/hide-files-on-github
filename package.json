@@ -3,8 +3,7 @@
 		"test": "xo",
 		"release:amo": "cd extension && web-ext-submit",
 		"release:cws": "cd extension && webstore upload --auto-publish",
-		"release": "run-s update-version save-url release:*",
-		"save-url": "echo https://github.com/$TRAVIS_REPO_SLUG/tree/$TRAVIS_COMMIT > extension/SOURCE_URL",
+		"release": "run-s update-version release:*",
 		"update-version": "dot-json extension/manifest.json version $TRAVIS_TAG"
 	},
 	"devDependencies": {
