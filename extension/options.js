@@ -1,4 +1,4 @@
-/* global HideFilesOnGitHub */
+/* global HideFilesOnGitHub, escapeTag */
 'use strict';
 const regexField = document.querySelector('#hideRegExp');
 const errorMessage = document.querySelector('#errorMessage');
@@ -11,14 +11,14 @@ document.addEventListener('change', update);
 /* Native validation tooltips don't seem to work */
 function setValidity(text = '') {
 	errorMessage.innerHTML = text;
-	regexField.setCustomValidity(text); /* Triggers :invalid */
+	regexField.setCustomValidity(errorMessage.textContent); /* Triggers :invalid */
 }
 
 function update() {
 	for (const line of regexField.value.split('\n')) {
 		// Don't allow delimiters in RegExp string
 		if (delimiters.test(line)) {
-			return setValidity(`Use <code>${line.replace(/^\/|\/$/g, '')}</code> instead of <code>${line}</code>. Slashes are not required.`);
+			return setValidity(escapeTag`Use <code>${line.replace(/^\/|\/$/g, '')}</code> instead of <code>${line}</code>. Slashes are not required.`);
 		}
 
 		// Fully test each RegExp
