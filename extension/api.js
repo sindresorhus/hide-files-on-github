@@ -45,7 +45,7 @@ window.escape = input => input
 	.replace(/</g, '&lt;')
 	.replace(/>/g, '&gt;');
 
-window.escapeTag = function (input, ...parts) {
+window.escapeTag = (input, ...parts) => {
 	let output = input[0];
 	for (let i = 0; i < parts.length; i++) {
 		output = output + escape(parts[i]) + input[i + 1];
