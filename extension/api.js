@@ -38,17 +38,18 @@ HideFilesOnGitHub.storage = {
 };
 
 // Inlined partial `escape-goat` package
-const escape = input => input
+window.escape = input => input
 	.replace(/&/g, '&amp;')
 	.replace(/"/g, '&quot;')
 	.replace(/'/g, '&#39;')
 	.replace(/</g, '&lt;')
 	.replace(/>/g, '&gt;');
 
-const escapeTag = function (input) {
+window.escapeTag = function (input, ...parts) {
 	let output = input[0];
-	for (let i = 1; i < arguments.length; i++) {
-		output = output + escape(arguments[i]) + input[i];
+	for (let i = 0; i < parts.length; i++) {
+		output = output + escape(parts[i]) + input[i + 1];
 	}
+
 	return output;
 };
