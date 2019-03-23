@@ -17,7 +17,7 @@ You can customize which files to hide and you can make it more minimal in the ex
 
 ## Related
 
-- [Refined GitHub](https://github.com/Zhouzi/hide-files-from-bitbucket-pr) - Browser extension that simplifies the GitHub interface and adds useful features
+- [Refined GitHub](https://github.com/sindresorhus/refined-github) - Browser extension that simplifies the GitHub interface and adds useful features
 - [Hide Files from Bitbucket PR](https://github.com/Zhouzi/hide-files-from-bitbucket-pr) - Hides nonessential files in Bitbucket's pull request viewer
 
 
