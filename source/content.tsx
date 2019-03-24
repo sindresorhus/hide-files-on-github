@@ -63,7 +63,7 @@ function updateUI() {
 	addToggleBtn(previewList);
 }
 
-function addToggleBtn(filesPreview) {
+function addToggleBtn(previewList) {
 	const btnRow = select('.hide-files-row');
 	const tbody = select('table.files tbody');
 	if (btnRow) {
@@ -81,28 +81,28 @@ function addToggleBtn(filesPreview) {
 		<tr class="hide-files-row dimmed">
 			<td colspan="5">
 				<label for="HFT" class="hide-files-btn">
-					{filesPreview ? <svg aria-hidden="true" height="16" width="10"><path d="M5 11L0 6l1.5-1.5L5 8.25 8.5 4.5 10 6z" /></svg> : ''}
+					{previewList ? <svg aria-hidden="true" height="16" width="10"><path d="M5 11L0 6l1.5-1.5L5 8.25 8.5 4.5 10 6z" /></svg> : ''}
 				</label>
 			</td>
 		</tr>
 	);
 
-	if (!filesPreview) {
+	if (!previewList) {
 		select('.hide-files-row').prepend(<td class="icon"/>);
 		return;
 	}
 
-	select('.hide-files-btn').after(filesPreview);
+	select('.hide-files-btn').after(previewList);
 
 	// Drop extra links on long lists
 	let moreBtn;
-	while (overflowsParent(filesPreview)) {
+	while (overflowsParent(previewList)) {
 		if (!moreBtn) {
 			moreBtn = true;
-			filesPreview.append(<label for="HFT"><a>etc...</a></label>);
+			previewList.append(<label for="HFT"><a>etc...</a></label>);
 		}
 
-		filesPreview.querySelector(':scope > a:last-of-type').remove();
+		previewList.querySelector(':scope > a:last-of-type').remove();
 	}
 }
 
