@@ -1,5 +1,4 @@
-/* global HideFilesOnGitHub */
-
+/* global HideFilesOnGitHub, escapeTag */
 'use strict';
 const regexField = document.querySelector('#hideRegExp');
 const errorMessage = document.querySelector('#errorMessage');
@@ -12,22 +11,22 @@ document.addEventListener('change', update);
 /* Native validation tooltips don't seem to work */
 function setValidity(text = '') {
 	errorMessage.innerHTML = text;
-	regexField.setCustomValidity(text); /* Triggers :invalid */
+	regexField.setCustomValidity(errorMessage.textContent); /* Triggers :invalid */
 }
 
 function update() {
 	for (const line of regexField.value.split('\n')) {
 		// Don't allow delimiters in RegExp string
 		if (delimiters.test(line)) {
-			return setValidity(`Use <code>${line.replace(/^\/|\/$/g, '')}</code> instead of <code>${line}</code>. Slashes are not required.`);
+			return setValidity(escapeTag`Use <code>${line.replace(/^\/|\/$/g, '')}</code> instead of <code>${line}</code>. Slashes are not required.`);
 		}
 
 		// Fully test each RegExp
 		try {
 			// eslint-disable-next-line no-new
 			new RegExp(line);
-		} catch (err) {
-			return setValidity(err.message);
+		} catch (error) {
+			return setValidity(error.message);
 		}
 	}
 
@@ -36,19 +35,19 @@ function update() {
 }
 
 function saveOptions() {
-	const defaults = HideFilesOnGitHub.defaults;
 	const previewField = document.querySelector('[name="filesPreview"]:checked');
 
 	HideFilesOnGitHub.storage.set({
 		filesPreview: previewField.value === 'true',
-		hideRegExp: regexField.value.trim() || defaults.hideRegExp
+		hideRegExp: regexField.value.trim() || HideFilesOnGitHub.defaults.hideRegExp
 	});
 }
 
 function restoreOptions() {
-	HideFilesOnGitHub.storage.get().then(items => {
+	(async () => {
+		const items = await HideFilesOnGitHub.storage.get();
 		const previewField = document.querySelector(`[name="filesPreview"][value="${String(items.filesPreview)}"]`);
 		regexField.value = items.hideRegExp;
 		previewField.checked = true;
-	});
+	})();
 }

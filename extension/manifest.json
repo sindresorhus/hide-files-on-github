@@ -4,7 +4,13 @@
 	"description": "Hide nonessential files from the file browser",
 	"homepage_url": "https://github.com/sindresorhus/hide-files-on-github",
 	"manifest_version": 2,
-	"minimum_chrome_version": "51",
+	"minimum_chrome_version": "69",
+	"applications": {
+		"gecko": {
+			"id": "hide-files-on-github@sindresorhus.com",
+			"strict_min_version": "62.0"
+		}
+	},
 	"icons": {
 		"128": "icon.png"
 	},
