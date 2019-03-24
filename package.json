@@ -1,6 +1,6 @@
 {
 	"scripts": {
-		"test": "xo",
+		"test": "xo !xo",
 		"release:amo": "cd extension && web-ext-submit",
 		"release:cws": "cd extension && webstore upload --auto-publish",
 		"release": "run-s update-version release:*",
