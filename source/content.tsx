@@ -2,13 +2,16 @@
 'use strict';
 
 const select = document.querySelector.bind(document);
-select.all = selector => Array.apply(0, document.querySelectorAll(selector));
+const selectAll = (selector: string): HTMLElement[] => [...document.querySelectorAll<HTMLElement>(selector)];
 
-let settings;
-const settingsPromise = HideFilesOnGitHub.storage.get().then(retrieved => {
-	settings = retrieved;
-	settings.hideRegExp = new RegExp(settings.hideRegExp.replace(/\n+/g, '|'), 'i');
-});
+let willPreviewFiles: boolean;
+let hideRegExp: RegExp;
+const settingsPromise = HideFilesOnGitHub.storage.get().then(
+	(retrieved: typeof HideFilesOnGitHub.defaults) => {
+		willPreviewFiles = retrieved.filesPreview;
+		hideRegExp = new RegExp(retrieved.hideRegExp.replace(/\n+/g, '|'), 'i');
+	}
+);
 
 const domLoaded = new Promise(resolve => {
 	if (document.readyState === 'loading') {
@@ -22,20 +25,20 @@ function overflowsParent(el) {
 	return el.getBoundingClientRect().right > el.parentNode.getBoundingClientRect().right;
 }
 
-function update() {
-	let {filesPreview, hideRegExp} = settings;
-	const hiddenFiles = select
-		.all('.files .js-navigation-item .content > span > *')
-		.filter(el => hideRegExp.test(el.textContent));
+function updateUI() {
+	const hiddenFiles =
+		selectAll('.files .js-navigation-item .content > span > *')
+			.filter(el => hideRegExp.test(el.textContent));
 
 	if (hiddenFiles.length === 0) {
 		return;
 	}
 
 	const hidden = document.createDocumentFragment();
-	if (filesPreview) {
-		filesPreview = document.createElement('span');
-		filesPreview.className = 'hide-files-list';
+	let previewList: HTMLElement;
+
+	if (willPreviewFiles) {
+		previewList = <span class="hide-files-list"/>;
 	}
 
 	for (const file of hiddenFiles) {
@@ -48,11 +51,11 @@ function update() {
 		}
 
 		hidden.append(row);
-		if (filesPreview) {
-			const node = file.cloneNode(true);
+		if (willPreviewFiles) {
+			const node = file.cloneNode(true) as HTMLElement;
 			delete node.id;
 			node.tabIndex = -1;
-			filesPreview.append(node);
+			previewList.append(node);
 		}
 	}
 
@@ -64,7 +67,7 @@ function update() {
 	select('.files tbody:last-child').prepend(hidden);
 
 	// Add it at last to make sure it's prepended to everything
-	addToggleBtn(filesPreview);
+	addToggleBtn(previewList);
 }
 
 function addToggleBtn(filesPreview) {
@@ -77,47 +80,43 @@ function addToggleBtn(filesPreview) {
 		return;
 	}
 
-	select('table.files').insertAdjacentHTML('beforeBegin', `
-		<input type="checkbox" id="HFT" class="hide-files-toggle" checked />
-	`);
+	select('table.files').before(
+		<input type="checkbox" id="HFT" class="hide-files-toggle" checked/>
+	);
 
-	tbody.insertAdjacentHTML('afterBegin', `
+	tbody.prepend(
 		<tr class="hide-files-row dimmed">
 			<td colspan="5">
-				<label for="HFT" class="hide-files-btn"></label>
+				<label for="HFT" class="hide-files-btn">
+					{filesPreview ? <svg aria-hidden="true" height="16" width="10"><path d="M5 11L0 6l1.5-1.5L5 8.25 8.5 4.5 10 6z" /></svg> : ''}
+				</label>
 			</td>
 		</tr>
-	`);
+	);
 
 	if (!filesPreview) {
-		select('.hide-files-row').insertAdjacentHTML('afterBegin', `
-			<td class="icon"></td>
-		`);
-
+		select('.hide-files-row').prepend(<td class="icon"/>);
 		return;
 	}
 
-	const btn = select('.hide-files-btn');
-	btn.insertAdjacentHTML('afterBegin', `
-		<svg aria-hidden="true" height="16" viewBox="0 0 10 16" width="10"><path d="M5 11L0 6l1.5-1.5L5 8.25 8.5 4.5 10 6z"></path></svg>
-	`);
-
-	btn.insertAdjacentElement('afterEnd', filesPreview);
+	select('.hide-files-btn').after(filesPreview);
 
 	// Drop extra links on long lists
 	let moreBtn;
 	while (overflowsParent(filesPreview)) {
 		if (!moreBtn) {
-			moreBtn = '<label for="HFT"><a>etc...</a></label>';
-			filesPreview.insertAdjacentHTML('beforeEnd', moreBtn);
+			moreBtn = true;
+			filesPreview.append(<label for="HFT"><a>etc...</a></label>);
 		}
 
 		filesPreview.querySelector(':scope > a:last-of-type').remove();
 	}
 }
 
-function init() {
-	const observer = new MutationObserver(update);
+async function init() {
+	await Promise.all([domLoaded, settingsPromise]);
+
+	const observer = new MutationObserver(updateUI);
 	const observeFragment = () => {
 		const ajaxFiles = select('include-fragment.file-wrap');
 		if (ajaxFiles) {
@@ -127,14 +126,10 @@ function init() {
 		}
 	};
 
-	update();
+	updateUI();
 	observeFragment();
-	document.addEventListener('pjax:end', update); // Update on page change
+	document.addEventListener('pjax:end', updateUI); // Update on page change
 	document.addEventListener('pjax:end', observeFragment);
 }
 
-(async () => {
-	await Promise.all([domLoaded, settingsPromise]);
-
-	init();
-})();
+init();
