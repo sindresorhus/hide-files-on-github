@@ -1,4 +1,3 @@
-/* globals chrome */
 'use strict';
 
 const HideFilesOnGitHub = {

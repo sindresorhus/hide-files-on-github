@@ -1,4 +1,3 @@
-/* global HideFilesOnGitHub */
 'use strict';
 
 const select = document.querySelector.bind(document);
@@ -6,12 +5,6 @@ const selectAll = (selector: string): HTMLElement[] => [...document.querySelecto
 
 let willPreviewFiles: boolean;
 let hideRegExp: RegExp;
-const settingsPromise = HideFilesOnGitHub.storage.get().then(
-	(retrieved: typeof HideFilesOnGitHub.defaults) => {
-		willPreviewFiles = retrieved.filesPreview;
-		hideRegExp = new RegExp(retrieved.hideRegExp.replace(/\n+/g, '|'), 'i');
-	}
-);
 
 const domLoaded = new Promise(resolve => {
 	if (document.readyState === 'loading') {
@@ -114,7 +107,9 @@ function addToggleBtn(filesPreview) {
 }
 
 async function init() {
-	await Promise.all([domLoaded, settingsPromise]);
+	const settings: typeof HideFilesOnGitHub.defaults = await HideFilesOnGitHub.storage.get();
+	willPreviewFiles = settings.filesPreview;
+	hideRegExp = new RegExp(settings.hideRegExp.replace(/\n+/g, '|'), 'i');
 
 	const observer = new MutationObserver(updateUI);
 	const observeFragment = () => {
@@ -125,6 +120,8 @@ async function init() {
 			});
 		}
 	};
+
+	await domLoaded;
 
 	updateUI();
 	observeFragment();

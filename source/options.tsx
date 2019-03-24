@@ -1,4 +1,3 @@
-/* global HideFilesOnGitHub, escapeTag */
 'use strict';
 const regexField = document.querySelector<HTMLTextAreaElement>('#hideRegExp');
 const errorMessage = document.querySelector('#errorMessage');
