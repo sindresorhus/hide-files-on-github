@@ -34,7 +34,7 @@ module.exports = (env, argv) => ({
 	plugins: [
 		new SizePlugin(),
 		new CopyWebpackPlugin([{
-			from: '*',
+			from: '**',
 			context: 'source',
 			ignore: [
 				'*.ts',

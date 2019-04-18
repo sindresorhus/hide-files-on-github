@@ -1,16 +1,16 @@
 import React from 'dom-chef';
 import {storage, defaults} from './api';
-
 const regexField = document.querySelector<HTMLTextAreaElement>('#hideRegExp');
 const errorMessage = document.querySelector('#errorMessage');
 const delimiters = /^\/|\/$/;
 
 restoreOptions();
-document.addEventListener('change', updateOptions);
+document.addEventListener('input', updateOptions);
 
 /* Native validation tooltips don't seem to work */
 function setValidity(text = ''): void {
-	errorMessage.innerHTML = text;
+	errorMessage.textContent = '';
+	errorMessage.append(text);
 }
 
 function updateOptions(): void {
