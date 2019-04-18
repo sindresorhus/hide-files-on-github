@@ -1,5 +1,6 @@
 import React from 'dom-chef';
 import {storage, defaults} from './api';
+
 const regexField = document.querySelector<HTMLTextAreaElement>('#hideRegExp');
 const errorMessage = document.querySelector('#errorMessage');
 const delimiters = /^\/|\/$/;
