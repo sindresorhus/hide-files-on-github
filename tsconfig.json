@@ -1,0 +1,12 @@
+{
+	"extends": "@sindresorhus/tsconfig",
+	"compilerOptions": {
+		"target": "esnext",
+		"module": "es2015",
+		"strict": false,
+		"declaration": false
+	},
+	"include": [
+		"source"
+	]
+}

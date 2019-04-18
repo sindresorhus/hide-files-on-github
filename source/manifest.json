@@ -33,8 +33,6 @@
 	},
 	"background": {
 		"scripts": [
-			"libs/webext-domain-permission-toggle.js",
-			"libs/webext-dynamic-content-scripts.js",
 			"background.js"
 		]
 	},
@@ -51,8 +49,6 @@
 				"content.css"
 			],
 			"js": [
-				"libs/webext-dynamic-content-scripts.js",
-				"api.js",
 				"content.js"
 			]
 		}
