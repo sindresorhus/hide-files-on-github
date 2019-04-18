@@ -1,26 +1,20 @@
-'use strict';
+import 'webext-dynamic-content-scripts';
+import React from 'dom-chef';
+import select from 'select-dom';
+import domLoaded from 'dom-loaded';
 
-const select = document.querySelector.bind(document);
-const selectAll = (selector: string): HTMLElement[] => [...document.querySelectorAll<HTMLElement>(selector)];
+import {storage} from './api';
 
 let willPreviewFiles: boolean;
 let hideRegExp: RegExp;
 
-const domLoaded = new Promise(resolve => {
-	if (document.readyState === 'loading') {
-		document.addEventListener('DOMContentLoaded', resolve);
-	} else {
-		resolve();
-	}
-});
-
-function overflowsParent(el) {
+function overflowsParent(el): boolean {
 	return el.getBoundingClientRect().right > el.parentNode.getBoundingClientRect().right;
 }
 
-function updateUI() {
+function updateUI(): void {
 	const hiddenFiles =
-		selectAll('.files .js-navigation-item .content > span > *')
+		select.all('.files .js-navigation-item .content > span > *')
 			.filter(el => hideRegExp.test(el.textContent));
 
 	if (hiddenFiles.length === 0) {
@@ -63,7 +57,7 @@ function updateUI() {
 	addToggleBtn(previewList);
 }
 
-function addToggleBtn(previewList) {
+function addToggleBtn(previewList): void {
 	const btnRow = select('.hide-files-row');
 	const tbody = select('table.files tbody');
 	if (btnRow) {
@@ -106,13 +100,13 @@ function addToggleBtn(previewList) {
 	}
 }
 
-async function init() {
-	const settings: typeof HideFilesOnGitHub.defaults = await HideFilesOnGitHub.storage.get();
+async function init(): Promise<void> {
+	const settings = await storage.get();
 	willPreviewFiles = settings.filesPreview;
 	hideRegExp = new RegExp(settings.hideRegExp.replace(/\n+/g, '|'), 'i');
 
 	const observer = new MutationObserver(updateUI);
-	const observeFragment = () => {
+	const observeFragment = (): void => {
 		const ajaxFiles = select('include-fragment.file-wrap');
 		if (ajaxFiles) {
 			observer.observe(ajaxFiles.parentNode, {

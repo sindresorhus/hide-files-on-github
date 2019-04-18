@@ -1,4 +1,6 @@
-'use strict';
+import React from 'dom-chef';
+import {storage, defaults} from './api';
+
 const regexField = document.querySelector<HTMLTextAreaElement>('#hideRegExp');
 const errorMessage = document.querySelector('#errorMessage');
 const delimiters = /^\/|\/$/;
@@ -7,11 +9,11 @@ restoreOptions();
 document.addEventListener('change', updateOptions);
 
 /* Native validation tooltips don't seem to work */
-function setValidity(text = '') {
+function setValidity(text = ''): void {
 	errorMessage.innerHTML = text;
 }
 
-function updateOptions() {
+function updateOptions(): void {
 	for (const line of regexField.value.split('\n')) {
 		// Don't allow delimiters in RegExp string
 		if (delimiters.test(line)) {
@@ -31,17 +33,17 @@ function updateOptions() {
 	saveOptions();
 }
 
-function saveOptions() {
+function saveOptions(): void {
 	const previewField = document.querySelector<HTMLInputElement>('[name="filesPreview"]:checked');
 
-	HideFilesOnGitHub.storage.set({
+	storage.set({
 		filesPreview: previewField.value === 'true',
-		hideRegExp: regexField.value.trim() || HideFilesOnGitHub.defaults.hideRegExp
+		hideRegExp: regexField.value.trim() || defaults.hideRegExp
 	});
 }
 
-async function restoreOptions() {
-	const items = await HideFilesOnGitHub.storage.get();
+async function restoreOptions(): Promise<void> {
+	const items = await storage.get();
 	const previewField = document.querySelector<HTMLInputElement>(`[name="filesPreview"][value="${String(items.filesPreview)}"]`);
 	regexField.value = items.hideRegExp;
 	previewField.checked = true;

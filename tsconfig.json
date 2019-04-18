@@ -1,13 +1,12 @@
 {
 	"extends": "@sindresorhus/tsconfig",
 	"compilerOptions": {
-		"outDir": "extension",
 		"target": "esnext",
+		"module": "es2015",
 		"strict": false,
-		"declaration": false,
-		"sourceMap": false
+		"declaration": false
 	},
 	"include": [
-		"source/*",
+		"source"
 	]
 }

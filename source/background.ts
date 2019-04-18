@@ -1,5 +1,6 @@
+import {addContextMenu} from 'webext-domain-permission-toggle';
+import {addToFutureTabs} from 'webext-dynamic-content-scripts';
+
 // GitHub Enterprise support
-declare var DCE;
-declare var DCS;
-DCE.addContextMenu();
-DCS.addToFutureTabs();
+addToFutureTabs();
+addContextMenu();
