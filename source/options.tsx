@@ -1,15 +1,15 @@
 import React from 'dom-chef';
 import {storage, defaults} from './api';
 
-const regexField = document.querySelector<HTMLTextAreaElement>('#hideRegExp');
-const errorMessage = document.querySelector('#errorMessage');
+const regexField = document.querySelector<HTMLTextAreaElement>('#hideRegExp')!;
+const errorMessage = document.querySelector('#errorMessage')!;
 const delimiters = /^\/|\/$/;
 
 restoreOptions();
 document.addEventListener('input', updateOptions);
 
 /* Native validation tooltips don't seem to work */
-function setValidity(text = ''): void {
+function setValidity(text: string | Node = ''): void {
 	errorMessage.textContent = '';
 	errorMessage.append(text);
 }
@@ -35,7 +35,7 @@ function updateOptions(): void {
 }
 
 function saveOptions(): void {
-	const previewField = document.querySelector<HTMLInputElement>('[name="filesPreview"]:checked');
+	const previewField = document.querySelector<HTMLInputElement>('[name="filesPreview"]:checked')!;
 
 	storage.set({
 		filesPreview: previewField.value === 'true',
@@ -45,7 +45,7 @@ function saveOptions(): void {
 
 async function restoreOptions(): Promise<void> {
 	const items = await storage.get();
-	const previewField = document.querySelector<HTMLInputElement>(`[name="filesPreview"][value="${String(items.filesPreview)}"]`);
+	const previewField = document.querySelector<HTMLInputElement>(`[name="filesPreview"][value="${String(items.filesPreview)}"]`)!;
 	regexField.value = items.hideRegExp;
 	previewField.checked = true;
 }
