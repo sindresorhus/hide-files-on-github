@@ -2,14 +2,10 @@
 // https://github.com/vadimdemedes/dom-chef/issues/36
 declare namespace JSX {
 	interface Element extends SVGElement, HTMLElement, DocumentFragment {}
-	type BaseIntrinsicElement = IntrinsicElements['div'];
 	type LabelIntrinsicElement = IntrinsicElements['label'];
+	type TdIntrinsicElement = IntrinsicElements['td'];
 	interface IntrinsicElements {
-		'has-rgh': {};
-		'label': LabelIntrinsicElement & {for?: string};
-		'include-fragment': BaseIntrinsicElement & {src?: string};
-		'details-menu': BaseIntrinsicElement & {src: string; preload: boolean};
-		'relative-time': BaseIntrinsicElement & {datetime: string; title: string};
-		'details-dialog': BaseIntrinsicElement & {tabindex: string};
+		'label': LabelIntrinsicElement & {for?: string}; // https://github.com/vadimdemedes/dom-chef/issues/37
+		'td': TdIntrinsicElement & {colspan?: string}; // https://github.com/vadimdemedes/dom-chef/issues/36#issuecomment-488721539
 	}
 }
