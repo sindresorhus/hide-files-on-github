@@ -22,7 +22,7 @@ function updateUI(): void {
 	}
 
 	const hidden = document.createDocumentFragment();
-	let previewList: HTMLElement | false = false;
+	let previewList: HTMLElement | undefined = undefined;
 
 	if (willPreviewFiles) {
 		previewList = <span className="hide-files-list"/>;
@@ -57,7 +57,7 @@ function updateUI(): void {
 	addToggleBtn(previewList);
 }
 
-function addToggleBtn(previewList: Element | false): void {
+function addToggleBtn(previewList?: Element): void {
 	const btnRow = select('.hide-files-row')!;
 	const tbody = select('table.files tbody')!;
 	if (btnRow) {
