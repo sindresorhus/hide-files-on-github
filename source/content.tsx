@@ -22,7 +22,7 @@ function updateUI(): void {
 	}
 
 	const hidden = document.createDocumentFragment();
-	let previewList: HTMLElement | undefined = undefined;
+	let previewList: HTMLElement | undefined;
 
 	if (willPreviewFiles) {
 		previewList = <span className="hide-files-list"/>;
