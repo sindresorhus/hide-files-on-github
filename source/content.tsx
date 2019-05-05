@@ -1,7 +1,7 @@
 import 'webext-dynamic-content-scripts';
 import React from 'dom-chef';
 import select from 'select-dom';
-import domLoaded from 'dom-loaded';
+import elementReady from 'element-ready';
 
 import {storage} from './api';
 
@@ -115,7 +115,7 @@ async function init(): Promise<void> {
 		}
 	};
 
-	await domLoaded;
+	await elementReady('.files');
 
 	updateUI();
 	observeFragment();
