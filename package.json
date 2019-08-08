@@ -10,16 +10,16 @@
 		"update-version": "dot-json distribution/manifest.json version $TRAVIS_TAG"
 	},
 	"dependencies": {
-		"@types/chrome": "0.0.86",
+		"@types/chrome": "0.0.88",
 		"dom-chef": "^3.6.1",
 		"element-ready": "^4.1.0",
 		"select-dom": "^5.1.0",
-		"webext-domain-permission-toggle": "^0.1.0",
-		"webext-dynamic-content-scripts": "^5.0.2"
+		"webext-domain-permission-toggle": "^1.0.0",
+		"webext-dynamic-content-scripts": "^6.0.2"
 	},
 	"devDependencies": {
 		"@sindresorhus/tsconfig": "^0.4.0",
-		"@types/react": "^16.8.24",
+		"@types/react": "^16.8.25",
 		"@typescript-eslint/eslint-plugin": "^1.13.0",
 		"@typescript-eslint/parser": "^1.13.0",
 		"chrome-webstore-upload-cli": "^1.2.0",
@@ -33,7 +33,7 @@
 		"ts-loader": "^6.0.4",
 		"typescript": "^3.5.3",
 		"web-ext-submit": "^3.1.1",
-		"webpack": "^4.38.0",
+		"webpack": "^4.39.1",
 		"webpack-cli": "^3.3.6",
 		"xo": "^0.24.0"
 	},
