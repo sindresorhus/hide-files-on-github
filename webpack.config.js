@@ -32,7 +32,7 @@ module.exports = (env, argv) => ({
 		}]
 	},
 	plugins: [
-		new SizePlugin({ publish: true }),
+		new SizePlugin({publish: true}),
 		new CopyWebpackPlugin([{
 			from: '**',
 			context: 'source',
