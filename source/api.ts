@@ -24,11 +24,13 @@ export const defaults = {
 };
 
 export const storage = {
-	get: (): Promise<typeof defaults> => new Promise(resolve => {
-		// Drop `as` when `.get` rightfully resolves to `typeof defaults` instead of `AnyObject`
-		chrome.storage.sync.get(defaults, options => resolve(options as typeof defaults));
-	}),
-	set: (object: typeof defaults) => {
+	async get(): Promise<typeof defaults> {
+		return new Promise(resolve => {
+			// Drop `as` when `.get` rightfully resolves to `typeof defaults` instead of `AnyObject`
+			chrome.storage.sync.get(defaults, options => resolve(options as typeof defaults));
+		});
+	},
+	set(object: typeof defaults) {
 		chrome.storage.sync.set(object);
 	}
 };

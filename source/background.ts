@@ -1,6 +1,5 @@
-import {addContextMenu} from 'webext-domain-permission-toggle';
-import {addToFutureTabs} from 'webext-dynamic-content-scripts';
+import 'webext-dynamic-content-scripts';
+import addDomainPermissionToggle from 'webext-domain-permission-toggle';
 
 // GitHub Enterprise support
-addToFutureTabs();
-addContextMenu();
+addDomainPermissionToggle();

@@ -2,8 +2,8 @@
 	"extends": "@sindresorhus/tsconfig",
 	"compilerOptions": {
 		"target": "esnext",
-		"module": "es2015",
-		"declaration": false
+		"declaration": false,
+		"esModuleInterop": true
 	},
 	"include": [
 		"source"
