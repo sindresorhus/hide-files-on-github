@@ -46,10 +46,10 @@
 				"https://github.com/*/dotfiles*"
 			],
 			"css": [
-				"content.css"
+				"hide-files-on-github.css"
 			],
 			"js": [
-				"content.js"
+				"hide-files-on-github.js"
 			]
 		}
 	]
