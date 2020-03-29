@@ -8,7 +8,7 @@ module.exports = (env, argv) => ({
 	devtool: 'sourcemap',
 	stats: 'errors-only',
 	entry: {
-		content: './source/content',
+		'hide-files-on-github': './source/hide-files-on-github',
 		background: './source/background',
 		options: './source/options'
 	},
