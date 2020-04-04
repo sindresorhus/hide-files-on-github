@@ -37,3 +37,9 @@ code {
 	border-radius: 3px;
 	color: black;
 }
+
+.monospace-text {
+	font-family: SFMono-Regular, Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+	font-size: 11px;
+	line-height: 1.5;
+}
