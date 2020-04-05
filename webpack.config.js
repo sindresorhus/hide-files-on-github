@@ -33,14 +33,19 @@ module.exports = (env, argv) => ({
 	},
 	plugins: [
 		new SizePlugin(),
-		new CopyWebpackPlugin([{
-			from: '**',
-			context: 'source',
-			ignore: [
-				'*.ts',
-				'*.tsx'
-			]
-		}])
+		new CopyWebpackPlugin([
+			{
+				from: '**',
+				context: 'source',
+				ignore: [
+					'*.ts',
+					'*.tsx'
+				]
+			},
+			{
+				from: 'node_modules/webext-base-css/webext-base.css'
+			}
+		])
 	],
 	resolve: {
 		extensions: [

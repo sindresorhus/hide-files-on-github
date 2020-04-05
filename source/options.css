@@ -14,7 +14,6 @@ small {
 }
 
 textarea {
-	width: 100%;
 	height: 180px;
 	resize: vertical;
 }
@@ -37,4 +36,10 @@ code {
 	background-color: rgba(27,31,35,0.05);
 	border-radius: 3px;
 	color: black;
+}
+
+.monospace-text {
+	font-family: SFMono-Regular, Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+	font-size: 11px;
+	line-height: 1.5;
 }

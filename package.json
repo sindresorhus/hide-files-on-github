@@ -14,6 +14,7 @@
 		"dom-chef": "^3.6.1",
 		"element-ready": "^4.1.0",
 		"select-dom": "^5.1.0",
+		"webext-base-css": "^1.1.0",
 		"webext-domain-permission-toggle": "^1.0.0",
 		"webext-dynamic-content-scripts": "^6.0.3-0"
 	},

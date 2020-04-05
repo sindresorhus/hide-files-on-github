@@ -3,25 +3,27 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Hide Files on Github Options</title>
-		<link href="options.css" rel="stylesheet">
+		<link rel="stylesheet" href="chrome://global/skin/in-content/common.css">
+		<link rel="stylesheet" href="webext-base.css">
+		<link rel="stylesheet" href="options.css">
 	</head>
 	<form>
 		<h2>Style</h2>
 		<p>
 			<label>
 				<input name="filesPreview" type="radio" value="true">
-				<img src="media/previews-on.png" alt="Previews on" width="264" height="34" valign="middle">
+				<img src="media/previews-on.png" alt="Previews on" width="264" height="34">
 			</label>
 		</p>
 		<p>
 			<label>
 				<input name="filesPreview" type="radio" value="false">
-				<img src="media/previews-off.png" alt="Previews off" width="264" height="34" valign="middle">
+				<img src="media/previews-off.png" alt="Previews off" width="264" height="34">
 			</label>
 		</p>
 		<h2>Hidden files</h2>
 		<p>Control which files are hidden with <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Guide/Regular_Expressions">Regular Expressions</a>:</p>
-		<textarea id="hideRegExp"></textarea>
+		<textarea id="hideRegExp" class="monospace-text"></textarea>
 		<small id="errorMessage"></small>
 		<small>Leave empty to restore the defaults.</small>
 		<script src="options.js"></script>
