@@ -1,4 +1,3 @@
-import 'webext-dynamic-content-scripts';
 import React from 'dom-chef';
 import select from 'select-dom';
 import elementReady from 'element-ready';
@@ -8,14 +7,14 @@ import {storage} from './api';
 let willPreviewFiles: boolean;
 let hideRegExp: RegExp;
 
-function overflowsParent(el: Element): boolean {
-	return el.getBoundingClientRect().right > el.parentElement!.getBoundingClientRect().right;
+function overflowsParent(element: Element): boolean {
+	return element.getBoundingClientRect().right > element.parentElement!.getBoundingClientRect().right;
 }
 
 function updateUI(): void {
 	const hiddenFiles =
 		select.all('.files .js-navigation-item .content > span > *')
-			.filter(el => hideRegExp.test(el.textContent!));
+			.filter(element => hideRegExp.test(element.textContent!));
 
 	if (hiddenFiles.length === 0) {
 		return;
