@@ -23,6 +23,9 @@ module.exports = (env, argv) => ({
 				loader: 'ts-loader',
 				query: {
 					compilerOptions: {
+						// Enables ModuleConcatenation. It must be in here to avoid conflic with ts-node
+						module: 'es2015',
+
 						// With this, TS will error but the file will still be generated (on watch only)
 						noEmitOnError: argv.watch === false
 					}
@@ -32,7 +35,9 @@ module.exports = (env, argv) => ({
 		}]
 	},
 	plugins: [
-		new SizePlugin(),
+		new SizePlugin({
+			writeFile: false
+		}),
 		new CopyWebpackPlugin([
 			{
 				from: '**',
@@ -55,7 +60,6 @@ module.exports = (env, argv) => ({
 		]
 	},
 	optimization: {
-		// Without this, function names will be garbled and enableFeature won't work
 		concatenateModules: true,
 
 		// Automatically enabled on production; keeps it somewhat readable for AMO reviewers
@@ -67,7 +71,7 @@ module.exports = (env, argv) => ({
 					compress: false,
 					output: {
 						beautify: true,
-						indent_level: 2 // eslint-disable-line camelcase
+						indent_level: 2
 					}
 				}
 			})

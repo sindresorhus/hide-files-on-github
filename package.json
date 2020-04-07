@@ -10,59 +10,45 @@
 		"update-version": "dot-json distribution/manifest.json version $TRAVIS_TAG"
 	},
 	"dependencies": {
-		"@types/chrome": "0.0.88",
-		"dom-chef": "^3.6.1",
-		"element-ready": "^4.1.0",
-		"select-dom": "^5.1.0",
+		"@types/chrome": "0.0.103",
+		"dom-chef": "^4.0.0",
+		"element-ready": "^4.1.1",
+		"select-dom": "^6.0.1",
 		"webext-base-css": "^1.1.0",
 		"webext-domain-permission-toggle": "^1.0.0",
-		"webext-dynamic-content-scripts": "^6.0.3-0"
+		"webext-dynamic-content-scripts": "^6.0.3"
 	},
 	"devDependencies": {
-		"@sindresorhus/tsconfig": "^0.4.0",
-		"@types/react": "^16.8.25",
-		"@typescript-eslint/eslint-plugin": "^1.13.0",
-		"@typescript-eslint/parser": "^1.13.0",
+		"@sindresorhus/tsconfig": "^0.7.0",
+		"@types/react": "^16.9.32",
 		"chrome-webstore-upload-cli": "^1.2.0",
-		"copy-webpack-plugin": "^5.0.4",
-		"dot-json": "^1.1.0",
-		"eslint": "^6.1.0",
-		"eslint-config-xo-typescript": "^0.15.0",
+		"copy-webpack-plugin": "^5.1.1",
+		"dot-json": "^1.2.0",
+		"eslint": "^6.8.0",
 		"npm-run-all": "^4.1.5",
-		"size-plugin": "^1.2.0",
-		"terser-webpack-plugin": "^1.4.1",
-		"ts-loader": "^6.0.4",
-		"typescript": "^3.5.3",
-		"web-ext-submit": "^3.1.1",
-		"webpack": "^4.39.1",
-		"webpack-cli": "^3.3.6",
-		"xo": "^0.24.0"
+		"size-plugin": "^2.0.1",
+		"terser-webpack-plugin": "^2.3.5",
+		"ts-loader": "^6.2.2",
+		"typescript": "^3.8.3",
+		"web-ext-submit": "^4.1.0",
+		"webpack": "^4.42.1",
+		"webpack-cli": "^3.3.11",
+		"xo": "^0.28.3"
 	},
 	"xo": {
-		"extensions": [
-			"ts",
-			"tsx"
-		],
 		"envs": [
 			"browser",
 			"webextensions"
 		],
 		"rules": {
-			"import/no-unassigned-import": "off"
-		},
-		"overrides": [
-			{
-				"files": "**/*.{ts,tsx}",
-				"extends": "xo-typescript",
-				"rules": {
-					"@typescript-eslint/no-unused-vars": [
-						"error",
-						{
-							"varsIgnorePattern": "^React$"
-						}
-					]
+			"@typescript-eslint/no-var-requires": "off",
+			"@typescript-eslint/no-unused-vars": [
+				"error",
+				{
+					"varsIgnorePattern": "^React$"
 				}
-			}
-		]
+			],
+			"import/no-unassigned-import": "off"
+		}
 	}
 }
