@@ -106,7 +106,7 @@ async function init(): Promise<void> {
 
 	const observer = new MutationObserver(updateUI);
 	const observeFragment = (): void => {
-		const ajaxFiles = select('include-fragment.file-wrap');
+		const ajaxFiles = select('#files ~ include-fragment[src*="/file-list/"]');
 		if (ajaxFiles) {
 			observer.observe(ajaxFiles.parentNode!, {
 				childList: true
