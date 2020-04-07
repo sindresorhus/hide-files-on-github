@@ -1,4 +1,5 @@
 import React from 'dom-chef';
+import fitTextarea from 'fit-textarea';
 import {storage, defaults} from './api';
 
 const regexField = document.querySelector<HTMLTextAreaElement>('#hideRegExp')!;
@@ -48,4 +49,6 @@ async function restoreOptions(): Promise<void> {
 	const previewField = document.querySelector<HTMLInputElement>(`[name="filesPreview"][value="${String(items.filesPreview)}"]`)!;
 	regexField.value = items.hideRegExp;
 	previewField.checked = true;
+
+	fitTextarea.watch(regexField);
 }

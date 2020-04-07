@@ -13,6 +13,7 @@
 		"@types/chrome": "0.0.103",
 		"dom-chef": "^4.0.0",
 		"element-ready": "^4.1.1",
+		"fit-textarea": "^2.0.0",
 		"select-dom": "^6.0.1",
 		"webext-base-css": "^1.1.0",
 		"webext-domain-permission-toggle": "^1.0.0",

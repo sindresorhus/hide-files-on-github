@@ -1,5 +1,6 @@
 :root {
 	--red-by-github: #cb2431;
+	min-width: 400px;
 }
 
 small {
@@ -14,7 +15,6 @@ small {
 }
 
 textarea {
-	height: 180px;
 	resize: vertical;
 }
 
