@@ -53,7 +53,7 @@ function updateUI(): void {
 	addToggleBtn(previewList);
 }
 
-async function addToggleBtn(previewList?: HTMLElement[]): Promise<void> {
+function addToggleBtn(previewList?: HTMLElement[]): void {
 	const btnRow = select('.hide-files-row')!;
 	const tbody = select('table.files tbody')!;
 	if (btnRow) {
