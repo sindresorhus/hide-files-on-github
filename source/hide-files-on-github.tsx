@@ -4,12 +4,9 @@ import elementReady from 'element-ready';
 
 import {storage} from './api';
 
+const ellipsisWidth = 70;
 let willPreviewFiles: boolean;
 let hideRegExp: RegExp;
-
-function overflowsParent(element: Element): boolean {
-	return element.getBoundingClientRect().right > element.parentElement!.getBoundingClientRect().right;
-}
 
 function updateUI(): void {
 	const hiddenFiles =
@@ -21,10 +18,10 @@ function updateUI(): void {
 	}
 
 	const hidden = document.createDocumentFragment();
-	let previewList: HTMLElement | undefined;
+	let previewList: HTMLElement[] | undefined;
 
 	if (willPreviewFiles) {
-		previewList = <span className="hide-files-list"/>;
+		previewList = [];
 	}
 
 	for (const file of hiddenFiles) {
@@ -41,7 +38,7 @@ function updateUI(): void {
 			const node = file.cloneNode(true) as HTMLElement;
 			delete node.id;
 			node.tabIndex = -1;
-			previewList.append(node);
+			previewList.push(node);
 		}
 	}
 
@@ -56,7 +53,7 @@ function updateUI(): void {
 	addToggleBtn(previewList);
 }
 
-function addToggleBtn(previewList?: Element): void {
+async function addToggleBtn(previewList?: HTMLElement[]): Promise<void> {
 	const btnRow = select('.hide-files-row')!;
 	const tbody = select('table.files tbody')!;
 	if (btnRow) {
@@ -85,17 +82,38 @@ function addToggleBtn(previewList?: Element): void {
 		return;
 	}
 
-	select('.hide-files-btn')!.after(previewList);
+	const container = select('.hide-files-row td')!;
+	container.append(...previewList);
+
+	if (navigator.userAgent.includes('Firefox/')) {
+		// Due to https://github.com/sindresorhus/hide-files-on-github/issues/93
+		setTimeout(addEllipsis, 100, container, previewList);
+	} else {
+		addEllipsis(container, previewList);
+	}
+}
+
+function addEllipsis(container: HTMLElement, previewList: HTMLElement[]): void {
+	const availableWidth = container.getBoundingClientRect().width;
+	if (availableWidth === container.scrollWidth) {
+		return; // No overflow
+	}
 
 	// Drop extra links on long lists
-	let moreBtn;
-	while (overflowsParent(previewList)) {
-		if (!moreBtn) {
-			moreBtn = true;
-			previewList.append(<label for="HFT"><a>etc...</a></label>);
+	let ellipsis = false;
+	for (const file of previewList.slice(5)) {
+		// Remove extra files when the ellipsis is added
+		if (ellipsis) {
+			file.remove();
+			continue;
 		}
 
-		previewList.querySelector(':scope > a:last-of-type')!.remove();
+		// First first element in the unsafe/overflowing area
+		if (file.offsetLeft + file.offsetWidth > availableWidth - ellipsisWidth) {
+			container.append(<label for="HFT"><a>etc...</a></label>);
+			ellipsis = true;
+			file.remove();
+		}
 	}
 }
 
