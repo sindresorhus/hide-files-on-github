@@ -86,7 +86,7 @@ function addToggleBtn(previewList?: HTMLElement[]): void {
 	container.append(...previewList);
 
 	if (navigator.userAgent.includes('Firefox/')) {
-		// Due to https://github.com/sindresorhus/hide-files-on-github/issues/93
+		// Due to FOUC on Firefox #93
 		setTimeout(addEllipsis, 100, container, previewList);
 	} else {
 		addEllipsis(container, previewList);
@@ -96,20 +96,16 @@ function addToggleBtn(previewList?: HTMLElement[]): void {
 function addEllipsis(container: HTMLElement, previewList: HTMLElement[]): void {
 	const availableWidth = container.getBoundingClientRect().width;
 	if (availableWidth === container.scrollWidth) {
-		return; // No overflow
+		return; // No overflow = No ellipsis necessary
 	}
 
-	// Drop extra links on long lists
 	let ellipsis = false;
 	for (const file of previewList.slice(5)) {
-		// Remove extra files when the ellipsis is added
 		if (ellipsis) {
+			// Remove extra files when the ellipsis is added
 			file.remove();
-			continue;
-		}
-
-		// First first element in the unsafe/overflowing area
-		if (file.offsetLeft + file.offsetWidth > availableWidth - ellipsisWidth) {
+		} else if (file.offsetLeft + file.offsetWidth > availableWidth - ellipsisWidth) {
+			// We found the first element in the unsafe/overflowing area
 			container.append(<label for="HFT"><a>etc...</a></label>);
 			ellipsis = true;
 			file.remove();
