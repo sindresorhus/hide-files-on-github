@@ -19,10 +19,12 @@
 	padding-left: 5px !important;
 	padding-right: 10px !important;
 	white-space: nowrap;
+	overflow: hidden;
 	max-width: 1px;
 }
-.hide-files-list a {
+.hide-files-row a {
 	margin-right: 1em;
+	display: inline-block;
 }
 
 /* Correct style and color for all links */
@@ -68,6 +70,6 @@
 }
 
 /* The magic */
-.hide-files-toggle:not(:checked) ~ .files .hide-files-row .hide-files-list {
+.hide-files-toggle:not(:checked) ~ .files .hide-files-row a {
 	display: none;
 }
