@@ -10,8 +10,8 @@ let hideRegExp: RegExp;
 
 function updateUI(): void {
 	const hiddenFiles =
-		select.all('.files .js-navigation-item .content > span > *')
-			.filter(element => hideRegExp.test(element.textContent!));
+		select.all('[aria-labelledby="files"] .js-navigation-open')
+			.filter(element => hideRegExp.test(element.title));
 
 	if (hiddenFiles.length === 0) {
 		return;
@@ -25,7 +25,7 @@ function updateUI(): void {
 	}
 
 	for (const file of hiddenFiles) {
-		const row = file.closest('tr')!;
+		const row = file.closest('[role="row"]')!;
 		row.classList.add('dimmed');
 
 		// If there's just one hidden file, there's no need to move it
@@ -46,8 +46,8 @@ function updateUI(): void {
 		return;
 	}
 
-	// The first tbody contains the .. link if it's a subfolder.
-	select('.files tbody:last-child')!.prepend(hidden);
+	// The first table contains the .. link if it's a subfolder.
+	select('[aria-labelledby="files"]')!.prepend(hidden);
 
 	// Add it at last to make sure it's prepended to everything
 	addToggleBtn(previewList);
@@ -55,34 +55,35 @@ function updateUI(): void {
 
 function addToggleBtn(previewList?: HTMLElement[]): void {
 	const btnRow = select('.hide-files-row')!;
-	const tbody = select('table.files tbody')!;
+	const table = select('[aria-labelledby="files"]')!;
 	if (btnRow) {
 		// This is probably inside a pjax event.
 		// Make sure it's still on top.
-		tbody.prepend(btnRow);
+		table.prepend(btnRow);
 		return;
 	}
 
-	select('table.files')!.before(
+	select('[aria-labelledby="files"]')!.before(
 		<input type="checkbox" id="HFT" className="hide-files-toggle" checked/>
 	);
 
-	tbody.prepend(
-		<tr className="hide-files-row dimmed">
-			<td colspan="5">
+	table.prepend(
+		<div role="row" className="hide-files-row Box-row py-2 d-flex position-relative dimmed">
+			<div role="gridcell" className="flex-shrink-0 mr-3">
 				<label for="HFT" className="hide-files-btn">
-					{previewList ? <svg aria-hidden="true" height="16" width="10"><path d="M5 11L0 6l1.5-1.5L5 8.25 8.5 4.5 10 6z" /></svg> : ''}
+					{previewList ? <svg aria-hidden="true" height="16" width="16" viewBox="-3 0 16 16"><path d="M5 11L0 6l1.5-1.5L5 8.25 8.5 4.5 10 6z" /></svg> : ''}
 				</label>
-			</td>
-		</tr>
+			</div>
+			<div role="gridcell" className="hide-files-preview-list flex-auto min-width-0 "></div>
+		</div>
 	);
 
 	if (!previewList) {
-		select('.hide-files-row')!.prepend(<td className="icon"/>);
+		select('.hide-files-row')!.prepend(<div role="gridcell"/>);
 		return;
 	}
 
-	const container = select('.hide-files-row td')!;
+	const container = select('.hide-files-preview-list')!;
 	container.append(...previewList);
 
 	if (navigator.userAgent.includes('Firefox/')) {
@@ -128,7 +129,8 @@ async function init(): Promise<void> {
 		}
 	};
 
-	await elementReady('.files');
+	// TODO: drop `*` after https://github.com/sindresorhus/element-ready/issues/29
+	await elementReady('[aria-labelledby="files"] + *');
 
 	updateUI();
 	observeFragment();
