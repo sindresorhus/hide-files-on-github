@@ -129,7 +129,8 @@ async function init(): Promise<void> {
 		}
 	};
 
-	await elementReady('[aria-labelledby="files"]');
+	// TODO: drop `*` after https://github.com/sindresorhus/element-ready/issues/29
+	await elementReady('[aria-labelledby="files"] + *');
 
 	updateUI();
 	observeFragment();
