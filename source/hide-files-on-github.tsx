@@ -68,7 +68,7 @@ function addToggleBtn(previewList?: HTMLElement[]): void {
 	);
 
 	table.prepend(
-		<div role="row" className="hide-files-row Box-row Box-row--focus-gray py-2 d-flex position-relative dimmed">
+		<div role="row" className="hide-files-row Box-row py-2 d-flex position-relative dimmed">
 			<div role="gridcell" className="flex-shrink-0 mr-3">
 				<label for="HFT" className="hide-files-btn">
 					{previewList ? <svg aria-hidden="true" height="16" width="16" viewBox="-3 0 16 16"><path d="M5 11L0 6l1.5-1.5L5 8.25 8.5 4.5 10 6z" /></svg> : ''}
