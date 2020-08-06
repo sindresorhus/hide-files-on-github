@@ -51,8 +51,7 @@ module.exports = (_environment: string, argv: Record<string, boolean | number | 
 					globOptions: {
 						ignore: [
 							'**/*.ts',
-							'**/*.tsx',
-							'**/*.css'
+							'**/*.tsx'
 						]
 					}
 				}
