@@ -7,7 +7,7 @@
 }
 
 /* Hide files when the checkbox is checked */
-.hide-files-toggle:checked ~ [aria-labelledby="files"] .js-navigation-item.dimmed:not(:first-child) {
+.hide-files-toggle:checked ~ [aria-labelledby="files"] .js-navigation-item.dimmed {
 	display: none !important;
 }
 
