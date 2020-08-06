@@ -6,7 +6,7 @@ const regexField = document.querySelector<HTMLTextAreaElement>('#hideRegExp')!;
 const errorMessage = document.querySelector('#errorMessage')!;
 const delimiters = /^\/|\/$/;
 
-restoreOptions();
+void restoreOptions();
 document.addEventListener('input', updateOptions);
 
 /* Native validation tooltips don't seem to work */

@@ -10,46 +10,50 @@
 		"update-version": "dot-json distribution/manifest.json version $TRAVIS_TAG"
 	},
 	"dependencies": {
-		"@types/chrome": "0.0.103",
-		"dom-chef": "^4.0.0",
+		"dom-chef": "^4.1.0",
 		"element-ready": "^4.1.1",
 		"fit-textarea": "^2.0.0",
-		"select-dom": "^6.0.1",
+		"select-dom": "^6.0.2",
 		"webext-base-css": "^1.1.0",
-		"webext-domain-permission-toggle": "^1.0.0",
-		"webext-dynamic-content-scripts": "^6.0.3"
+		"webext-domain-permission-toggle": "^1.0.1",
+		"webext-dynamic-content-scripts": "^6.0.4"
 	},
 	"devDependencies": {
 		"@sindresorhus/tsconfig": "^0.7.0",
-		"@types/react": "^16.9.32",
+		"@types/chrome": "0.0.122",
+		"@types/copy-webpack-plugin": "^6.0.0",
+		"@types/react": "^16.9.44",
+		"@types/terser-webpack-plugin": "^4.0.0",
 		"chrome-webstore-upload-cli": "^1.2.0",
-		"copy-webpack-plugin": "^5.1.1",
+		"copy-webpack-plugin": "^6.0.3",
 		"dot-json": "^1.2.0",
-		"eslint": "^6.8.0",
+		"eslint-config-xo-react": "^0.23.0",
+		"eslint-plugin-react": "^7.20.5",
+		"eslint-plugin-react-hooks": "^4.0.8",
 		"npm-run-all": "^4.1.5",
 		"size-plugin": "^2.0.1",
-		"terser-webpack-plugin": "^2.3.5",
-		"ts-loader": "^6.2.2",
-		"typescript": "^3.8.3",
-		"web-ext-submit": "^4.1.0",
-		"webpack": "^4.42.1",
-		"webpack-cli": "^3.3.11",
-		"xo": "^0.28.3"
+		"terser-webpack-plugin": "^4.0.0",
+		"ts-loader": "^8.0.2",
+		"ts-node": "^8.10.2",
+		"typescript": "^3.9.7",
+		"web-ext-submit": "^5.0.2",
+		"webpack": "^4.44.1",
+		"webpack-cli": "^3.3.12",
+		"xo": "^0.32.1"
 	},
 	"xo": {
+		"extends": "xo-react",
 		"envs": [
 			"browser",
 			"webextensions"
 		],
 		"rules": {
-			"@typescript-eslint/no-var-requires": "off",
-			"@typescript-eslint/no-unused-vars": [
-				"error",
-				{
-					"varsIgnorePattern": "^React$"
-				}
-			],
 			"import/no-unassigned-import": "off"
+		},
+		"settings": {
+			"react": {
+				"version": "16.13"
+			}
 		}
 	}
 }
