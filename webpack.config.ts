@@ -54,7 +54,10 @@ module.exports = (_environment: string, argv: Record<string, boolean | number | 
 							'**/*.tsx'
 						]
 					}
-				}
+				},
+ 				{
+ 					from: 'node_modules/webext-base-css/webext-base.css'
+ 				}
 			]
 		})
 	],
