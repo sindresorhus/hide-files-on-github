@@ -41,9 +41,6 @@ module.exports = (_environment: string, argv: Record<string, boolean | number | 
 		}]
 	},
 	plugins: [
-		new SizePlugin({
-			writeFile: false
-		}),
 		new CopyWebpackPlugin({
 			patterns: [
 				{
@@ -59,6 +56,9 @@ module.exports = (_environment: string, argv: Record<string, boolean | number | 
  					from: 'node_modules/webext-base-css/webext-base.css'
  				}
 			]
+		}),
+		new SizePlugin({
+			writeFile: false
 		})
 	],
 	resolve: {
