@@ -52,9 +52,9 @@ module.exports = (_environment: string, argv: Record<string, boolean | number | 
 						]
 					}
 				},
- 				{
- 					from: 'node_modules/webext-base-css/webext-base.css'
- 				}
+				{
+					from: 'node_modules/webext-base-css/webext-base.css'
+				}
 			]
 		}),
 		new SizePlugin({
