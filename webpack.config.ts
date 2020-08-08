@@ -1,24 +1,30 @@
-'use strict';
-const path = require('path');
-const SizePlugin = require('size-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
+/// <reference types="./source/globals" />
 
-module.exports = (env, argv) => ({
-	devtool: 'sourcemap',
-	stats: 'errors-only',
-	entry: {
-		'hide-files-on-github': './source/hide-files-on-github',
-		background: './source/background',
-		options: './source/options'
+import path from 'path';
+import {Configuration} from 'webpack';
+import SizePlugin from 'size-plugin';
+import TerserPlugin from 'terser-webpack-plugin';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
+
+module.exports = (_environment: string, argv: Record<string, boolean | number | string>): Configuration => ({
+	devtool: 'source-map',
+	stats: {
+		all: false,
+		errors: true,
+		builtAt: true
 	},
+	entry: Object.fromEntries([
+		'hide-files-on-github',
+		'background',
+		'options'
+	].map(name => [name, `./source/${name}`])),
 	output: {
 		path: path.join(__dirname, 'distribution'),
 		filename: '[name].js'
 	},
 	module: {
 		rules: [{
-			test: /\.(js|ts|tsx)$/,
+			test: /\.tsx?$/,
 			use: [{
 				loader: 'ts-loader',
 				query: {
@@ -35,22 +41,25 @@ module.exports = (env, argv) => ({
 		}]
 	},
 	plugins: [
+		new CopyWebpackPlugin({
+			patterns: [
+				{
+					from: 'source',
+					globOptions: {
+						ignore: [
+							'**/*.ts',
+							'**/*.tsx'
+						]
+					}
+				},
+				{
+					from: 'node_modules/webext-base-css/webext-base.css'
+				}
+			]
+		}),
 		new SizePlugin({
 			writeFile: false
-		}),
-		new CopyWebpackPlugin([
-			{
-				from: '**',
-				context: 'source',
-				ignore: [
-					'*.ts',
-					'*.tsx'
-				]
-			},
-			{
-				from: 'node_modules/webext-base-css/webext-base.css'
-			}
-		])
+		})
 	],
 	resolve: {
 		extensions: [
@@ -60,15 +69,23 @@ module.exports = (env, argv) => ({
 		]
 	},
 	optimization: {
-		concatenateModules: true,
-
-		// Automatically enabled on production; keeps it somewhat readable for AMO reviewers
+		// Automatically enabled on production;
+		// Keeps it somewhat readable for AMO reviewers
 		minimizer: [
 			new TerserPlugin({
 				parallel: true,
 				terserOptions: {
 					mangle: false,
-					compress: false,
+					compress: {
+						defaults: false,
+						dead_code: true,
+						unused: true,
+						arguments: true,
+						join_vars: false,
+						booleans: false,
+						expression: false,
+						sequences: false
+					},
 					output: {
 						beautify: true,
 						indent_level: 2

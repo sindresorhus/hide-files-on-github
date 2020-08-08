@@ -64,17 +64,17 @@ function addToggleBtn(previewList?: HTMLElement[]): void {
 	}
 
 	select('[aria-labelledby="files"]')!.before(
-		<input type="checkbox" id="HFT" className="hide-files-toggle" checked/>
+		<input checked type="checkbox" id="HFT" className="hide-files-toggle"/>
 	);
 
 	table.prepend(
 		<div role="row" className="hide-files-row Box-row py-2 d-flex position-relative dimmed">
 			<div role="gridcell" className="flex-shrink-0 mr-3">
-				<label for="HFT" className="hide-files-btn">
-					{previewList ? <svg aria-hidden="true" height="16" width="16" viewBox="-3 0 16 16"><path d="M5 11L0 6l1.5-1.5L5 8.25 8.5 4.5 10 6z" /></svg> : ''}
+				<label htmlFor="HFT" className="hide-files-btn">
+					{previewList ? <svg aria-hidden="true" height="16" width="16" viewBox="-3 0 16 16"><path d="M5 11L0 6l1.5-1.5L5 8.25 8.5 4.5 10 6z"/></svg> : ''}
 				</label>
 			</div>
-			<div role="gridcell" className="hide-files-preview-list flex-auto min-width-0 "></div>
+			<div role="gridcell" className="hide-files-preview-list flex-auto min-width-0 "/>
 		</div>
 	);
 
@@ -107,7 +107,7 @@ function addEllipsis(container: HTMLElement, previewList: HTMLElement[]): void {
 			file.remove();
 		} else if (file.offsetLeft + file.offsetWidth > availableWidth - ellipsisWidth) {
 			// We found the first element in the unsafe/overflowing area
-			container.append(<label for="HFT"><a>etc...</a></label>);
+			container.append(<label htmlFor="HFT"><a>etc...</a></label>);
 			ellipsis = true;
 			file.remove();
 		}
@@ -138,4 +138,4 @@ async function init(): Promise<void> {
 	document.addEventListener('pjax:end', observeFragment);
 }
 
-init();
+void init();

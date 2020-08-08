@@ -1,3 +1,5 @@
+declare module 'size-plugin';
+
 // TODO: Drop when this bug is fixed
 // https://github.com/vadimdemedes/dom-chef/issues/36
 declare namespace JSX {
