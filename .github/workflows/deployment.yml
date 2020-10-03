@@ -29,9 +29,7 @@ jobs:
       - name: Update extension’s meta
         env:
           VER: ${{ steps.daily-version.outputs.version }}
-        run: |
-          echo https://github.com/$GITHUB_REPOSITORY/tree/$VER > distribution/SOURCE_URL.txt
-          npm run version
+        run: npm run version
       - uses: actions/upload-artifact@v2
         with:
           path: distribution
