@@ -7,7 +7,7 @@
 		"release:amo": "cd distribution && web-ext-submit",
 		"release:cws": "cd distribution && webstore upload --auto-publish",
 		"release": "VER=$(daily-version) run-s build version release:*",
-		"version": "dot-json distribution/manifest.json version $VER"
+		"version": "dot-json distribution/manifest.json version"
 	},
 	"dependencies": {
 		"dom-chef": "^4.1.0",

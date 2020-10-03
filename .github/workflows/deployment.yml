@@ -11,7 +11,7 @@ on:
 jobs:
   Build:
     outputs:
-      shouldDeploy: ${{ steps.daily-version.outputs.created }} || github.event_name == 'workflow_dispatch'
+      shouldDeploy: ${{ steps.daily-version.outputs.created || github.event_name == 'workflow_dispatch' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -24,12 +24,8 @@ jobs:
       - uses: notlmn/release-with-changelog@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          template: '{commits}'
-          exclude: '^Meta|^Document|^Readme|^Lint'
       - name: Update extension’s meta
-        env:
-          VER: ${{ steps.daily-version.outputs.version }}
-        run: npm run version
+        run: npm run version -- ${{ steps.daily-version.outputs.version }}
       - uses: actions/upload-artifact@v2
         with:
           path: distribution
