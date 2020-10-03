@@ -6,19 +6,18 @@ on:
   # You can manually trigger a deployment on GitHub.com
   # https://github.blog/changelog/2020-07-06-github-actions-manual-triggers-with-workflow_dispatch/
   schedule:
-    - cron: '31 13 * * 3'
+    - cron: '42 4 * * 4' # At 04:42 every Thursday
 
 jobs:
   Build:
     outputs:
-      created: ${{ steps.daily-version.outputs.created }}
+      shouldDeploy: ${{ steps.daily-version.outputs.created }} || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 20
-      - run: npm install
-      - run: npm test # This includes the build
+      - run: npm ci
       - uses: fregante/daily-version-action@v1
         name: Create tag if necessary
         id: daily-version
@@ -39,7 +38,7 @@ jobs:
 
   Chrome:
     needs: Build
-    if: github.event_name == 'workflow_dispatch' || needs.Build.outputs.created
+    if: needs.Build.outputs.shouldDeploy
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v2
@@ -52,7 +51,7 @@ jobs:
 
   Firefox:
     needs: Build
-    if: github.event_name == 'workflow_dispatch' || needs.Build.outputs.created
+    if: needs.Build.outputs.shouldDeploy
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v2
