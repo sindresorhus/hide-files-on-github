@@ -4,10 +4,8 @@
 		"test": "npm run build && xo",
 		"build": "webpack --mode=production",
 		"watch": "webpack --mode=development --watch",
-		"release:amo": "cd distribution && web-ext-submit",
-		"release:cws": "cd distribution && webstore upload --auto-publish",
-		"release": "run-s build update-version release:*",
-		"update-version": "dot-json distribution/manifest.json version $TRAVIS_TAG"
+		"release:chrome": "cd distribution && webstore upload --auto-publish",
+		"release:firefox": "cd distribution && web-ext-submit"
 	},
 	"dependencies": {
 		"dom-chef": "^4.1.0",
@@ -26,6 +24,7 @@
 		"@types/terser-webpack-plugin": "^4.0.0",
 		"chrome-webstore-upload-cli": "^1.2.0",
 		"copy-webpack-plugin": "^6.0.3",
+		"daily-version": "^2.0.0",
 		"dot-json": "^1.2.0",
 		"eslint-config-xo-react": "^0.23.0",
 		"eslint-plugin-react": "^7.20.5",
