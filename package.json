@@ -3,42 +3,37 @@
 	"scripts": {
 		"test": "npm run build && xo",
 		"build": "webpack --mode=production",
-		"watch": "webpack --mode=development --watch",
-		"release:chrome": "cd distribution && webstore upload --auto-publish",
-		"release:firefox": "cd distribution && web-ext-submit"
+		"watch": "webpack --mode=development --watch"
 	},
 	"dependencies": {
-		"dom-chef": "^4.1.0",
-		"element-ready": "^4.1.1",
+		"dom-chef": "^5.0.0-1",
+		"element-ready": "^5.0.0",
 		"fit-textarea": "^2.0.0",
-		"select-dom": "^6.0.2",
-		"webext-base-css": "^1.1.0",
-		"webext-domain-permission-toggle": "^1.0.1",
-		"webext-dynamic-content-scripts": "^6.0.4"
+		"select-dom": "^7.1.0",
+		"webext-base-css": "^1.3.1",
+		"webext-domain-permission-toggle": "^2.1.0",
+		"webext-dynamic-content-scripts": "^7.1.1"
 	},
 	"devDependencies": {
-		"@sindresorhus/tsconfig": "^0.7.0",
-		"@types/chrome": "0.0.122",
-		"@types/copy-webpack-plugin": "^6.0.0",
-		"@types/react": "^16.9.44",
-		"@types/terser-webpack-plugin": "^4.0.0",
-		"chrome-webstore-upload-cli": "^1.2.0",
-		"copy-webpack-plugin": "^6.0.3",
+		"@sindresorhus/tsconfig": "^0.9.0",
+		"@types/chrome": "0.0.133",
+		"@types/copy-webpack-plugin": "^6.4.0",
+		"@types/react": "^17.0.3",
+		"@types/terser-webpack-plugin": "^5.0.2",
+		"copy-webpack-plugin": "^8.0.0",
 		"daily-version": "^2.0.0",
-		"dot-json": "^1.2.0",
-		"eslint-config-xo-react": "^0.23.0",
-		"eslint-plugin-react": "^7.20.5",
-		"eslint-plugin-react-hooks": "^4.0.8",
+		"eslint-config-xo-react": "^0.24.0",
+		"eslint-plugin-react": "^7.22.0",
+		"eslint-plugin-react-hooks": "^4.2.0",
 		"npm-run-all": "^4.1.5",
-		"size-plugin": "^2.0.1",
-		"terser-webpack-plugin": "^4.0.0",
-		"ts-loader": "^8.0.2",
-		"ts-node": "^8.10.2",
-		"typescript": "^3.9.7",
-		"web-ext-submit": "^5.0.2",
-		"webpack": "^4.44.1",
-		"webpack-cli": "^3.3.12",
-		"xo": "^0.32.1"
+		"size-plugin": "^2.0.2",
+		"terser-webpack-plugin": "^5.1.1",
+		"ts-loader": "^8.0.17",
+		"ts-node": "^9.1.1",
+		"typescript": "^4.2.3",
+		"webpack": "^5.24.4",
+		"webpack-cli": "^4.5.0",
+		"xo": "^0.38.2"
 	},
 	"xo": {
 		"extends": "xo-react",
@@ -47,7 +42,8 @@
 			"webextensions"
 		],
 		"rules": {
-			"import/no-unassigned-import": "off"
+			"import/no-unassigned-import": "off",
+			"@typescript-eslint/dot-notation": "off"
 		},
 		"settings": {
 			"react": {
