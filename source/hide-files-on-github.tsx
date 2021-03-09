@@ -36,7 +36,7 @@ function updateUI(): void {
 		hidden.append(row);
 		if (willPreviewFiles && previewList) {
 			const node = file.cloneNode(true) as HTMLElement;
-			delete node.id;
+			node.removeAttribute('id');
 			node.tabIndex = -1;
 			previewList.push(node);
 		}
@@ -129,8 +129,7 @@ async function init(): Promise<void> {
 		}
 	};
 
-	// TODO: drop `*` after https://github.com/sindresorhus/element-ready/issues/29
-	await elementReady('[aria-labelledby="files"] + *');
+	await elementReady('[aria-labelledby="files"]');
 
 	updateUI();
 	observeFragment();

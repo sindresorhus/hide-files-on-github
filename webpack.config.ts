@@ -27,13 +27,13 @@ module.exports = (_environment: string, argv: Record<string, boolean | number | 
 			test: /\.tsx?$/,
 			use: [{
 				loader: 'ts-loader',
-				query: {
+				options: {
 					compilerOptions: {
 						// Enables ModuleConcatenation. It must be in here to avoid conflic with ts-node
 						module: 'es2015',
 
 						// With this, TS will error but the file will still be generated (on watch only)
-						noEmitOnError: argv.watch === false
+						noEmitOnError: argv['watch'] === false
 					}
 				}
 			}],
