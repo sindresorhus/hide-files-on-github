@@ -28,7 +28,7 @@ function updateOptions(): void {
 			// eslint-disable-next-line no-new
 			new RegExp(line);
 		} catch (error: unknown) {
-			setValidity((error as any).message);
+			setValidity((error as Error).message);
 			return;
 		}
 	}

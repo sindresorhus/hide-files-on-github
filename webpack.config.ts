@@ -1,5 +1,4 @@
-/// <reference types="./source/globals" />
-
+/// <reference types="./source/globals"/>
 import path from 'path';
 import {Configuration} from 'webpack';
 import SizePlugin from 'size-plugin';
@@ -57,6 +56,7 @@ module.exports = (_environment: string, argv: Record<string, boolean | number | 
 				}
 			]
 		}),
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 		new SizePlugin({
 			writeFile: false
 		})
