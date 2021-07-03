@@ -8,7 +8,7 @@ export const defaults = {
 		^(patents|authors|contributors|acknowledgments|backers)(\\.|$)
 		^(issue|pull_request)_template\\.md$
 		^(appveyor|circle|codecov)\\.yml$
-		^(yarn|Gemfile|composer)\\.lock$
+		^(yarn|Gemfile|Cargo|composer)\\.lock$
 		^package-lock\\.json$
 		^npm-shrinkwrap\\.json$
 		\\.sublime-project$
