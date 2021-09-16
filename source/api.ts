@@ -11,6 +11,7 @@ export const defaults = {
 		^(yarn|Gemfile|Cargo|composer)\\.lock$
 		^package-lock\\.json$
 		^npm-shrinkwrap\\.json$
+		^pnpm-lock\\.yaml$
 		\\.sublime-project$
 		^(tsconfig|typings|tslint|tsfmt)\\.json$
 		^coffeelint\\.json$
